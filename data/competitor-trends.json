@@ -1,97 +1,83 @@
 {
-  "lastUpdated": "2026-02-04T10:00:00Z",
+  "lastUpdated": "2026-02-04T12:00:00Z",
   "amazonTop": [
-    {"rank": 1, "name": "Apple AirPods 4", "category": "电子产品", "dailySales": 34500, "price": "$179"},
-    {"rank": 2, "name": "Echo Dot 5th Gen", "category": "智能家居", "dailySales": 31247, "price": "$49.99"},
-    {"rank": 3, "name": "Fire TV Stick 4K Max", "category": "电子产品", "dailySales": 28932, "price": "$54.99"},
-    {"rank": 4, "name": "Kindle Paperwhite", "category": "电子书", "dailySales": 24500, "price": "$139.99"},
-    {"rank": 5, "name": "Anker Portable Charger", "category": "电子产品", "dailySales": 21200, "price": "$39.99"},
-    {"rank": 6, "name": "Ring Video Doorbell", "category": "智能家居", "dailySales": 18900, "price": "$99.99"},
-    {"rank": 7, "name": "Instant Pot Duo 7-in-1", "category": "厨房电器", "dailySales": 16500, "price": "$89.99"},
-    {"rank": 8, "name": "Ninja Foodi Air Fryer", "category": "厨房电器", "dailySales": 14200, "price": "$149.99"},
-    {"rank": 9, "name": "Dyson V15 Vacuum", "category": "家居清洁", "dailySales": 12800, "price": "$749.99"},
-    {"rank": 10, "name": "Fitbit Charge 6", "category": "健康穿戴", "dailySales": 11500, "price": "$159.95"}
+    {"rank": 1, "name": "智能手表/手环", "category": "电子产品", "price": "$30-150", "trend": "稳定增长", "source": "Amazon"},
+    {"rank": 2, "name": "咖啡器具", "category": "厨房用品", "price": "$20-100", "trend": "冬季需求", "source": "Amazon"},
+    {"rank": 3, "name": "空气炸锅", "category": "厨房用品", "price": "$40-100", "trend": "稳定需求", "source": "Amazon"},
+    {"rank": 4, "name": "宠物用品", "category": "宠物", "price": "$20-60", "trend": "增长", "source": "Amazon"},
+    {"rank": 5, "name": "家居装饰", "category": "家居", "price": "$20-150", "trend": "上升", "source": "Amazon"}
   ],
   "etsyTop": [
-    {"rank": 1, "name": "个性化珠宝首饰", "category": "珠宝", "price": "$25-150", "trend": "稳定增长"},
-    {"rank": 2, "name": "定制照片拼图", "category": "礼品", "price": "$15-50", "trend": "新兴品类"},
-    {"rank": 3, "name": "激光雕刻礼品", "category": "定制", "price": "$20-80", "trend": "高度定制化"},
-    {"rank": 4, "name": "手工刺绣餐巾", "category": "家居", "price": "$20-40", "trend": "怀旧回归"},
-    {"rank": 5, "name": "升级再造木制品", "category": "环保", "price": "$35-120", "trend": "环保驱动"},
-    {"rank": 6, "name": "牛纹地毯", "category": "家居装饰", "price": "$50-200", "trend": "潮流单品"},
-    {"rank": 7, "name": "香薰蜡烛", "category": "礼品", "price": "$15-60", "trend": "礼品常青"},
-    {"rank": 8, "name": "亚麻布艺家居", "category": "家居", "price": "$50-150", "trend": "极简流行"},
-    {"rank": 9, "name": "个性化刻字杯", "category": "定制", "price": "$12-35", "trend": "实用首选"},
-    {"rank": 10, "name": "宠物肖像定制", "category": "宠物", "price": "$30-100", "trend": "宠物经济"}
+    {"rank": 1, "name": "定制服饰(POD)", "category": "服装", "price": "$15-60", "trend": "快速增长", "note": "传统刺绣+现代设计"},
+    {"rank": 2, "name": "珠宝首饰", "category": "首饰", "price": "$20-200", "trend": "稳定", "note": "个性化项链、极简主义耳环"},
+    {"rank": 3, "name": "家居装饰", "category": "家居", "price": "$20-150", "trend": "上升", "note": "温暖极简主义、自然材质"},
+    {"rank": 4, "name": "数字下载", "category": "数字产品", "price": "$3-50", "trend": "稳定", "note": "即时交付、个性化定制"},
+    {"rank": 5, "name": "文具礼品", "category": "文具", "price": "$5-30", "trend": "稳定", "note": "收藏价值、个性化表达"}
   ],
   "tiktokShop": [
-    {"rank": 1, "name": "3合1无线充电座", "hashtag": "techgifts", "views": 15000000, "price": "$25-40"},
-    {"rank": 2, "name": "日落投影灯", "hashtag": "aestheticroom", "views": 12000000, "price": "$15-30"},
-    {"rank": 3, "name": "蜗牛精华", "hashtag": "skincaretok", "views": 11000000, "price": "$15-30"},
-    {"rank": 4, "name": "LED光疗面膜", "hashtag": "skincareroutine", "views": 9800000, "price": "$50-100"},
-    {"rank": 5, "name": "无热卷发器", "hashtag": "heatlesscurls", "views": 8500000, "price": "$20-35"},
-    {"rank": 6, "name": "便携式咖啡杯", "hashtag": "coffeetok", "views": 7200000, "price": "$25-45"},
-    {"rank": 7, "name": "瑜伽防滑垫", "hashtag": "yogawithme", "views": 6800000, "price": "$30-60"},
-    {"rank": 8, "name": "厨房收纳套装", "hashtag": "kitchenorganization", "views": 5900000, "price": "$20-40"},
-    {"rank": 9, "name": "手机支架Ring Light", "hashtag": "contentcreator", "views": 5200000, "price": "$15-35"},
-    {"rank": 10, "name": "香薰加湿器", "hashtag": "selfcare routine", "views": 4800000, "price": "$20-45"}
+    {"rank": 1, "name": "香水", "hashtag": "PerfumeTok", "views": "11000000", "price": "$15-80", "source": "TikTok Shop"},
+    {"rank": 2, "name": "美容工具", "hashtag": "SkincareTok", "views": "125000000", "price": "$5-30", "source": "TikTok Shop"},
+    {"rank": 3, "name": "LED氛围灯", "hashtag": "RoomDecor", "views": "310000000", "price": "$10-50", "source": "TikTok Shop"},
+    {"rank": 4, "name": "无热卷发器", "hashtag": "HeatlessCurls", "views": "520000000", "price": "$15-40", "source": "TikTok Shop"},
+    {"rank": 5, "name": "宠物用品", "hashtag": "PetTok", "views": "920000000", "price": "$10-80", "source": "TikTok Shop"}
   ],
   "hotProducts": [
-    {"name": "Apple AirPods 4", "platform": "Amazon", "sales": 34500, "price": "$179"},
-    {"name": "3合1无线充电座", "platform": "TikTok", "sales": 15000000, "price": "$25-40"},
-    {"name": "个性化珠宝首饰", "platform": "Etsy", "sales": 1200000, "price": "$25-150"},
-    {"name": "日落投影灯", "platform": "TikTok", "sales": 12000000, "price": "$15-30"},
-    {"name": "Echo Dot 5th Gen", "platform": "Amazon", "sales": 31247, "price": "$49.99"}
+    {"name": "定制服饰(POD)", "platform": "Etsy/Shopify", "sales": "高", "price": "$15-60"},
+    {"name": "美容工具", "platform": "TikTok Shop", "sales": "病毒式传播", "price": "$5-30"},
+    {"name": "LED氛围灯", "platform": "TikTok Shop", "sales": "高热度", "price": "$10-50"},
+    {"name": "香水", "platform": "TikTok Shop", "sales": "持续火爆", "price": "$15-80"},
+    {"name": "智能手表/手环", "platform": "Amazon", "sales": "稳定增长", "price": "$30-150"}
   ],
   "trendingTags": [
-    {"name": "#handmade", "count": 15700000},
-    {"name": "#diy", "count": 12300000},
-    {"name": "#crafts", "count": 8900000},
-    {"name": "#customgift", "count": 6500000},
-    {"name": "#personalized", "count": 5200000},
-    {"name": "#artisan", "count": 4800000},
-    {"name": "#supportlocal", "count": 3900000},
-    {"name": "#sustainable", "count": 3500000},
-    {"name": "#giftideas", "count": 3200000},
-    {"name": "#uniquegifts", "count": 2800000},
-    {"name": "#handmadegifts", "count": 2500000},
-    {"name": "#boho", "count": 2200000},
-    {"name": "#ecofriendly", "count": 1900000},
-    {"name": "# handmadewithlove", "count": 1800000},
-    {"name": "#minimalist", "count": 1600000}
+    {"name": "#handmade", "count": 15700000, "trend": "up"},
+    {"name": "#diy", "count": 12300000, "trend": "up"},
+    {"name": "#crafts", "count": 8900000, "trend": "up"},
+    {"name": "#customgift", "count": 6500000, "trend": "up"},
+    {"name": "#personalized", "count": 5200000, "trend": "stable"},
+    {"name": "#skincaretok", "count": 125000000, "trend": "up"},
+    {"name": "#petotok", "count": 920000000, "trend": "up"},
+    {"name": "#heatlesscurls", "count": 520000000, "trend": "up"},
+    {"name": "#roomdecor", "count": 310000000, "trend": "up"},
+    {"name": "#perfumeotok", "count": 11000000, "trend": "up"}
   ],
   "priceDistribution": {
     "labels": ["$0-20", "$20-50", "$50-100", "$100-200", "$200+"],
     "data": [25, 35, 22, 12, 6]
   },
   "categoryRankings": [
-    {"name": "珠宝首饰", "growth": 45},
-    {"name": "家居装饰", "growth": 38},
-    {"name": "个性化定制", "growth": 52},
-    {"name": "宠物用品", "growth": 67},
-    {"name": "美妆工具", "growth": 42},
-    {"name": "厨房用品", "growth": 28},
-    {"name": "电子配件", "growth": 35},
-    {"name": "文具礼品", "growth": 22}
+    {"name": "珠宝首饰", "growth": 45, "margin": "60-80%"},
+    {"name": "定制服饰", "growth": 52, "margin": "40-60%"},
+    {"name": "美妆工具", "growth": 42, "margin": "50-70%"},
+    {"name": "LED照明", "growth": 35, "margin": "40-60%"},
+    {"name": "宠物用品", "growth": 67, "margin": "45-65%"},
+    {"name": "家居装饰", "growth": 38, "margin": "50-75%"},
+    {"name": "电子产品", "growth": 35, "margin": "40-55%"},
+    {"name": "厨房用品", "growth": 28, "margin": "35-50%"}
   ],
   "chinaOpportunities": [
-    {"icon": "🏺", "category": "陶瓷产品", "description": "传统工艺+现代设计，溢价100-300%", "margin": "毛利率 50-65%"},
-    {"icon": "🧵", "category": "刺绣制品", "description": "IP联名+定制服务，溢价200-500%", "margin": "毛利率 60-75%"},
-    {"icon": "🧺", "category": "柳编产品", "description": "可持续设计+环保概念，溢价50-150%", "margin": "毛利率 45-55%"},
-    {"icon": "🎨", "category": "手工皮具", "description": "品牌化+匠人故事，溢价80-200%", "margin": "毛利率 55-70%"},
-    {"icon": "💡", "category": "3C配件", "description": "成本优势明显，快速走量", "margin": "毛利率 40-50%"},
-    {"icon": "💄", "category": "美妆工具", "description": "供应链成熟，复购率高", "margin": "毛利率 50-65%"}
+    {"icon": "🧵", "category": "刺绣制品", "description": "传统工艺+IP联名，溢价100-300%", "margin": "毛利率 60-75%", "priority": "高"},
+    {"icon": "🏺", "category": "陶瓷产品", "description": "景德镇/德化+现代设计，溢价60-150%", "margin": "毛利率 50-65%", "priority": "高"},
+    {"icon": "🧺", "category": "柳编产品", "description": "可持续设计+环保概念，溢价50-100%", "margin": "毛利率 45-55%", "priority": "中"},
+    {"icon": "💄", "category": "美妆工具", "description": "供应链成熟，快速走量", "margin": "毛利率 50-70%", "priority": "高"},
+    {"icon": "💡", "category": "LED照明", "description": "深圳供应链优势明显", "margin": "毛利率 40-60%", "priority": "高"},
+    {"icon": "🐕", "category": "宠物用品", "description": "成本优势+智能功能", "margin": "毛利率 45-65%", "priority": "中"}
+  ],
+  "etsyTrends": [
+    {"name": "Nutcrackercore", "description": "梦幻戏剧性、芭蕾舞灵感、天鹅绒丝带", "products": "节日装饰、珠宝、玻璃器皿"},
+    {"name": "Messy Coquette", "description": "邋遢俏皮、荷叶边复兴、Y2K风格", "products": "服装、首饰、家居"},
+    {"name": "温暖极简主义", "description": "手工质感、自然材质、真实感", "products": "陶瓷、纺织品、木作"},
+    {"name": "个性化定制", "description": "刻字、名字项链、定制礼品", "products": "珠宝、文具、婚礼用品"}
   ],
   "trendData": {
     "labels": ["周一", "周二", "周三", "周四", "周五", "周六", "周日"],
     "datasets": [
-      {"label": "Amazon销量指数", "data": [100, 105, 98, 110, 115, 130, 125]},
-      {"label": "Etsy热度指数", "data": [95, 98, 102, 100, 108, 115, 118]},
-      {"label": "TikTok互动指数", "data": [90, 95, 105, 112, 120, 145, 140]}
+      {"label": "TikTok Shop热度", "data": [100, 105, 98, 110, 115, 130, 125]},
+      {"label": "Etsy热度", "data": [95, 98, 102, 100, 108, 115, 118]},
+      {"label": "Amazon销量", "data": [90, 95, 105, 112, 120, 145, 140]}
     ]
   },
   "categoryDistribution": {
-    "labels": ["电子产品", "家居装饰", "时尚配饰", "美妆个护", "宠物用品", "其他"],
+    "labels": ["美妆个护", "家居装饰", "时尚配饰", "电子产品", "宠物用品", "其他"],
     "data": [28, 22, 18, 15, 10, 7]
   }
 }

@@ -8,9 +8,10 @@ document.addEventListener('DOMContentLoaded', async function() {
     const data = await DataManager.loadJSON('data/competitor-trends.json');
     
     if (data) {
-        renderAmazon(data.amazonTop);
+        renderAmazon(data.etsyTop);
         renderEtsy(data.etsyTop);
         renderTikTok(data.tiktokShop);
+        renderEtsyTrends(data.etsyTrends);
         renderPriceDistribution(data.priceDistribution);
         renderCategoryRankings(data.categoryRankings);
         renderChinaOpportunities(data.chinaOpportunities);
@@ -27,7 +28,7 @@ function renderAmazon(products) {
             <span class="product-rank">${index + 1}</span>
             <div class="product-info">
                 <div class="product-name">${product.name}</div>
-                <div class="product-meta">${product.category} · ${Utils.formatNumber(product.dailySales)}/天</div>
+                <div class="product-meta">${product.category} · ${product.source || 'Amazon'}</div>
             </div>
             <span class="product-price">${product.price}</span>
         </div>
@@ -44,7 +45,7 @@ function renderEtsy(products) {
             <span class="product-rank">${index + 1}</span>
             <div class="product-info">
                 <div class="product-name">${product.name}</div>
-                <div class="product-meta">${product.category} · ${product.trend}</div>
+                <div class="product-meta">${product.category} · ${product.note || ''}</div>
             </div>
             <span class="product-price">${product.price}</span>
         </div>
@@ -68,12 +69,28 @@ function renderTikTok(products) {
     `).join('');
 }
 
+// 渲染Etsy趋势
+function renderEtsyTrends(trends) {
+    const container = document.getElementById('etsy-trends');
+    if (!container || !trends) return;
+    
+    container.innerHTML = trends.map(trend => `
+        <div class="region-item">
+            <h4>${trend.name}</h4>
+            <p>${trend.description}</p>
+            <p style="font-size: 0.85rem; color: var(--text-light);">代表产品: ${trend.products}</p>
+        </div>
+    `).join('');
+}
+
 // 渲染价格分布
 function renderPriceDistribution(data) {
     const container = document.getElementById('price-distribution');
     if (!container || !data) return;
     
-    // 创建价格带分布图表
+    // 检查是否已有图表
+    if (container.querySelector('canvas')) return;
+    
     const ctx = document.createElement('canvas');
     ctx.id = 'priceChart';
     container.appendChild(ctx);
@@ -88,13 +105,24 @@ function renderCategoryRankings(data) {
     
     container.innerHTML = `
         <table style="width:100%; border-collapse: collapse;">
-            ${data.map((item, index) => `
-                <tr style="border-bottom: 1px solid #eee;">
-                    <td style="padding: 8px; width: 40px;">${index + 1}</td>
-                    <td style="padding: 8px;">${item.name}</td>
-                    <td style="padding: 8px; text-align: right; color: #27ae60;">${item.growth}%</td>
+            <thead>
+                <tr style="background: var(--bg-color);">
+                    <th style="padding: 8px; text-align: left;">排名</th>
+                    <th style="padding: 8px; text-align: left;">品类</th>
+                    <th style="padding: 8px; text-align: right;">增长率</th>
+                    <th style="padding: 8px; text-align: right;">毛利率</th>
                 </tr>
-            `).join('')}
+            </thead>
+            <tbody>
+                ${data.map((item, index) => `
+                    <tr style="border-bottom: 1px solid #eee;">
+                        <td style="padding: 8px; width: 40px;">${index + 1}</td>
+                        <td style="padding: 8px;">${item.name}</td>
+                        <td style="padding: 8px; text-align: right; color: #27ae60;">+${item.growth}%</td>
+                        <td style="padding: 8px; text-align: right; color: #3498db;">${item.margin}</td>
+                    </tr>
+                `).join('')}
+            </tbody>
         </table>
     `;
 }
@@ -109,7 +137,10 @@ function renderChinaOpportunities(data) {
             <h4>${item.icon} ${item.category}</h4>
             <p>${item.description}</p>
             <p style="font-size: 0.85rem; color: #27ae60; margin-top: 0.5rem;">
-                💰 毛利率: ${item.margin}
+                💰 ${item.margin}
+            </p>
+            <p style="font-size: 0.8rem; margin-top: 0.3rem;">
+                优先级: ${item.priority || '中'}
             </p>
         </div>
     `).join('');

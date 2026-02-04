@@ -458,18 +458,166 @@ footer p {
     margin: 0.3rem 0;
 }
 
-/* 响应式 */
+/* 响应式 - 移动端修复 */
 @media (max-width: 768px) {
+    header {
+        padding: 1rem;
+    }
+    
     header h1 {
-        font-size: 1.8rem;
+        font-size: 1.5rem;
+        margin-bottom: 0.3rem;
+    }
+    
+    header p {
+        font-size: 0.9rem;
     }
     
     nav {
+        padding: 0.5rem;
+        gap: 0.3rem;
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+    
+    nav a {
+        padding: 0.4rem 0.8rem;
+        font-size: 0.85rem;
+        border-radius: 15px;
+    }
+    
+    main {
+        padding: 1rem;
+    }
+    
+    .metrics,
+    .charts,
+    .platforms,
+    .insights,
+    .region-content,
+    .price-grid,
+    .tag-cloud,
+    .link-cards,
+    .ip-grid,
+    .suggestion-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .metric-card,
+    .platform-card,
+    .insight-card,
+    .chart-container,
+    .region-section,
+    .materials-section,
+    .policy-section,
+    .opportunity-section,
+    .craft-advice {
+        padding: 1rem;
+    }
+    
+    .link-card {
+        padding: 1.5rem;
+    }
+    
+    .link-card .icon {
+        font-size: 2rem;
+    }
+    
+    .link-card .title {
+        font-size: 1rem;
+    }
+    
+    .product-item {
+        padding: 0.6rem;
         flex-wrap: wrap;
     }
     
-    .charts, .metrics, .platforms, .insights {
-        grid-template-columns: 1fr;
+    .product-rank {
+        width: 24px;
+        height: 24px;
+        font-size: 0.75rem;
+        margin-right: 0.5rem;
+    }
+    
+    .product-name {
+        font-size: 0.9rem;
+    }
+    
+    .product-meta {
+        font-size: 0.75rem;
+    }
+    
+    .product-price {
+        font-size: 0.9rem;
+        margin-top: 0.3rem;
+        width: 100%;
+        text-align: right;
+    }
+    
+    .tag {
+        font-size: 0.75rem;
+        padding: 0.2rem 0.6rem;
+    }
+    
+    .price-item {
+        padding: 0.8rem;
+    }
+    
+    .price-value {
+        font-size: 1.2rem;
+    }
+    
+    .ip-item,
+    .suggestion-item {
+        padding: 0.8rem;
+    }
+    
+    footer {
+        padding: 1rem;
+    }
+    
+    footer p {
+        font-size: 0.8rem;
+    }
+    
+    /* 表格移动端优化 */
+    table {
+        font-size: 0.85rem;
+    }
+    
+    /* 滚动区域移动端 */
+    .product-list,
+    .tag-list,
+    .trend-list {
+        max-height: 300px;
+    }
+}
+
+/* 小屏幕进一步优化 */
+@media (max-width: 480px) {
+    header h1 {
+        font-size: 1.2rem;
+    }
+    
+    header p {
+        font-size: 0.8rem;
+    }
+    
+    .metric-card h3,
+    .platform-card h3,
+    .insight-card h3,
+    .chart-container h3 {
+        font-size: 1rem;
+    }
+    
+    .full-report {
+        padding: 1rem;
+    }
+    
+    .full-report a {
+        font-size: 0.9rem;
+        padding: 0.6rem 1rem;
+        display: inline-block;
     }
 }
 

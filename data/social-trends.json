@@ -1,166 +1,202 @@
 {
-  "lastUpdated": "2026-02-04T10:00:00Z",
+  "lastUpdated": "2026-02-04T12:00:00Z",
   "platformTrends": [
     {
       "platform": "TikTok",
       "topTags": [
-        {"name": "#handmade", "count": 15700000, "engagement": "高", "trend": "up", "weeklyChange": "+5.2%"},
-        {"name": "#crafts", "count": 8900000, "engagement": "高", "trend": "up", "weeklyChange": "+7.8%"},
-        {"name": "#diy", "count": 12300000, "engagement": "高", "trend": "up", "weeklyChange": "+4.1%"},
-        {"name": "#crochet", "count": 7400000, "engagement": "高", "trend": "up", "weeklyChange": "+9.3%"},
-        {"name": "#knitting", "count": 5200000, "engagement": "中", "trend": "up", "weeklyChange": "+3.5%"},
-        {"name": "#embroidery", "count": 3800000, "engagement": "高", "trend": "up", "weeklyChange": "+12.5%"},
-        {"name": "#pottery", "count": 2900000, "engagement": "高", "trend": "up", "weeklyChange": "+8.2%"},
-        {"name": "#woodworking", "count": 2100000, "engagement": "中", "trend": "stable", "weeklyChange": "+1.2%"},
-        {"name": "#leathercraft", "count": 1800000, "engagement": "中", "trend": "up", "weeklyChange": "+6.7%"},
-        {"name": "#jewelrymaking", "count": 3200000, "engagement": "高", "trend": "up", "weeklyChange": "+11.3%"}
-      ],
-      "trendingPins": [],
-      "trendingVideos": []
+        {"name": "#dragonballsuper", "count": 37000, "engagement": "🔥极高", "trend": "up", "weeklyChange": "+15.2%", "category": "动漫IP"},
+        {"name": "#ufc", "count": 32400, "engagement": "高", "trend": "stable", "weeklyChange": "+2.1%", "category": "体育格斗"},
+        {"name": "#skincaretok", "count": 125000000, "engagement": "高", "trend": "up", "weeklyChange": "+8.5%", "category": "美妆护肤"},
+        {"name": "#cleantok", "count": 123000000, "engagement": "高", "trend": "up", "weeklyChange": "+5.3%", "category": "清洁用品"},
+        {"name": "#pettok", "count": 920000000, "engagement": "极高", "trend": "up", "weeklyChange": "+12.8%", "category": "宠物用品"},
+        {"name": "#heatlesscurls", "count": 520000000, "engagement": "高", "trend": "up", "weeklyChange": "+18.2%", "category": "美发工具"},
+        {"name": "#roomdecor", "count": 310000000, "engagement": "高", "trend": "up", "weeklyChange": "+9.4%", "category": "家居装饰"},
+        {"name": "#fashiontok", "count": 125000000, "engagement": "高", "trend": "up", "weeklyChange": "+6.7%", "category": "时尚穿搭"},
+        {"name": "#kitchentok", "count": 35000000, "engagement": "中", "trend": "up", "weeklyChange": "+4.2%", "category": "厨房用品"},
+        {"name": "#crafttok", "count": 8900000, "engagement": "高", "trend": "up", "weeklyChange": "+7.8%", "category": "手工"}
+      ]
     },
     {
       "platform": "Pinterest",
-      "topTags": [],
       "trendingPins": [
-        {"title": "手工礼物DIY教程", "category": "礼品", "saveRate": "85%"},
-        {"title": "定制礼物创意", "category": "礼品", "saveRate": "82%"},
-        {"title": "手工贺卡设计", "category": "贺卡", "saveRate": "78%"},
-        {"title": "家居装饰手工艺品", "category": "家居", "saveRate": "75%"},
-        {"title": "个性化定制礼品", "category": "定制", "saveRate": "72%"},
-        {"title": "可持续手工设计", "category": "环保", "saveRate": "68%"},
-        {"title": "东方美学风格", "category": "风格", "saveRate": "65%"},
-        {"title": "极简手工风格", "category": "风格", "saveRate": "62%"}
-      ],
-      "trendingVideos": []
+        {"title": "家居装饰手工艺品", "category": "家居", "saveRate": "85%", "trend": "可持续"},
+        {"title": "Mocha Mousse配色方案", "category": "色彩", "saveRate": "82%", "trend": "Pantone 2025"},
+        {"title": "手工定制礼物", "category": "礼品", "saveRate": "78%", "trend": "个性化"},
+        {"title": "编织装饰趋势", "category": "编织", "saveRate": "75%", "trend": "自然材质"},
+        {"title": "陶瓷器皿设计", "category": "陶瓷", "saveRate": "72%", "trend": "侘寂美学"},
+        {"title": "可持续生活方式", "category": "环保", "saveRate": "68%", "trend": "环保材质"},
+        {"title": "极简主义设计", "category": "设计", "saveRate": "65%", "trend": "温暖极简"},
+        {"title": "传统工艺现代演绎", "category": "工艺", "saveRate": "62%", "trend": "手工温度"}
+      ]
     },
     {
       "platform": "YouTube",
-      "topTags": [],
-      "trendingPins": [],
       "trendingVideos": [
-        {"title": "ASMR手工制作过程", "views": 5200000, "duration": "15:32"},
-        {"title": "DIY礼物完整教程", "views": 3800000, "duration": "22:15"},
-        {"title": "陶瓷制作全过程", "views": 2900000, "duration": "35:42"},
-        {"title": "皮革钱包教程", "views": 2100000, "duration": "28:18"},
-        {"title": "刺绣入门教学", "views": 1800000, "duration": "45:30"}
+        {"title": "ASMR手工制作过程", "views": 5200000, "duration": "15:32", "trend": "治愈系"},
+        {"title": "传统工艺技术展示", "views": 3800000, "duration": "22:15", "trend": "技艺传承"},
+        {"title": "陶瓷制作全过程", "views": 2900000, "duration": "35:42", "trend": "手作温度"},
+        {"title": "刺绣入门教学", "views": 2100000, "duration": "45:30", "trend": "DIY热潮"},
+        {"title": "柳编教程", "views": 1800000, "duration": "28:18", "trend": "可持续"}
       ]
     }
   ],
   "ipOpportunities": [
     {
-      "icon": "🎮",
-      "name": "原神",
-      "category": "游戏IP",
-      "suitability": "非常适合刺绣、雕刻周边",
-      "targetAudience": "二次元、年轻玩家",
-      "opportunity": "高"
-    },
-    {
-      "icon": "🏰",
-      "name": "迪士尼",
-      "category": "影视IP",
-      "suitability": "Handcrafted项目合作",
-      "targetAudience": "全年龄段",
-      "opportunity": "高"
-    },
-    {
       "icon": "🐉",
-      "name": "国漫IP",
+      "name": "龙珠超",
       "category": "动漫IP",
-      "suitability": "传统工艺+中国文化元素",
-      "targetAudience": "年轻群体",
-      "opportunity": "中高"
+      "suitability": "🔥刺绣徽章、陶瓷摆件、角色周边",
+      "targetAudience": "二次元、80-90后玩家",
+      "opportunity": "极高",
+      "priority": 1
     },
     {
-      "icon": "🎬",
-      "name": "漫威/DC",
-      "category": "影视IP",
-      "suitability": "英雄主题周边",
-      "targetAudience": "年轻男性",
-      "opportunity": "中"
+      "icon": "⚔️",
+      "name": "UFC",
+      "category": "体育格斗",
+      "suitability": "定制奖杯、纪念品、选手周边",
+      "targetAudience": "体育爱好者",
+      "opportunity": "中",
+      "priority": 3
     },
     {
-      "icon": "🎵",
-      "name": "音乐艺术家",
-      "category": "音乐IP",
-      "suitability": "艺术家联名周边",
-      "targetAudience": "音乐爱好者",
-      "opportunity": "中"
+      "icon": "🏗️",
+      "name": "建筑地标",
+      "category": "旅游IP",
+      "suitability": "台北101、迪拜塔等地标文创",
+      "targetAudience": "旅行者、建筑爱好者",
+      "opportunity": "中",
+      "priority": 3
     },
     {
-      "icon": "🌸",
-      "name": "三丽鸥",
-      "category": "IP品牌",
-      "suitability": "可爱风格手工制品",
-      "targetAudience": "年轻女性",
-      "opportunity": "中高"
+      "icon": "🎮",
+      "name": "原神/星穹铁道",
+      "category": "游戏IP",
+      "suitability": "刺绣周边、陶瓷角色摆件",
+      "targetAudience": "二次元玩家",
+      "opportunity": "高",
+      "priority": 2
+    },
+    {
+      "icon": "🧗",
+      "name": "Alex Honnold",
+      "category": "户外探险",
+      "suitability": "探险主题周边、装备复刻",
+      "targetAudience": "户外爱好者",
+      "opportunity": "低",
+      "priority": 4
+    },
+    {
+      "icon": "🎮",
+      "name": "Dalluska17",
+      "category": "游戏/VTuber",
+      "suitability": "游戏周边、定制装饰",
+      "targetAudience": "年轻玩家",
+      "opportunity": "中",
+      "priority": 3
     }
   ],
   "designTrends": {
     "colors": [
-      {"name": "Mocha Mousse", "hex": "#6F4E37", "description": "Pantone 2025年度色，柔和棕红"},
-      {"name": "Patina Blue", "hex": "#5B8FA8", "description": "柔和蓝绿色调"},
-      {"name": "Warm Earth Tones", "hex": "#C4A484", "description": "温暖大地色系"},
-      {"name": "Soft Sage", "hex": "#9CAF88", "description": "柔和鼠尾草绿"},
-      {"name": "Dusty Rose", "hex": "#DCAE96", "description": "粉灰玫瑰色"}
+      {"name": "Mocha Mousse", "hex": "#6F4E37", "description": "Pantone 2025年度色，温暖棕调", "priority": "⭐⭐⭐⭐⭐"},
+      {"name": "Patina Blue", "hex": "#5B8FA8", "description": "Etsy年度色", "priority": "⭐⭐⭐⭐"},
+      {"name": "Washed Linen", "hex": "#C4A484", "description": "纹理年度色", "priority": "⭐⭐⭐⭐"},
+      {"name": "Warm Earth Tones", "hex": "#C4A484", "description": "温暖大地色系", "priority": "⭐⭐⭐⭐⭐"},
+      {"name": "Soft Sage", "hex": "#9CAF88", "description": "柔和鼠尾草绿", "priority": "⭐⭐⭐"}
     ],
     "materials": [
-      {"name": "天然纤维", "applications": "编织、纺织品", "growth": 35, "trend": "up"},
-      {"name": "再生材料", "applications": "环保产品", "growth": 52, "trend": "up"},
-      {"name": "陶瓷粘土", "applications": "陶艺、雕塑", "growth": 28, "trend": "up"},
-      {"name": "实木竹材", "applications": "家居装饰", "growth": 22, "trend": "up"},
-      {"name": "天然皮革", "applications": "皮具、配饰", "growth": 18, "trend": "stable"}
+      {"name": "天然纤维", "applications": "编织、纺织品", "growth": 35, "trend": "up", "priority": "⭐⭐⭐⭐⭐"},
+      {"name": "再生材料", "applications": "环保产品", "growth": 52, "trend": "up", "priority": "⭐⭐⭐⭐⭐"},
+      {"name": "陶瓷粘土", "applications": "陶艺、雕塑", "growth": 28, "trend": "up", "priority": "⭐⭐⭐⭐"},
+      {"name": "实木竹材", "applications": "家居装饰", "growth": 22, "trend": "up", "priority": "⭐⭐⭐⭐"},
+      {"name": "天然皮革", "applications": "皮具、配饰", "growth": 18, "trend": "stable", "priority": "⭐⭐⭐"}
     ],
     "styles": [
-      {"name": "可持续奢侈", "description": "环保+高端设计结合"},
-      {"name": "手工艺复兴", "description": "传统技艺现代演绎"},
-      {"name": "温暖极简主义", "description": "极简+温馨质感"},
-      {"name": "自然有机形态", "description": "自然元素融入设计"},
-      {"name": "复古怀旧风格", "description": "经典设计回归"}
+      {"name": "可持续奢侈", "description": "环保+高端设计结合", "priority": "⭐⭐⭐⭐⭐"},
+      {"name": "手工艺复兴", "description": "传统技艺现代演绎", "priority": "⭐⭐⭐⭐⭐"},
+      {"name": "温暖极简主义", "description": "极简+温馨质感", "priority": "⭐⭐⭐⭐⭐"},
+      {"name": "自然有机形态", "description": "自然元素融入设计", "priority": "⭐⭐⭐⭐"},
+      {"name": "治愈系手工", "description": "ASMR、慢生活展示", "priority": "⭐⭐⭐⭐"},
+      {"name": "Nutcrackercore", "description": "梦幻戏剧性、芭蕾舞灵感", "priority": "⭐⭐⭐"},
+      {"name": "Messy Coquette", "description": "邋遢俏皮、Y2K风格", "priority": "⭐⭐⭐"}
     ]
   },
   "craftSuggestions": [
     {
       "icon": "🧺",
       "craft": "柳编",
-      "direction": "家居装饰+环保袋",
-      "targetAudience": "Z世代、可持续消费者",
-      "keywords": ["#sustainable", "#ecofriendly", "#handmade", "#minimalist", "#zerowaste"]
+      "direction": "家居装饰+环保袋+可持续产品",
+      "targetAudience": "Z世代、可持续消费者、品质生活人群",
+      "keywords": ["#sustainable", "#ecofriendly", "#handmade", "#minimalist", "#zerowaste", "#crafttok"],
+      "priority": "高",
+      "trends": ["Mocha Mousse配色", "自然纹理", "有机形状"]
     },
     {
-      "icon": "🧵",
+      "icon": "🪡",
       "craft": "刺绣",
-      "direction": "定制服装+IP周边",
-      "targetAudience": "二次元、时尚爱好者",
-      "keywords": ["#embroidery", "#custom", "#anime", "#fashion", "#personalized"]
+      "direction": "动漫IP周边+定制服装+时尚单品",
+      "targetAudience": "二次元、时尚爱好者、年轻消费者",
+      "keywords": ["#embroidery", "#custom", "#anime", "#dragonball", "#fashion", "#personalized"],
+      "priority": "🔥最高",
+      "trends": ["龙珠超IP联名", "国潮元素", "街头潮流融合"]
     },
     {
       "icon": "🏺",
       "craft": "陶瓷",
-      "direction": "生活器皿+艺术品",
-      "targetAudience": "品质生活人群",
-      "keywords": ["#pottery", "#ceramics", "#handcrafted", "#artisan", "#mochamousse"]
+      "direction": "生活器皿+艺术品+定制礼品",
+      "targetAudience": "品质生活人群、艺术品收藏者、礼品市场",
+      "keywords": ["#pottery", "#ceramics", "#handcrafted", "#artisan", "#mochamousse", "#wabi_sabi"],
+      "priority": "高",
+      "trends": ["侘寂美学", "Mocha Mousse配色", "手工温度"]
     },
     {
       "icon": "🪵",
       "craft": "木作",
-      "direction": "家居用品+收纳",
-      "targetAudience": "追求自然质感人群",
-      "keywords": ["#woodworking", "#handmade", "#sustainableliving", "#minimalism"]
-    },
-    {
-      "icon": "🧿",
-      "craft": "扎染",
-      "direction": "服饰配件+家居",
-      "targetAudience": "波西米亚风格爱好者",
-      "keywords": ["#tie dye", "#boho", "#handmade", "#indigo"]
+      "direction": "家居用品+收纳+榫卯结构",
+      "targetAudience": "追求自然质感人群、日本/北欧风格爱好者",
+      "keywords": ["#woodworking", "#handmade", "#sustainableliving", "#minimalism", "#japanese_design"],
+      "priority": "中",
+      "trends": ["榫卯工艺", "北欧极简", "自然材质"]
     },
     {
       "icon": "🪡",
       "craft": "编织",
-      "direction": "时尚配饰+家居",
-      "targetAudience": "治愈系消费者",
-      "keywords": ["#crochet", "#knitting", "#handmade", "#selfcare", "#cozy"]
+      "direction": "时尚配饰+家居装饰+治愈系产品",
+      "targetAudience": "治愈系消费者、手工爱好者",
+      "keywords": ["#crochet", "#knitting", "#handmade", "#selfcare", "#cozy", "#crafttok"],
+      "priority": "高",
+      "trends": ["ASMR内容", "慢生活", "舒适极简"]
+    },
+    {
+      "icon": "🎨",
+      "craft": "综合工艺",
+      "direction": "IP联名+定制服务+礼品市场",
+      "targetAudience": "泛二次元、礼品消费者",
+      "keywords": ["#customgift", "#personalized", "#limitededition", "#artisan"],
+      "priority": "高",
+      "trends": ["个性化定制", "限量版", "节日礼盒"]
     }
-  ]
+  ],
+  "keyInsights": {
+    "topTrends": [
+      "🔥龙珠超IP热度爆表，刺绣周边是最佳切入点",
+      "Pantone Mocha Mousse大地色系将主导2025-2026设计",
+      "可持续手工艺持续升温，柳编环保产品潜力大",
+      "治愈系ASMR内容成为手工传播新趋势",
+      "温暖极简主义取代冷调极简成主流"
+    ],
+    "actionItems": [
+      {"priority": "高", "action": "优先开发龙珠超IP刺绣周边", "timeline": "1-2周"},
+      {"priority": "高", "action": "开发Mocha Mousse配色产品线", "timeline": "1个月"},
+      {"priority": "中", "action": "探索原神IP联名可能性", "timeline": "1个月"},
+      {"priority": "中", "action": "布局可持续材料手工产品", "timeline": "2-3个月"},
+      {"priority": "中", "action": "制作工艺ASMR短视频内容", "timeline": "持续"}
+    ]
+  },
+  "tiktokStats": {
+    "totalViews": "1.5B+",
+    "topCategory": "PetTok",
+    "fastestGrowing": "HeatlessCurls",
+    "craftEngagement": "高"
+  }
 }

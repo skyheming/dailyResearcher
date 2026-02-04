@@ -32,9 +32,9 @@ function renderHotTopics(data) {
             <span class="product-rank">${index + 1}</span>
             <div class="product-info">
                 <div class="product-name">${product.name}</div>
-                <div class="product-meta">${product.platform} · ${Utils.formatNumber(product.sales)}/天</div>
+                <div class="product-meta">${product.platform} · ${product.price}</div>
             </div>
-            <span class="product-price">${product.price}</span>
+            <span class="product-price">${product.sales}</span>
         </li>
     `).join('');
 }
@@ -44,10 +44,10 @@ function renderTagCloud(data) {
     const container = document.getElementById('tag-cloud');
     if (!container || !data.trendingTags) return;
     
-    const maxCount = Math.max(...data.trendingTags.map(t => t.count));
+    const maxCount = Math.max(...data.trendingTags.slice(0, 15).map(t => t.count));
     
     container.innerHTML = data.trendingTags.slice(0, 15).map(tag => `
-        <span class="tag ${Utils.getTagSize(tag.count, maxCount)}">
+        <span class="tag ${Utils.getTagSize(tag.count, maxCount)}" title="${tag.count.toLocaleString()} posts">
             ${tag.name}
         </span>
     `).join('');
@@ -61,10 +61,14 @@ function renderTagCloudFromSocial(data) {
     const tiktokData = data.platformTrends.find(p => p.platform === 'TikTok');
     if (!tiktokData || !tiktokData.topTags) return;
     
-    const maxCount = Math.max(...tiktokData.topTags.map(t => t.count));
+    // 如果竞品数据的标签云已有内容，跳过
+    const existingContent = container.innerHTML;
+    if (existingContent && existingContent.trim() !== '') return;
+    
+    const maxCount = Math.max(...tiktokData.topTags.slice(0, 15).map(t => t.count));
     
     container.innerHTML = tiktokData.topTags.slice(0, 15).map(tag => `
-        <span class="tag ${Utils.getTagSize(tag.count, maxCount)}">
+        <span class="tag ${Utils.getTagSize(tag.count, maxCount)}" title="${tag.count.toLocaleString()} posts">
             ${tag.name}
         </span>
     `).join('');
@@ -76,14 +80,14 @@ function renderCharts(data) {
     const trendCtx = document.getElementById('trendChart');
     if (trendCtx && data.competitor && data.competitor.trendData) {
         const trendData = data.competitor.trendData;
-        ChartUtils.createLineChart(trendCtx, trendData.labels, trendData.datasets);
+        ChartUtils.createLineChart(trendCtx.getContext('2d'), trendData.labels, trendData.datasets);
     }
     
     // 品类分布图表
     const categoryCtx = document.getElementById('categoryChart');
     if (categoryCtx && data.competitor && data.competitor.categoryDistribution) {
         const catData = data.competitor.categoryDistribution;
-        ChartUtils.createPieChart(categoryCtx, catData.labels, catData.data);
+        ChartUtils.createPieChart(categoryCtx.getContext('2d'), catData.labels, catData.data);
     }
 }
 

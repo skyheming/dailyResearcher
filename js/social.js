@@ -25,7 +25,7 @@ function renderTikTokTags(platforms) {
     const container = document.getElementById('tiktok-tags');
     if (!container || !tiktok || !tiktok.topTags) return;
     
-    container.innerHTML = tiktok.topTags.slice(0, 15).map(tag => `
+    container.innerHTML = tiktok.topTags.slice(0, 10).map(tag => `
         <div class="product-item">
             <span class="product-rank">#</span>
             <div class="product-info">
@@ -52,6 +52,7 @@ function renderPinterestTrends(platforms) {
                 <div class="product-name">${pin.title}</div>
                 <div class="product-meta">${pin.category} · ${pin.saveRate}保存率</div>
             </div>
+            <span style="font-size: 0.8rem; color: var(--text-light);">${pin.trend}</span>
         </div>
     `).join('');
 }
@@ -69,6 +70,7 @@ function renderYouTubeTrends(platforms) {
                 <div class="product-name">${video.title}</div>
                 <div class="product-meta">${Utils.formatNumber(video.views)}观看 · ${video.duration}</div>
             </div>
+            <span style="font-size: 0.8rem; color: var(--text-light);">${video.trend}</span>
         </div>
     `).join('');
 }
@@ -78,12 +80,18 @@ function renderIPOpportunities(ips) {
     const container = document.getElementById('ip-grid');
     if (!container || !ips) return;
     
-    container.innerHTML = ips.map(ip => `
+    // 按优先级排序
+    const sortedIps = [...ips].sort((a, b) => a.priority - b.priority);
+    
+    container.innerHTML = sortedIps.map(ip => `
         <div class="ip-item">
             <h4>${ip.icon} ${ip.name}</h4>
             <p>${ip.category}</p>
-            <p style="font-size: 0.85rem; margin-top: 0.5rem; opacity: 0.9;">
+            <p style="font-size: 0.8rem; margin-top: 0.5rem; opacity: 0.9;">
                 ${ip.suitability}
+            </p>
+            <p style="font-size: 0.75rem; margin-top: 0.3rem; color: ${ip.opportunity === '极高' || ip.opportunity === '高' ? '#27ae60' : '#f39c12'};">
+                机会: ${ip.opportunity}
             </p>
         </div>
     `).join('');
@@ -94,10 +102,11 @@ function renderColorTrends(trends) {
     const container = document.getElementById('color-trends');
     if (!container || !trends || !trends.colors) return;
     
-    container.innerHTML = trends.colors.map(color => `
+    container.innerHTML = trends.colors.slice(0, 5).map(color => `
         <div class="price-item" style="background: ${color.hex}; color: white;">
             <div class="price-name">${color.name}</div>
             <div class="price-value">${color.hex}</div>
+            <div style="font-size: 0.75rem; opacity: 0.9;">${color.description.substring(0, 30)}...</div>
         </div>
     `).join('');
 }
@@ -114,7 +123,7 @@ function renderMaterialTrends(trends) {
                 <div class="product-name">${material.name}</div>
                 <div class="product-meta">${material.applications}</div>
             </div>
-            <span class="product-price" style="color: ${material.growth > 0 ? '#27ae60' : '#e74c3c'};">
+            <span class="product-price" style="color: ${material.trend === 'up' ? '#27ae60' : '#e74c3c'};">
                 ${material.growth > 0 ? '+' : ''}${material.growth}%
             </span>
         </div>
@@ -126,7 +135,7 @@ function renderStyleTrends(trends) {
     const container = document.getElementById('style-trends');
     if (!container || !trends || !trends.styles) return;
     
-    container.innerHTML = trends.styles.map((style, index) => `
+    container.innerHTML = trends.styles.slice(0, 6).map((style, index) => `
         <div class="product-item">
             <span class="product-rank">${index + 1}</span>
             <div class="product-info">
@@ -146,9 +155,12 @@ function renderCraftSuggestions(suggestions) {
         <div class="suggestion-item">
             <h4>${suggestion.icon} ${suggestion.craft}</h4>
             <p><strong>方向：</strong>${suggestion.direction}</p>
-            <p><strong>目标人群：</strong>${suggestion.targetAudience}</p>
-            <p style="margin-top: 0.5rem; font-size: 0.9rem; color: #7f8c8d;">
-                ${suggestion.keywords.join(' · ')}
+            <p><strong>目标：</strong>${suggestion.targetAudience}</p>
+            <p style="font-size: 0.8rem; color: #27ae60; margin-top: 0.5rem;">
+                优先级: ${suggestion.priority}
+            </p>
+            <p style="margin-top: 0.5rem; font-size: 0.8rem; color: #7f8c8d;">
+                ${suggestion.keywords.slice(0, 3).join(' · ')}
             </p>
         </div>
     `).join('');
