@@ -1,0 +1,181 @@
+{
+  "lastUpdated": "2026-02-04T10:00:00Z",
+  "reportDate": "2026年2月第1周",
+  "regions": {
+    "shandong": {
+      "name": "山东省非遗产业集群",
+      "overview": "山东是中国非遗手工产业最集中的省份之一，拥有53个国家级、538个省级非遗项目，形成十大特色产业集群。",
+      "keyProducts": [
+        {
+          "icon": "👘",
+          "name": "曹县汉服",
+          "outputValue": "72亿元（2023年）",
+          "companies": "2753家企业",
+          "employees": "近10万人"
+        },
+        {
+          "icon": "🪁",
+          "name": "潍坊风筝",
+          "outputValue": "20亿元+",
+          "companies": "600-700家",
+          "employees": "8万余人"
+        },
+        {
+          "icon": "🧺",
+          "name": "临沭柳编",
+          "outputValue": "出口占全国1/3",
+          "companies": "几十家规模以上企业",
+          "employees": "数万人"
+        },
+        {
+          "icon": "🏺",
+          "name": "淄博陶瓷琉璃",
+          "outputValue": "17.8亿元（玻璃出口2022年）",
+          "companies": "规模以上企业数百家",
+          "employees": "数千人"
+        }
+      ],
+      "highlights": [
+        {
+          "icon": "🤖",
+          "title": "AI设计平台",
+          "description": "曹县上线'曹县汉服'APP，整合设计师、面料商、绣娘、主播资源，10万个原创纹样明码标价"
+        },
+        {
+          "icon": "🏭",
+          "title": "智能制造",
+          "description": "引入柔性生产线，生产周期从20天缩短至7天"
+        },
+        {
+          "icon": "📱",
+          "title": "电商直播",
+          "description": "潍坊风筝产业学院推进电商直播新业态，王家庄子村300+厂家寻求代运营"
+        }
+      ]
+    },
+    "jiangsu": {
+      "name": "江苏省非遗产业集群",
+      "overview": "江苏是中国传统工艺重镇，拥有苏绣、紫砂、水晶等知名品牌，形成完整的产业链体系。",
+      "keyProducts": [
+        {
+          "icon": "🪡",
+          "name": "苏绣",
+          "outputValue": "15亿元（镇湖）",
+          "companies": "200+绣庄",
+          "employees": "近8000绣娘"
+        },
+        {
+          "icon": "🫖",
+          "name": "宜兴紫砂",
+          "outputValue": "约36亿元（2022年）",
+          "companies": "400+企业",
+          "employees": "3.6万人"
+        },
+        {
+          "icon": "💎",
+          "name": "东海水晶",
+          "outputValue": "近200亿元",
+          "companies": "3000+企业",
+          "employees": "近30万人"
+        }
+      ],
+      "highlights": [
+        {
+          "icon": "🎨",
+          "title": "IP联名合作",
+          "description": "苏绣与《牧神记》动画、魔兽世界合作，祥云锦绣火鹰文创产品"
+        },
+        {
+          "icon": "🏭",
+          "title": "创意园区",
+          "description": "丁蜀镇陶二厂创意园区改建完成，文创+生活体验+现代陶艺一体化"
+        },
+        {
+          "icon": "🍵",
+          "title": "产业融合",
+          "description": "'宜兴紫砂对话中国茗茶'活动，促进茶具+茶叶产业融合发展"
+        }
+      ]
+    }
+  },
+  "materialPrices": [
+    {"name": "柳条（杞柳）", "unit": "¥8-12/kg", "trend": 5, "change": "+2.5%"},
+    {"name": "紫砂泥", "unit": "¥50-200/kg", "trend": -3, "change": "-1.2%"},
+    {"name": "蚕丝线", "unit": "¥200-400/kg", "trend": 8, "change": "+4.5%"},
+    {"name": "棉麻布料", "unit": "¥15-30/m", "trend": -2, "change": "-0.8%"},
+    {"name": "环保染料", "unit": "¥30-80/kg", "trend": 12, "change": "+6.2%"},
+    {"name": "天然皮革", "unit": "¥50-150/sq.ft", "trend": 3, "change": "+1.5%"},
+    {"name": "陶瓷釉料", "unit": "¥20-60/kg", "trend": -5, "change": "-2.1%"},
+    {"name": "木材（实木）", "unit": "¥3000-8000/m³", "trend": 2, "change": "+0.9%"}
+  ],
+  "policyUpdates": [
+    {
+      "icon": "📜",
+      "title": "第六批国家级非遗传承人公布",
+      "date": "2026年1月",
+      "source": "文化和旅游部"
+    },
+    {
+      "icon": "🎓",
+      "title": "非遗传承人研修培训计划实施",
+      "date": "2026年1月",
+      "source": "文旅部"
+    },
+    {
+      "icon": "🏛️",
+      "title": "潍坊出台风筝文化产业专项措施",
+      "date": "2026年1月",
+      "source": "潍坊市政府"
+    },
+    {
+      "icon": "🌐",
+      "title": "非遗数字传承项目推进",
+      "date": "2026年1月",
+      "source": "文旅部"
+    }
+  ],
+  "cooperationOpportunities": [
+    {
+      "icon": "🎨",
+      "title": "曹县汉服AI设计平台合作",
+      "description": "对接10万原创纹样库，AI试衣间技术可对接电商平台"
+    },
+    {
+      "icon": "📱",
+      "title": "潍坊风筝电商直播合作",
+      "description": "产业学院寻求直播渠道合作，300+厂家寻求代运营"
+    },
+    {
+      "icon": "🤝",
+      "title": "苏绣IP联名合作",
+      "description": "动画/游戏IP联名模式成熟，可复制到其他非遗品类"
+    },
+    {
+      "icon": "💡",
+      "title": "数字非遗技术合作",
+      "description": "AI仿生技术、沉浸式体验项目、榫卯结构可视化"
+    }
+  ],
+  "recommendations": [
+    {
+      "priority": "高",
+      "action": "对接曹县汉服数字平台",
+      "timeline": "近期（1-2周）"
+    },
+    {
+      "priority": "高",
+      "action": "探索苏绣IP联名合作",
+      "timeline": "近期（1-2周）"
+    },
+    {
+      "priority": "中",
+      "action": "跟进风筝产业直播合作",
+      "timeline": "中期（1个月）"
+    },
+    {
+      "priority": "中",
+      "action": "布局AI+非遗设计领域",
+      "timeline": "中期（1-2个月）"
+    }
+  ]
+}
