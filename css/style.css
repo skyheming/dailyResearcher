@@ -725,3 +725,35 @@ footer p {
     background: var(--secondary-color);
     border-radius: 3px;
 }
+
+/* 加载状态 */
+.loading {
+    color: var(--text-light);
+    text-align: center;
+    padding: 2rem;
+    font-style: italic;
+}
+
+.loading::before {
+    content: "⏳ ";
+}
+
+.error {
+    color: #e74c3c;
+    text-align: center;
+    padding: 1rem;
+    background: #fdf2f2;
+    border-radius: 8px;
+}
+
+.error::before {
+    content: "❌ ";
+}
+
+.success {
+    color: #27ae60;
+}
+
+.success::before {
+    content: "✅ ";
+}

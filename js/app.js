@@ -44,9 +44,15 @@ const Utils = {
     // 加载JSON数据
     async loadJSON(url) {
         try {
+            console.log('Loading:', url);
             const response = await fetch(url);
-            if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`);
-            return await response.json();
+            if (!response.ok) {
+                console.error(`HTTP error! status: ${response.status} for ${url}`);
+                return null;
+            }
+            const data = await response.json();
+            console.log('Loaded:', url, data ? 'success' : 'empty');
+            return data;
         } catch (error) {
             console.error(`Error loading ${url}:`, error);
             return null;

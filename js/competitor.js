@@ -5,23 +5,45 @@ document.addEventListener('DOMContentLoaded', async function() {
     
     Utils.updateTime();
     
-    const data = await DataManager.loadJSON('data/competitor-trends.json');
-    
-    if (data) {
-        renderAmazon(data.etsyTop);
-        renderEtsy(data.etsyTop);
-        renderTikTok(data.tiktokShop);
-        renderEtsyTrends(data.etsyTrends);
-        renderPriceDistribution(data.priceDistribution);
-        renderCategoryRankings(data.categoryRankings);
-        renderChinaOpportunities(data.chinaOpportunities);
+    try {
+        const data = await DataManager.loadJSON('data/competitor-trends.json');
+        
+        if (data) {
+            renderAmazon(data.etsyTop);
+            renderEtsy(data.etsyTop);
+            renderTikTok(data.tiktokShop);
+            renderEtsyTrends(data.etsyTrends);
+            renderPriceDistribution(data.priceDistribution);
+            renderCategoryRankings(data.categoryRankings);
+            renderChinaOpportunities(data.chinaOpportunities);
+        } else {
+            showError('amazon-list', 'Amazon数据加载失败');
+            showError('etsy-list', 'Etsy数据加载失败');
+            showError('tiktok-list', 'TikTok数据加载失败');
+        }
+    } catch (error) {
+        console.error('Error loading competitor data:', error);
+        showError('amazon-list', '数据加载失败');
+        showError('etsy-list', '数据加载失败');
+        showError('tiktok-list', '数据加载失败');
     }
 });
+
+// 显示错误信息
+function showError(elementId, message) {
+    const container = document.getElementById(elementId);
+    if (container) {
+        container.innerHTML = `<div class="error">${message}</div>`;
+    }
+}
 
 // 渲染Amazon榜单
 function renderAmazon(products) {
     const container = document.getElementById('amazon-list');
-    if (!container || !products) return;
+    if (!container || !products || products.length === 0) {
+        showError('amazon-list', '暂无Amazon数据');
+        return;
+    }
     
     container.innerHTML = products.slice(0, 10).map((product, index) => `
         <div class="product-item">
@@ -38,7 +60,10 @@ function renderAmazon(products) {
 // 渲染Etsy榜单
 function renderEtsy(products) {
     const container = document.getElementById('etsy-list');
-    if (!container || !products) return;
+    if (!container || !products || products.length === 0) {
+        showError('etsy-list', '暂无Etsy数据');
+        return;
+    }
     
     container.innerHTML = products.slice(0, 10).map((product, index) => `
         <div class="product-item">
@@ -55,7 +80,10 @@ function renderEtsy(products) {
 // 渲染TikTok Shop爆款
 function renderTikTok(products) {
     const container = document.getElementById('tiktok-list');
-    if (!container || !products) return;
+    if (!container || !products || products.length === 0) {
+        showError('tiktok-list', '暂无TikTok数据');
+        return;
+    }
     
     container.innerHTML = products.slice(0, 10).map((product, index) => `
         <div class="product-item">
@@ -72,7 +100,12 @@ function renderTikTok(products) {
 // 渲染Etsy趋势
 function renderEtsyTrends(trends) {
     const container = document.getElementById('etsy-trends');
-    if (!container || !trends) return;
+    if (!container || !trends || trends.length === 0) {
+        // 移除趋势洞察区域，如果没有数据
+        const insightCard = container?.closest('.insight-card');
+        if (insightCard) insightCard.style.display = 'none';
+        return;
+    }
     
     container.innerHTML = trends.map(trend => `
         <div class="region-item">
@@ -86,7 +119,10 @@ function renderEtsyTrends(trends) {
 // 渲染价格分布
 function renderPriceDistribution(data) {
     const container = document.getElementById('price-distribution');
-    if (!container || !data) return;
+    if (!container || !data) {
+        // 移除图表区域，如果没有数据
+        return;
+    }
     
     // 检查是否已有图表
     if (container.querySelector('canvas')) return;
@@ -101,7 +137,9 @@ function renderPriceDistribution(data) {
 // 渲染品类排行
 function renderCategoryRankings(data) {
     const container = document.getElementById('category-rankings');
-    if (!container || !data) return;
+    if (!container || !data || data.length === 0) {
+        return;
+    }
     
     container.innerHTML = `
         <table style="width:100%; border-collapse: collapse;">
@@ -130,7 +168,9 @@ function renderCategoryRankings(data) {
 // 渲染中国供应链优势
 function renderChinaOpportunities(data) {
     const container = document.getElementById('china-opportunities');
-    if (!container || !data) return;
+    if (!container || !data || data.length === 0) {
+        return;
+    }
     
     container.innerHTML = data.map(item => `
         <div class="suggestion-item">
