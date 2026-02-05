@@ -6,6 +6,19 @@
     <title>📊 Daily Researcher - 非遗手工出海全球趋势洞察</title>
     <link rel="stylesheet" href="css/style.css">
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        /* 加载动画 */
+        .loading-spinner {
+            display: inline-block;
+            width: 20px;
+            height: 20px;
+            border: 2px solid #f3f3f3;
+            border-top: 2px solid #3498db;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+        }
+        @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
+    </style>
 </head>
 <body>
     <header>
@@ -27,13 +40,15 @@
             <div class="metric-card">
                 <h3>🔥 今日热点</h3>
                 <ul id="hot-topics">
-                    <li class="loading">加载中...</li>
+                    <li style="padding: 1rem; text-align: center; color: #7f8c8d;">
+                        <span class="loading-spinner"></span> 加载中...
+                    </li>
                 </ul>
             </div>
             <div class="metric-card">
                 <h3>🏷️ 热门标签</h3>
-                <div id="tag-cloud" class="tag-cloud">
-                    <span class="loading">加载中...</span>
+                <div id="tag-cloud" class="tag-cloud" style="padding: 1rem; text-align: center; color: #7f8c8d;">
+                    <span class="loading-spinner"></span> 加载中...
                 </div>
             </div>
         </section>
@@ -78,7 +93,133 @@
         <p>数据来源：Amazon, Etsy, TikTok Shop, Pinterest, Google Trends</p>
     </footer>
 
-    <script src="js/app.js"></script>
-    <script src="js/index.js"></script>
+    <script>
+    // 工具函数
+    const Utils = {
+        formatDate(date) {
+            return new Date(date).toLocaleString('zh-CN', {
+                year: 'numeric', month: '2-digit', day: '2-digit',
+                hour: '2-digit', minute: '2-digit'
+            });
+        },
+        formatNumber(num) {
+            if (num >= 1000000000) return (num / 1000000000).toFixed(1) + 'B';
+            if (num >= 1000000) return (num / 1000000).toFixed(1) + 'M';
+            if (num >= 1000) return (num / 1000).toFixed(1) + 'K';
+            return num.toString();
+        },
+        getTagSize(count, maxCount) {
+            const ratio = count / maxCount;
+            if (ratio > 0.8) return 'size-5';
+            if (ratio > 0.6) return 'size-4';
+            if (ratio > 0.4) return 'size-3';
+            if (ratio > 0.2) return 'size-2';
+            return 'size-1';
+        }
+    };
+
+    // 图表工具
+    const ChartUtils = {
+        createLineChart(ctx, labels, datasets) {
+            return new Chart(ctx, {
+                type: 'line',
+                data: { labels, datasets: datasets.map((d, i) => ({
+                    label: d.label, data: d.data,
+                    borderColor: ['#3498db','#e74c3c','#27ae60'][i%3],
+                    backgroundColor: 'transparent', tension: 0.4, fill: false
+                }))},
+                options: {
+                    responsive: true, maintainAspectRatio: false,
+                    plugins: { legend: { position: 'bottom' } },
+                    scales: { y: { beginAtZero: false } }
+                }
+            });
+        },
+        createPieChart(ctx, labels, data) {
+            return new Chart(ctx, {
+                type: 'doughnut',
+                data: { labels, datasets: [{
+                    data, borderWidth: 2, borderColor: '#fff',
+                    backgroundColor: ['#3498db','#e74c3c','#27ae60','#f39c12','#9b59b6','#1abc9c']
+                }]},
+                options: {
+                    responsive: true, maintainAspectRatio: false,
+                    plugins: { legend: { position: 'right' } }
+                }
+            });
+        }
+    };
+
+    // 主逻辑
+    async function initDashboard() {
+        console.log('🚀 Dashboard initializing...');
+        document.getElementById('update-time').textContent = Utils.formatDate(new Date());
+        
+        try {
+            // 加载竞品数据
+            const response = await fetch('data/competitor-trends.json');
+            if (!response.ok) throw new Error('Failed to load competitor data');
+            const data = await response.json();
+            console.log('✅ Data loaded:', data);
+            
+            // 渲染今日热点
+            const hotContainer = document.getElementById('hot-topics');
+            if (data.hotProducts && data.hotProducts.length > 0) {
+                hotContainer.innerHTML = data.hotProducts.slice(0, 5).map((p, i) => `
+                    <li class="product-item">
+                        <span class="product-rank">${i+1}</span>
+                        <div class="product-info">
+                            <div class="product-name">${p.name}</div>
+                            <div class="product-meta">${p.platform} · ${p.price}</div>
+                        </div>
+                        <span class="product-price">${p.sales}</span>
+                    </li>
+                `).join('');
+            } else {
+                hotContainer.innerHTML = '<li style="padding: 1rem; color: #7f8c8d;">暂无数据</li>';
+            }
+            
+            // 渲染标签云
+            const tagContainer = document.getElementById('tag-cloud');
+            if (data.trendingTags && data.trendingTags.length > 0) {
+                const maxCount = Math.max(...data.trendingTags.slice(0, 15).map(t => t.count || 1));
+                tagContainer.innerHTML = data.trendingTags.slice(0, 15).map(tag => `
+                    <span class="tag ${Utils.getTagSize(tag.count || 1, maxCount)}">
+                        ${tag.name}
+                    </span>
+                `).join('');
+            } else {
+                tagContainer.innerHTML = '<span style="color: #7f8c8d;">暂无标签数据</span>';
+            }
+            
+            // 渲染趋势图表
+            if (data.trendData) {
+                const trendCtx = document.getElementById('trendChart').getContext('2d');
+                ChartUtils.createLineChart(trendCtx, data.trendData.labels, data.trendData.datasets);
+            }
+            
+            // 渲染品类分布
+            if (data.categoryDistribution) {
+                const catCtx = document.getElementById('categoryChart').getContext('2d');
+                ChartUtils.createPieChart(catCtx, data.categoryDistribution.labels, data.categoryDistribution.data);
+            }
+            
+            console.log('✅ Dashboard rendered successfully');
+        } catch (error) {
+            console.error('❌ Error:', error);
+            document.getElementById('hot-topics').innerHTML = 
+                '<li style="padding: 1rem; color: #e74c3c;">数据加载失败</li>';
+            document.getElementById('tag-cloud').innerHTML = 
+                '<span style="color: #e74c3c;">数据加载失败</span>';
+        }
+    }
+
+    // 页面加载完成后执行
+    if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', initDashboard);
+    } else {
+        initDashboard();
+    }
+    </script>
 </body>
 </html>

@@ -5,6 +5,19 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>🛒 竞品动态 - Daily Researcher</title>
     <link rel="stylesheet" href="css/style.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        .loading-spinner {
+            display: inline-block;
+            width: 20px;
+            height: 20px;
+            border: 2px solid #f3f3f3;
+            border-top: 2px solid #3498db;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+        }
+        @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
+    </style>
 </head>
 <body>
     <header>
@@ -26,19 +39,25 @@
             <div class="platform-card">
                 <h3>🛍️ Amazon Top 10</h3>
                 <div id="amazon-list" class="product-list">
-                    <div class="loading">加载中...</div>
+                    <div style="padding: 1rem; text-align: center; color: #7f8c8d;">
+                        <span class="loading-spinner"></span> 加载中...
+                    </div>
                 </div>
             </div>
             <div class="platform-card">
                 <h3>🎨 Etsy 热销榜</h3>
                 <div id="etsy-list" class="product-list">
-                    <div class="loading">加载中...</div>
+                    <div style="padding: 1rem; text-align: center; color: #7f8c8d;">
+                        <span class="loading-spinner"></span> 加载中...
+                    </div>
                 </div>
             </div>
             <div class="platform-card">
                 <h3>📱 TikTok Shop 爆款</h3>
                 <div id="tiktok-list" class="product-list">
-                    <div class="loading">加载中...</div>
+                    <div style="padding: 1rem; text-align: center; color: #7f8c8d;">
+                        <span class="loading-spinner"></span> 加载中...
+                    </div>
                 </div>
             </div>
         </section>
@@ -47,23 +66,30 @@
         <section class="insights">
             <div class="insight-card">
                 <h3>💰 价格带分布</h3>
-                <div id="price-distribution"></div>
+                <div id="price-distribution" style="height: 250px; position: relative;">
+                    <div style="padding: 1rem; text-align: center; color: #7f8c8d; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);">
+                        <span class="loading-spinner"></span> 加载中...
+                    </div>
+                </div>
             </div>
             <div class="insight-card">
                 <h3>🎯 品类热度排行</h3>
-                <div id="category-rankings"></div>
+                <div id="category-rankings">
+                    <div style="padding: 1rem; text-align: center; color: #7f8c8d;">
+                        <span class="loading-spinner"></span> 加载中...
+                    </div>
+                </div>
             </div>
         </section>
 
-        <!-- 中国供应链机会 -->
+        <!-- 中国供应链优势 -->
         <section class="opportunities">
             <h3>🇨🇳 中国供应链优势品类</h3>
-            <div id="china-opportunities" class="opportunity-grid"></div>
-        </section>
-
-        <!-- 完整报告链接 -->
-        <section class="full-report">
-            <p>📄 <a href="data/competitor-trends.json" target="_blank">查看完整数据JSON</a></p>
+            <div id="china-opportunities" class="opportunity-grid">
+                <div style="padding: 1rem; text-align: center; color: #7f8c8d; grid-column: 1/-1;">
+                    <span class="loading-spinner"></span> 加载中...
+                </div>
+            </div>
         </section>
     </main>
 
@@ -71,7 +97,148 @@
         <p>📊 Daily Researcher | 非遗手工出海趋势洞察</p>
     </footer>
 
-    <script src="js/app.js"></script>
-    <script src="js/competitor.js"></script>
+    <script>
+    const Utils = {
+        formatDate(date) {
+            return new Date(date).toLocaleString('zh-CN', {
+                year: 'numeric', month: '2-digit', day: '2-digit',
+                hour: '2-digit', minute: '2-digit'
+            });
+        },
+        formatNumber(num) {
+            if (num >= 1000000000) return (num / 1000000000).toFixed(1) + 'B';
+            if (num >= 1000000) return (num / 1000000).toFixed(1) + 'M';
+            if (num >= 1000) return (num / 1000).toFixed(1) + 'K';
+            return num.toString();
+        }
+    };
+
+    async function initPage() {
+        console.log('🚀 Competitor page initializing...');
+        document.getElementById('update-time').textContent = Utils.formatDate(new Date());
+        
+        try {
+            const response = await fetch('data/competitor-trends.json');
+            if (!response.ok) throw new Error('Failed to load data');
+            const data = await response.json();
+            console.log('✅ Data loaded:', data);
+            
+            // Amazon列表
+            if (data.amazonTop && data.amazonTop.length > 0) {
+                document.getElementById('amazon-list').innerHTML = data.amazonTop.slice(0, 10).map((p, i) => `
+                    <div class="product-item">
+                        <span class="product-rank">${i+1}</span>
+                        <div class="product-info">
+                            <div class="product-name">${p.name}</div>
+                            <div class="product-meta">${p.category} · ${p.source || 'Amazon'}</div>
+                        </div>
+                        <span class="product-price">${p.price}</span>
+                    </div>
+                `).join('');
+            }
+            
+            // Etsy列表
+            if (data.etsyTop && data.etsyTop.length > 0) {
+                document.getElementById('etsy-list').innerHTML = data.etsyTop.slice(0, 10).map((p, i) => `
+                    <div class="product-item">
+                        <span class="product-rank">${i+1}</span>
+                        <div class="product-info">
+                            <div class="product-name">${p.name}</div>
+                            <div class="product-meta">${p.category} · ${p.note || ''}</div>
+                        </div>
+                        <span class="product-price">${p.price}</span>
+                    </div>
+                `).join('');
+            }
+            
+            // TikTok列表
+            if (data.tiktokShop && data.tiktokShop.length > 0) {
+                document.getElementById('tiktok-list').innerHTML = data.tiktokShop.slice(0, 10).map((p, i) => `
+                    <div class="product-item">
+                        <span class="product-rank">${i+1}</span>
+                        <div class="product-info">
+                            <div class="product-name">${p.name}</div>
+                            <div class="product-meta">#${p.hashtag} · ${Utils.formatNumber(p.views)}播放</div>
+                        </div>
+                        <span class="product-price">${p.price}</span>
+                    </div>
+                `).join('');
+            }
+            
+            // 价格分布图表
+            if (data.priceDistribution) {
+                const ctx = document.getElementById('price-distribution');
+                ctx.innerHTML = '<canvas id="priceChart"></canvas>';
+                new Chart(ctx.querySelector('#priceChart'), {
+                    type: 'doughnut',
+                    data: {
+                        labels: data.priceDistribution.labels,
+                        datasets: [{
+                            data: data.priceDistribution.data,
+                            backgroundColor: ['#3498db','#e74c3c','#27ae60','#f39c12','#9b59b6'],
+                            borderWidth: 2, borderColor: '#fff'
+                        }]
+                    },
+                    options: {
+                        responsive: true, maintainAspectRatio: false,
+                        plugins: { legend: { position: 'right' } }
+                    }
+                });
+            }
+            
+            // 品类排行
+            if (data.categoryRankings && data.categoryRankings.length > 0) {
+                document.getElementById('category-rankings').innerHTML = `
+                    <table style="width:100%; border-collapse: collapse;">
+                        <thead>
+                            <tr style="background: var(--bg-color);">
+                                <th style="padding: 8px; text-align: left;">排名</th>
+                                <th style="padding: 8px; text-align: left;">品类</th>
+                                <th style="padding: 8px; text-align: right;">增长率</th>
+                                <th style="padding: 8px; text-align: right;">毛利率</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            ${data.categoryRankings.map((item, i) => `
+                                <tr style="border-bottom: 1px solid #eee;">
+                                    <td style="padding: 8px; width: 40px;">${i+1}</td>
+                                    <td style="padding: 8px;">${item.name}</td>
+                                    <td style="padding: 8px; text-align: right; color: #27ae60;">+${item.growth}%</td>
+                                    <td style="padding: 8px; text-align: right; color: #3498db;">${item.margin}</td>
+                                </tr>
+                            `).join('')}
+                        </tbody>
+                    </table>
+                `;
+            }
+            
+            // 中国供应链优势
+            if (data.chinaOpportunities && data.chinaOpportunities.length > 0) {
+                document.getElementById('china-opportunities').innerHTML = data.chinaOpportunities.map(item => `
+                    <div class="suggestion-item">
+                        <h4>${item.icon} ${item.category}</h4>
+                        <p>${item.description}</p>
+                        <p style="font-size: 0.85rem; color: #27ae60; margin-top: 0.5rem;">💰 ${item.margin}</p>
+                    </div>
+                `).join('');
+            }
+            
+            console.log('✅ Competitor page rendered');
+        } catch (error) {
+            console.error('❌ Error:', error);
+            const ids = ['amazon-list', 'etsy-list', 'tiktok-list', 'china-opportunities'];
+            ids.forEach(id => {
+                const el = document.getElementById(id);
+                if (el) el.innerHTML = '<div style="padding: 1rem; color: #e74c3c;">数据加载失败</div>';
+            });
+        }
+    }
+
+    if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', initPage);
+    } else {
+        initPage();
+    }
+    </script>
 </body>
 </html>
