@@ -9,6 +9,8 @@
 - 可持续设计趋势：https://www.saramosele.com/blog-posts/sustainable-design-trends [链接]
 - 2025设计趋势：https://www.remarcable.co.uk/blog/a-sensory-sustainable-and-earthy-approach-2025-design-trends [链接]
 - Dune Ceramics设计趋势：https://duneceramics.com/en/blog/design-trends-2025 [链接]
+- 动漫周边趋势：https://otakupopmall.com/blogs/column/2026-trend-forecast-the-next-big-japanese-character-goods-that-will-go-global [链接]
+- 动漫周边市场报告：https://www.grandviewresearch.com/industry-analysis/anime-merchandising-market-report [链接]
 
 ---
 
@@ -150,6 +152,12 @@
 - 限定版手工艺品
 - 节日主题文创
 
+**动漫周边市场数据**（2026年预测）：
+- 全球动漫周边市场规模预计超过30亿美元
+- 玩具和手办占据28%以上市场份额
+- 日本占据全球市场59%份额
+- 高品质手工艺制作趋势明显
+
 #### 2. 影视IP联名
 
 **关注方向**：
@@ -281,6 +289,7 @@
 - TikTok #dallaska17：17K Posts（游戏/VTuber增长）
 - Pantone 2025 Mocha Mousse：年度色彩趋势确定
 - 编织装饰、可持续设计：2025-2026核心方向
+- 全球动漫周边市场预计超30亿美元
 
 ---
 
@@ -343,6 +352,8 @@
 | 2026-02-04 | 设计 | 可持续设计 | 高 | 🔥上升 | https://www.bdiusa.com/blog/2025-furniture-trends-embracing-comfort-sustainability-and-versatility | 环保材料产品 |
 | 2026-02-04 | 设计 | 编织装饰 | 高 | 稳定 | https://www.remarcable.co.uk/blog/a-sensory-sustainable-and-earthy-approach-2025-design-trends | 柳编制品、家居装饰 |
 | 2026-02-04 | 设计 | 室内设计趋势 | 高 | 稳定 | https://duneceramics.com/en/blog/design-trends-2025 | 陶瓷器皿、装饰摆件 |
+| 2026-02-04 | 动漫周边 | 市场趋势 | 高 | 🔥上升 | https://otakupopmall.com/blogs/column/2026-trend-forecast-the-next-big-japanese-character-goods-that-will-go-global | IP联名产品开发 |
+| 2026-02-04 | 动漫周边 | 市场数据 | 高 | 稳定 | https://www.grandviewresearch.com/industry-analysis/anime-merchandising-market-report | 高端手工周边产品 |
 
 ---
 
@@ -360,8 +371,8 @@
 
 ---
 
-*报告生成时间：2026年2月4日 4:30 AM (UTC)*
-*数据来源：TikTok Creative Center、Pantone CNN、室内设计行业报告*
+*报告生成时间：2026年2月4日 10:30 AM (UTC)*
+*数据来源：TikTok Creative Center、Pantone CNN、室内设计行业报告、动漫周边市场研究*
 *趋势监控周期：每日更新（工作日）*
 
 ---
@@ -370,4 +381,6 @@
 - 龙珠超IP热度爆表，建议优先开发相关刺绣周边
 - Mocha Mousse配色将成为2025-2026主流，可提前布局产品线
 - 可持续设计持续升温，环保材料手工产品需求增加
+- 全球动漫周边市场超30亿美元，高品质手工艺产品潜力巨大
 - 建筑地标打卡成为新趋势，地标文创有潜力
+- AnimeJapan 2026将推出日本传统工艺与动漫联名产品，是重要参考方向

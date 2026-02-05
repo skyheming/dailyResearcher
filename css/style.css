@@ -163,6 +163,8 @@ main {
     border-radius: var(--radius);
     padding: 1.5rem;
     box-shadow: var(--shadow);
+    height: 350px;
+    position: relative;
 }
 
 .chart-container h3 {
@@ -697,6 +699,8 @@ footer p {
     .insight-card,
     .chart-container {
         padding: 0.8rem;
+        height: auto;
+        min-height: 280px;
     }
     
     .link-card {
