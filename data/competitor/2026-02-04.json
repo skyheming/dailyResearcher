@@ -1,0 +1,49 @@
+{
+  "date": "2026-02-04",
+  "amazonTop": [
+    {"rank": 1, "name": "Apple AirPods 4", "category": "电子产品", "price": "$179", "dailySales": 34500, "source": "Amazon"},
+    {"rank": 2, "name": "Echo Dot 5th Gen", "category": "智能家居", "price": "$49.99", "dailySales": 31247, "source": "Amazon"},
+    {"rank": 3, "name": "Fire TV Stick 4K Max", "category": "电子产品", "price": "$54.99", "dailySales": 28932, "source": "Amazon"},
+    {"rank": 4, "name": "Kindle Paperwhite", "category": "电子书", "price": "$139.99", "dailySales": 24500, "source": "Amazon"},
+    {"rank": 5, "name": "Stanley Quencher tumbler", "category": "家居用品", "price": "$45-65", "trend": "TikTok病毒传播", "source": "Amazon"}
+  ],
+  "etsyTop": [
+    {"rank": 1, "name": "个性化珠宝首饰", "category": "珠宝", "price": "$25-200", "trend": "稳定增长"},
+    {"rank": 2, "name": "数字下载/模板", "category": "数字产品", "price": "$3-50", "trend": "即时交付"},
+    {"rank": 3, "name": "定制服饰(POD)", "category": "服装", "price": "$15-60", "trend": "快速增长"},
+    {"rank": 4, "name": "宠物用品", "category": "宠物", "price": "$10-80", "trend": "持续增长"},
+    {"rank": 5, "name": "亚麻家居用品", "category": "家居", "price": "$20-150", "trend": "Etsy 2026趋势"}
+  ],
+  "tiktokShop": [
+    {"rank": 1, "name": "香水", "hashtag": "PerfumeTok", "views": "11M+", "price": "$15-80"},
+    {"rank": 2, "name": "LED氛围灯", "hashtag": "RoomDecor", "views": "310M", "price": "$10-50"},
+    {"rank": 3, "name": "无热卷发器", "hashtag": "HeatlessCurls", "views": "520M", "price": "$15-40"},
+    {"rank": 4, "name": "蜗牛精华", "hashtag": "SkincareTok", "views": "58B", "price": "$15-30"},
+    {"rank": 5, "name": "宠物毛发清洁器", "hashtag": "PetTok", "views": "920M", "price": "$10-25"}
+  ],
+  "hotProducts": [
+    {"name": "Apple AirPods 4", "platform": "Amazon", "sales": "34,500单/天", "price": "$179"},
+    {"name": "Stanley Quencher", "platform": "TikTok+Amazon", "sales": "病毒式传播", "price": "$45-65"},
+    {"name": "个性化珠宝首饰", "platform": "Etsy", "sales": "高溢价品类", "price": "$25-200"},
+    {"name": "LED氛围灯", "platform": "TikTok Shop", "sales": "310M播放", "price": "$10-50"},
+    {"name": "定制服饰(POD)", "platform": "Etsy/Shopify", "sales": "快速增长", "price": "$15-60"}
+  ],
+  "trendingTags": [
+    {"name": "#handmade", "count": 15700000, "trend": "up"},
+    {"name": "#diy", "count": 12300000, "trend": "up"},
+    {"name": "#crafts", "count": 8900000, "trend": "up"},
+    {"name": "#skincaretok", "count": 125000000, "trend": "up"},
+    {"name": "#pettok", "count": 920000000, "trend": "up"}
+  ],
+  "priceDistribution": {
+    "labels": ["$0-25", "$25-50", "$50-100", "$100-200", "$200+"],
+    "data": [22, 35, 25, 12, 6]
+  },
+  "categoryRankings": [
+    {"name": "定制服饰(POD)", "growth": 52, "margin": "40-60%"},
+    {"name": "个性化珠宝", "growth": 45, "margin": "60-80%"},
+    {"name": "美妆工具", "growth": 42, "margin": "50-70%"},
+    {"name": "LED照明", "growth": 35, "margin": "40-60%"},
+    {"name": "宠物用品", "growth": 67, "margin": "45-65%"}
+  ]
+}

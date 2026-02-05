@@ -17,6 +17,38 @@
             animation: spin 1s linear infinite;
         }
         @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
+        
+        .date-selector {
+            background: white;
+            padding: 1rem;
+            border-radius: var(--radius);
+            margin-bottom: 1.5rem;
+            box-shadow: var(--shadow);
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            flex-wrap: wrap;
+        }
+        .date-selector label {
+            font-weight: 500;
+            color: var(--primary-color);
+        }
+        .date-selector select {
+            padding: 0.5rem 1rem;
+            border: 2px solid var(--secondary-color);
+            border-radius: 8px;
+            font-size: 1rem;
+            cursor: pointer;
+            background: white;
+        }
+        .current-badge {
+            background: var(--success-color);
+            color: white;
+            padding: 0.3rem 0.8rem;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            margin-left: auto;
+        }
     </style>
 </head>
 <body>
@@ -30,10 +62,20 @@
         <a href="index.html">仪表板</a>
         <a href="competitor.html">竞品动态</a>
         <a href="social.html" class="active">社交趋势</a>
-        <a href="supply-chain.html">供应链周报</a>
+        <a href="supply-chain.html">供应链月报</a>
     </nav>
 
     <main>
+        <!-- 日期选择器 -->
+        <div class="date-selector">
+            <label>📅 选择日期：</label>
+            <select id="date-select" onchange="loadDataByDate()">
+                <option value="2026-02-05">2026年2月5日</option>
+                <option value="2026-02-04">2026年2月4日</option>
+            </select>
+            <span class="current-badge" id="current-badge">最新数据</span>
+        </div>
+
         <!-- 平台趋势 -->
         <section class="platforms">
             <div class="platform-card">
@@ -55,7 +97,7 @@
             <div class="platform-card">
                 <h3>🎬 YouTube 热门</h3>
                 <div id="youtube-trends" class="trend-list">
-                    <div style="padding: 1rem; text-align: center; color: #7f8c8d;">
+                    <div style="padding: 1rem; text-align: center;f8c8 color: #7d;">
                         <span class="loading-spinner"></span> 加载中...
                     </div>
                 </div>
@@ -122,14 +164,39 @@
         }
     };
 
+    let currentDate = new Date().toISOString().split('T')[0];
+
+    async function loadDataByDate() {
+        const select = document.getElementById('date-select');
+        currentDate = select.value;
+        
+        const badge = document.getElementById('current-badge');
+        const today = new Date().toISOString().split('T')[0];
+        if (currentDate === today) {
+            badge.textContent = '最新数据';
+            badge.style.background = '#27ae60';
+        } else {
+            badge.textContent = '历史数据';
+            badge.style.background = '#f39c12';
+        }
+        
+        await initPage();
+    }
+
     async function initPage() {
-        console.log('🚀 Social page initializing...');
+        console.log('🚀 Social page initializing...', currentDate);
         document.getElementById('update-time').textContent = Utils.formatDate(new Date());
         
         try {
-            const response = await fetch('data/social-trends.json');
-            if (!response.ok) throw new Error('Failed to load data');
-            const data = await response.json();
+            const response = await fetch(`data/social/${currentDate}.json`);
+            let data;
+            if (!response.ok) {
+                const latestResponse = await fetch('data/social/2026-02-05.json');
+                if (!latestResponse.ok) throw new Error('No data available');
+                data = await latestResponse.json();
+            } else {
+                data = await response.json();
+            }
             console.log('✅ Data loaded:', data);
             
             // TikTok标签

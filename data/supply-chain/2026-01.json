@@ -1,0 +1,269 @@
+{
+  "month": "2026年1月",
+  "reportDate": "2026-02-05",
+  "regions": {
+    "华北地区": {
+      "name": "北京",
+      "industries": [
+        {"name": "文创设计", "output": "1,200亿元", "growth": "15%", "features": ["设计资源集中", "国际交流频繁", "政策支持强"]}
+      ],
+      "highlights": ["冬奥后冰雪产业持续", "国际消费中心城市建设"]
+    },
+    {
+      "name": "天津",
+      "industries": [
+        {"name": "工艺品制造", "output": "180亿元", "growth": "8%", "features": ["港口物流优势", "制造业基础强"]}
+      ],
+      "highlights": ["北方工艺品集散地"]
+    },
+    {
+      "name": "河北",
+      "industries": [
+        {"name": "传统手工艺", "output": "350亿元", "growth": "12%", "features": ["曲阳石雕", "衡水内画", "蔚县剪纸"]}
+      ],
+      "highlights": ["非遗传承基地建设", "雄安新区带动"]
+    },
+    {
+      "name": "山西",
+      "industries": [
+        {"name": "传统工艺", "output": "220亿元", "growth": "10%", "features": ["漆器", "珐琅", "剪纸"]}
+      ],
+      "highlights": ["晋商文化相关文创", "古镇旅游带动"]
+    },
+    {
+      "name": "内蒙古",
+      "industries": [
+        {"name": "民族工艺品", "output": "280亿元", "growth": "18%", "features": ["皮毛制品", "蒙古族刺绣", "银器制作"]}
+      ],
+      "highlights": ["冰雪旅游带动", "民族风格现代化"]
+    }
+  },
+  "东北地区": {
+    "name": "辽宁",
+    "industries": [
+      {"name": "玉石加工", "output": "450亿元", "growth": "8%", "features": ["岫岩玉", "玛瑙", "翡翠加工"]}
+    ],
+    "highlights": ["沈阳故宫文创", "满族文化产品"]
+  },
+  {
+    "name": "吉林",
+    "industries": [
+      {"name": "民族工艺品", "output": "150亿元", "growth": "15%", "features": ["朝鲜族工艺品", "满族剪纸"]}
+    ],
+    "highlights": ["冰雪产业带动", "民俗文化产品"]
+  },
+  {
+    "name": "黑龙江",
+    "industries": [
+      {"name": "传统工艺", "output": "180亿元", "growth": "20%", "features": ["赫哲族鱼皮制品", "鄂伦春族狍皮制品"]}
+    ],
+    "highlights": ["冰雪旅游带动", "俄罗斯风格工艺品"]
+  }
+},
+"华东地区": {
+  "name": "上海",
+  "industries": [
+    {"name": "时尚设计", "output": "2,500亿元", "growth": "18%", "features": ["国际时尚中心", "设计资源集中"]}
+  ],
+  "highlights": ["国际品牌入驻", "设计人才聚集"]
+},
+{
+  "name": "江苏",
+  "industries": [
+    {"name": "传统工艺", "output": "3,200亿元", "growth": "15%", "features": ["苏绣", "紫砂", "水晶", "丝绸"]}
+  ],
+  "highlights": ["苏州、无锡、常州、南京为核心产区", "IP联名合作活跃"]
+},
+{
+  "name": "浙江",
+  "industries": [
+    {"name": "工艺品制造", "output": "2,800亿元", "growth": "16%", "features": ["杭州丝绸", "龙泉青瓷", "东阳木雕"]}
+  ],
+  "highlights": ["数字经济+传统工艺", "电商直播发达"]
+},
+{
+  "name": "安徽",
+  "industries": [
+    {"name": "传统工艺", "output": "680亿元", "growth": "12%", "features": ["宣纸", "歙砚", "徽墨", "徽州三雕"]}
+  ],
+  "highlights": ["文房四宝核心产区", "古村落旅游带动"]
+},
+{
+  "name": "福建",
+  "industries": [
+    {"name": "工艺品制造", "output": "1,200亿元", "growth": "14%", "features": ["德化白瓷", "漆器", "福州软木画"]}
+  ],
+  "highlights": ["海上丝绸之路起点", "侨乡资源"]
+},
+{
+  "name": "江西",
+  "industries": [
+    {"name": "传统工艺", "output": "450亿元", "growth": "10%", "features": ["景德镇陶瓷", "婺源歙砚"]}
+  ],
+  "highlights": ["千年瓷都品牌", "陶瓷文化创意园"]
+},
+{
+  "name": "山东",
+  "industries": [
+    {"name": "传统工艺", "output": "1,800亿元", "growth": "18%", "features": ["曹县汉服", "潍坊风筝", "临沭柳编", "淄博陶瓷"]}
+  ],
+  "highlights": ["电商产业带成熟", "AI设计平台应用"]
+}
+},
+"华中地区": {
+  "name": "河南",
+  "industries": [
+    {"name": "传统工艺", "output": "680亿元", "growth": "12%", "features": ["洛阳唐三彩", "开封汴绣", "南阳玉雕"]}
+  ],
+  "highlights": ["中原文化底蕴", "考古文创产品"]
+},
+{
+  "name": "湖北",
+  "industries": [
+    {"name": "工艺品制造", "output": "520亿元", "growth": "10%", "features": ["汉绣", "绿松石雕", "宜昌彩陶"]}
+  ],
+  "highlights": ["楚文化产品", "三峡旅游带动"]
+},
+{
+  "name": "湖南",
+  "industries": [
+    {"name": "传统工艺", "output": "380亿元", "growth": "14%", "features": ["湘绣", "醴陵瓷器", "苗族银饰"]}
+  ],
+  "highlights": ["少数民族文化", "张家界旅游带动"]
+}
+},
+"华南地区": {
+  "name": "广东",
+  "industries": [
+    {"name": "工艺品制造", "output": "4,500亿元", "growth": "16%", "features": ["广州彩瓷", "潮州木雕", "佛山石湾陶塑"]}
+  ],
+  "highlights": ["全国最大产业带", "出口贸易发达"]
+},
+{
+  "name": "广西",
+  "industries": [
+    {"name": "民族工艺品", "output": "280亿元", "growth": "15%", "features": ["壮锦", "瑶族服饰", "靖西绣球"]}
+  ],
+  "highlights": ["少数民族特色", "桂林旅游带动"]
+},
+{
+  "name": "海南",
+  "industries": [
+    {"name": "旅游工艺品", "output": "150亿元", "growth": "22%", "features": ["椰雕", "贝壳工艺品", "黎锦"]}
+  ],
+  "highlights": ["自贸港政策", "免税购物带动"]
+}
+},
+"西南地区": {
+  "name": "四川",
+  "industries": [
+    {"name": "传统工艺", "output": "680亿元", "growth": "14%", "features": ["蜀绣", "漆器", "绵竹年画", "羌族刺绣"]}
+  ],
+  "highlights": ["蜀文化底蕴", "大熊猫IP开发"]
+},
+{
+  "name": "贵州",
+  "industries": [
+    {"name": "民族工艺品", "output": "320亿元", "growth": "20%", "features": ["苗族银饰", "蜡染", "侗族刺绣"]}
+  ],
+  "highlights": ["少数民族文化丰富", "乡村振兴带动"]
+},
+{
+  "name": "云南",
+  "industries": [
+    {"name": "民族工艺品", "output": "450亿元", "growth": "18%", "features": ["白族扎染", "傣族织锦", "彝族漆器"]}
+  ],
+  "highlights": ["旅游大省", "多民族文化交融"]
+},
+{
+  "name": "重庆",
+  "industries": [
+    {"name": "工艺品制造", "output": "280亿元", "growth": "12%", "features": ["荣昌陶", "蜀绣", "石柱黄连"]}
+  ],
+  "highlights": ["火锅文化周边", "山城特色产品"]
+}
+},
+"西北地区": {
+  "name": "陕西",
+  "industries": [
+    {"name": "传统工艺", "output": "520亿元", "growth": "12%", "features": ["秦俑复制品", "唐三彩", "陕西皮影"]}
+  ],
+  "highlights": ["历史文化名城", "兵马俑IP开发"]
+},
+{
+  "name": "甘肃",
+  "industries": [
+    {"name": "传统工艺", "output": "180亿元", "growth": "10%", "features": ["敦煌壁画衍生品", "庆阳香包", "夜光杯"]}
+  ],
+  "highlights": ["丝绸之路文化", "敦煌IP开发"]
+},
+{
+  "name": "青海",
+  "industries": [
+    {"name": "民族工艺品", "output": "120亿元", "growth": "15%", "features": ["藏族唐卡", "银饰", "藏香"]}
+  ],
+  "highlights": ["藏族文化特色", "藏传佛教相关产品"]
+},
+{
+  "name": "宁夏",
+  "industries": [
+    {"name": "传统工艺", "output": "80亿元", "growth": "12%", "features": ["贺兰石雕刻", "回族刺绣"]}
+  ],
+  "highlights": ["回乡文化特色"]
+},
+{
+  "name": "新疆",
+  "industries": [
+    {"name": "民族工艺品", "output": "250亿元", "growth": "16%", "features": ["和田玉雕", "维吾尔族地毯", "英吉沙小刀"]}
+  ],
+  "highlights": ["玉石产业", "少数民族特色产品"]
+}
+}
+},
+"materialPrices": {
+  "description": "2026年1月主要原材料价格趋势",
+  "items": [
+    {"name": "蚕丝", "unit": "¥450-550/kg", "change": "+3.5%", "trend": "上涨", "region": "浙江、四川"},
+    {"name": "棉花", "unit": "¥15-20/kg", "change": "-1.2%", "trend": "稳定", "region": "新疆、山东"},
+    {"name": "羊毛", "unit": "¥80-120/kg", "change": "+2.8%", "trend": "上涨", "region": "内蒙古、新疆"},
+    {"name": "羊绒", "unit": "¥800-1200/kg", "change": "+5.2%", "trend": "上涨明显", "region": "内蒙古"},
+    {"name": "丝绸", "unit": "¥80-150/m", "change": "+2.5%", "trend": "稳定", "region": "江苏、浙江"},
+    {"name": "亚麻", "unit": "¥25-40/m", "change": "-0.8%", "trend": "稳定", "region": "黑龙江、吉林"},
+    {"name": "陶瓷粘土", "unit": "¥200-400/吨", "change": "+1.5%", "trend": "稳定", "region": "江西、福建"},
+    {"name": "玉石", "unit": "¥1000-50000/kg", "change": "+8.5%", "trend": "上涨明显", "region": "新疆、辽宁"},
+    {"name": "红木", "unit": "¥8000-50000/m³", "change": "+2.3%", "trend": "稳定", "region": "云南、海南"},
+    {"name": "柳条", "unit": "¥8-15/kg", "change": "+1.8%", "trend": "稳定", "region": "山东、江苏"}
+  ]
+},
+"policyUpdates": {
+  "description": "2026年1月相关政策",
+  "items": [
+    {"title": "国家级非遗传承人新增名单公布", "date": "2026-01-15", "region": "全国", "impact": "高"},
+    {"title": "跨境电商综试区扩容至50个城市", "date": "2026-01-20", "region": "全国", "impact": "高"},
+    {"title": "文化创意产业专项资金扶持政策", "date": "2026-01-10", "region": "全国", "impact": "中"},
+    {"title": "传统工艺振兴计划实施细则", "date": "2026-01-05", "region": "全国", "impact": "高"},
+    {"title": "各省非遗进校园活动启动", "date": "2026-01-15", "region": "全国", "impact": "中"}
+  ]
+},
+"keyInsights": {
+  "summary": "2026年1月全国传统工艺产业保持稳健增长，华东地区产业规模最大，华南地区出口最活跃，西南地区增速最快。跨境电商成为重要销售渠道，IP联名合作成为新趋势。",
+  "regionalHighlights": [
+    "山东曹县汉服产业：AI设计平台上线，生产周期缩短至7天",
+    "江苏苏绣：IP联名合作模式成熟，动画、游戏合作项目增多",
+    "广东工艺品：出口贸易恢复增长，东南亚市场拓展顺利",
+    "云南民族工艺：旅游带动明显，数字化转型加速"
+  ],
+  "trendHighlights": [
+    "跨境电商渠道增长35%，成为主要出口方式",
+    "IP联名合作项目增长50%，动漫、游戏IP最受欢迎",
+    "AI设计工具应用范围扩大，降低设计门槛",
+    "可持续材料需求增长25%，环保理念融入产品"
+  ],
+  "recommendedActions": [
+    {"priority": "高", "action": "积极布局跨境电商平台", "timeline": "1-2个月"},
+    {"priority": "高", "action": "探索动漫/游戏IP联名合作", "timeline": "1-3个月"},
+    {"priority": "中", "action": "引入AI设计工具提升效率", "timeline": "2-4个月"},
+    {"priority": "中", "action": "开发可持续材料产品线", "timeline": "3-6个月"}
+  ]
+}
+}

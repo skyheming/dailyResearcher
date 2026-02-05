@@ -1,0 +1,49 @@
+{
+  "date": "2026-02-05",
+  "amazonTop": [
+    {"rank": 1, "name": "Apple AirPods 4", "category": "电子产品", "price": "$179", "dailySales": 35200, "source": "Amazon"},
+    {"rank": 2, "name": "Echo Dot 5th Gen", "category": "智能家居", "price": "$49.99", "dailySales": 31800, "source": "Amazon"},
+    {"rank": 3, "name": "Fire TV Stick 4K Max", "category": "电子产品", "price": "$54.99", "dailySales": 29500, "source": "Amazon"},
+    {"rank": 4, "name": "Kindle Paperwhite", "category": "电子书", "price": "$139.99", "dailySales": 25000, "source": "Amazon"},
+    {"rank": 5, "name": "Samsung Galaxy Watch 7", "category": "穿戴设备", "price": "$199", "dailySales": 22000, "source": "Amazon"}
+  ],
+  "etsyTop": [
+    {"rank": 1, "name": "个性化珠宝首饰", "category": "珠宝", "price": "$25-200", "trend": "稳定增长"},
+    {"rank": 2, "name": "定制服饰(POD)", "category": "服装", "price": "$15-60", "trend": "快速增长"},
+    {"rank": 3, "name": "数字下载/模板", "category": "数字产品", "price": "$3-50", "trend": "即时交付"},
+    {"rank": 4, "name": "亚麻家居用品", "category": "家居", "price": "$20-150", "trend": "Etsy 2026趋势"},
+    {"rank": 5, "name": "宠物用品", "category": "宠物", "price": "$10-80", "trend": "持续增长"}
+  ],
+  "tiktokShop": [
+    {"rank": 1, "name": "香水", "hashtag": "PerfumeTok", "views": "12M+", "price": "$15-80"},
+    {"rank": 2, "name": "无热卷发器", "hashtag": "HeatlessCurls", "views": "550M", "price": "$15-40"},
+    {"rank": 3, "name": "LED氛围灯", "hashtag": "RoomDecor", "views": "320M", "price": "$10-50"},
+    {"rank": 4, "name": "蜗牛精华", "hashtag": "SkincareTok", "views": "60B", "price": "$15-30"},
+    {"rank": 5, "name": "宠物毛发清洁器", "hashtag": "PetTok", "views": "950M", "price": "$10-25"}
+  ],
+  "hotProducts": [
+    {"name": "Apple AirPods 4", "platform": "Amazon", "sales": "35,200单/天", "price": "$179"},
+    {"name": "无热卷发器", "platform": "TikTok Shop", "sales": "550M播放", "price": "$15-40"},
+    {"name": "个性化珠宝首饰", "platform": "Etsy", "sales": "稳定增长", "price": "$25-200"},
+    {"name": "香水", "platform": "TikTok Shop", "sales": "12M+播放", "price": "$15-80"},
+    {"name": "Samsung Galaxy Watch 7", "platform": "Amazon", "sales": "22,000单/天", "price": "$199"}
+  ],
+  "trendingTags": [
+    {"name": "#handmade", "count": 15800000, "trend": "up"},
+    {"name": "#diy", "count": 12400000, "trend": "up"},
+    {"name": "#crafts", "count": 9000000, "trend": "up"},
+    {"name": "#skincaretok", "count": 128000000, "trend": "up"},
+    {"name": "#pettok", "count": 950000000, "trend": "up"}
+  ],
+  "priceDistribution": {
+    "labels": ["$0-25", "$25-50", "$50-100", "$100-200", "$200+"],
+    "data": [20, 36, 26, 12, 6]
+  },
+  "categoryRankings": [
+    {"name": "宠物用品", "growth": 70, "margin": "45-65%"},
+    {"name": "定制服饰(POD)", "growth": 55, "margin": "40-60%"},
+    {"name": "个性化珠宝", "growth": 48, "margin": "60-80%"},
+    {"name": "美妆工具", "growth": 44, "margin": "50-70%"},
+    {"name": "LED照明", "growth": 38, "margin": "40-60%"}
+  ]
+}

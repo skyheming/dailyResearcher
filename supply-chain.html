@@ -3,13 +3,157 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>📦 供应链周报 - Daily Researcher</title>
+    <title>📦 供应链月报 - Daily Researcher</title>
     <link rel="stylesheet" href="css/style.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        .loading-spinner {
+            display: inline-block;
+            width: 20px;
+            height: 20px;
+            border: 2px solid #f3f3f3;
+            border-top: 2px solid #3498db;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+        }
+        @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
+        
+        .month-selector {
+            background: white;
+            padding: 1rem;
+            border-radius: var(--radius);
+            margin-bottom: 1.5rem;
+            box-shadow: var(--shadow);
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            flex-wrap: wrap;
+        }
+        .month-selector label {
+            font-weight: 500;
+            color: var(--primary-color);
+        }
+        .month-selector select {
+            padding: 0.5rem 1rem;
+            border: 2px solid var(--secondary-color);
+            border-radius: 8px;
+            font-size: 1rem;
+            cursor: pointer;
+            background: white;
+        }
+        
+        .region-section {
+            background: var(--card-bg);
+            border-radius: var(--radius);
+            padding: 1.5rem;
+            margin-bottom: 1.5rem;
+            box-shadow: var(--shadow);
+        }
+        .region-section h3 {
+            color: var(--primary-color);
+            margin-bottom: 1rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 3px solid var(--secondary-color);
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        .region-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+        .province-card {
+            background: var(--bg-color);
+            border-radius: 8px;
+            padding: 1rem;
+            border-left: 4px solid var(--secondary-color);
+        }
+        .province-card h4 {
+            color: var(--primary-color);
+            margin-bottom: 0.5rem;
+        }
+        .province-card .industry {
+            font-size: 0.9rem;
+            color: var(--text-light);
+        }
+        .province-card .output {
+            font-weight: bold;
+            color: var(--success-color);
+            margin: 0.3rem 0;
+        }
+        .province-card .features {
+            font-size: 0.85rem;
+            color: var(--text-light);
+        }
+        
+        .insights-section {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border-radius: var(--radius);
+            padding: 1.5rem;
+            margin-bottom: 1.5rem;
+        }
+        .insights-section h3 {
+            border-bottom-color: rgba(255,255,255,0.3);
+        }
+        .insights-section li {
+            margin: 0.5rem 0;
+            padding-left: 0.5rem;
+        }
+        
+        .policy-section {
+            background: #fff9e6;
+            border-radius: var(--radius);
+            padding: 1.5rem;
+            margin-bottom: 1.5rem;
+            border-left: 4px solid #f39c12;
+        }
+        .policy-section h3 {
+            color: #f39c12;
+        }
+        
+        .price-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 1rem;
+        }
+        .price-table th, .price-table td {
+            padding: 0.8rem;
+            text-align: left;
+            border-bottom: 1px solid var(--border-color);
+        }
+        .price-table th {
+            background: var(--bg-color);
+            font-weight: 600;
+        }
+        .price-table .up { color: #e74c3c; }
+        .price-table .down { color: #27ae60; }
+        
+        .action-item {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            padding: 1rem;
+            background: var(--bg-color);
+            border-radius: 8px;
+            margin-bottom: 0.8rem;
+        }
+        .action-item .priority {
+            padding: 0.3rem 0.8rem;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: bold;
+        }
+        .action-item .priority.high { background: #e74c3c; color: white; }
+        .action-item .priority.medium { background: #f39c12; color: white; }
+    </style>
 </head>
 <body>
     <header>
-        <h1>📦 供应链周报</h1>
-        <p>产区动态 · 原材料价格 · 政策信息 · 合作机会</p>
+        <h1>📦 供应链月报</h1>
+        <p>全国非遗手工艺产业集群 · 原材料价格 · 政策动态</p>
         <p class="last-updated">最后更新：<span id="update-time">加载中...</span></p>
     </header>
 
@@ -17,51 +161,313 @@
         <a href="index.html">仪表板</a>
         <a href="competitor.html">竞品动态</a>
         <a href="social.html">社交趋势</a>
-        <a href="supply-chain.html" class="active">供应链周报</a>
+        <a href="supply-chain.html" class="active">供应链月报</a>
     </nav>
 
     <main>
-        <!-- 山东产区 -->
-        <section class="region-section">
-            <h3>🏭 山东产区动态</h3>
-            <div id="shandong" class="region-content"></div>
+        <!-- 月份选择器 -->
+        <div class="month-selector">
+            <label>📅 选择月份：</label>
+            <select id="month-select" onchange="loadMonthData()">
+                <option value="2026-01">2026年1月</option>
+            </select>
+        </div>
+
+        <!-- 全国概览 -->
+        <section class="insights-section" id="summary-section">
+            <h3>📊 2026年1月全国概览</h3>
+            <p>加载中...</p>
         </section>
 
-        <!-- 江苏产区 -->
-        <section class="region-section">
-            <h3>🏺 江苏产区动态</h3>
-            <div id="jiangsu" class="region-content"></div>
+        <!-- 区域产业集群 -->
+        <section id="regions-container">
+            <!-- 华北地区 -->
+            <div class="region-section" id="region-huabei">
+                <h3>🏔️ 华北地区</h3>
+                <div class="region-grid">
+                    <p style="color: #7f8c8d;">加载中...</p>
+                </div>
+            </div>
+            
+            <!-- 东北地区 -->
+            <div class="region-section" id="region-dongbei">
+                <h3>❄️ 东北地区</h3>
+                <div class="region-grid">
+                    <p style="color: #7f8c8d;">加载中...</p>
+                </div>
+            </div>
+            
+            <!-- 华东地区 -->
+            <div class="region-section" id="region-huadong">
+                <h3>🌸 华东地区</h3>
+                <div class="region-grid">
+                    <p style="color: #7f8c8d;">加载中...</p>
+                </div>
+            </div>
+            
+            <!-- 华中地区 -->
+            <div class="region-section" id="region-huazhong">
+                <h3>🏯 华中地区</h3>
+                <div class="region-grid">
+                    <p style="color: #7f8c8d;">加载中...</p>
+                </div>
+            </div>
+            
+            <!-- 华南地区 -->
+            <div class="region-section" id="region-huanan">
+                <h3>🌴 华南地区</h3>
+                <div class="region-grid">
+                    <p style="color: #7f8c8d;">加载中...</p>
+                </div>
+            </div>
+            
+            <!-- 西南地区 -->
+            <div class="region-section" id="region-xinan">
+                <h3>🏔️ 西南地区</h3>
+                <div class="region-grid">
+                    <p style="color: #7f8c8d;">加载中...</p>
+                </div>
+            </div>
+            
+            <!-- 西北地区 -->
+            <div class="region-section" id="region-xibei">
+                <h3>🏜️ 西北地区</h3>
+                <div class="region-grid">
+                    <p style="color: #7f8c8d;">加载中...</p>
+                </div>
+            </div>
         </section>
 
         <!-- 原材料价格 -->
-        <section class="materials-section">
+        <section class="region-section">
             <h3>💵 原材料价格趋势</h3>
-            <div id="material-prices" class="price-grid"></div>
+            <div id="price-container">
+                <p style="color: #7f8c8d;">加载中...</p>
+            </div>
         </section>
 
-        <!-- 政策信息 -->
-        <section class="policy-section">
-            <h3>📋 政策与行业信息</h3>
-            <div id="policy-list" class="policy-list"></div>
+        <!-- 政策动态 -->
+        <section class="policy-section" id="policy-section">
+            <h3>📋 政策与行业动态</h3>
+            <p>加载中...</p>
         </section>
 
-        <!-- 合作机会 -->
-        <section class="opportunity-section">
-            <h3>🤝 合作机会</h3>
-            <div id="coop-opportunities" class="opportunity-list"></div>
+        <!-- 核心洞察 -->
+        <section class="insights-section">
+            <h3>💡 核心洞察与建议</h3>
+            <div id="insights-container">
+                <p>加载中...</p>
+            </div>
         </section>
 
-        <!-- 完整报告链接 -->
-        <section class="full-report">
-            <p>📄 <a href="data/supply-chain-weekly.json" target="_blank">查看完整数据JSON</a></p>
+        <!-- 行动建议 -->
+        <section class="region-section">
+            <h3>🎯 行动建议</h3>
+            <div id="actions-container">
+                <p style="color: #7f8c8d;">加载中...</p>
+            </div>
         </section>
     </main>
 
     <footer>
         <p>📊 Daily Researcher | 非遗手工出海趋势洞察</p>
+        <p>数据来源：国家统计局、各省工信厅、行业报告</p>
     </footer>
 
-    <script src="js/app.js"></script>
-    <script src="js/supply-chain.js"></script>
+    <script>
+    const Utils = {
+        formatDate(date) {
+            return new Date(date).toLocaleString('zh-CN', {
+                year: 'numeric', month: '2-digit', day: '2-digit',
+                hour: '2-digit', minute: '2-digit'
+            });
+        }
+    };
+
+    let currentMonth = '2026-01';
+
+    async function loadMonthData() {
+        const select = document.getElementById('month-select');
+        currentMonth = select.value;
+        await initPage();
+    }
+
+    async function initPage() {
+        console.log('🚀 Supply Chain page initializing...', currentMonth);
+        document.getElementById('update-time').textContent = Utils.formatDate(new Date());
+        
+        try {
+            const response = await fetch(`data/supply-chain/${currentMonth}.json`);
+            if (!response.ok) throw new Error('Failed to load data');
+            const data = await response.json();
+            console.log('✅ Data loaded:', data);
+            
+            // 渲染区域产业集群
+            renderRegions(data.regions);
+            
+            // 渲染原材料价格
+            renderPrices(data.materialPrices);
+            
+            // 渲染政策动态
+            renderPolicy(data.policyUpdates);
+            
+            // 渲染核心洞察
+            renderInsights(data.keyInsights);
+            
+            console.log('✅ Supply Chain page rendered');
+        } catch (error) {
+            console.error('❌ Error:', error);
+            document.getElementById('summary-section').innerHTML = 
+                '<h3>❌ 数据加载失败</h3><p>请检查网络连接或选择其他月份</p>';
+        }
+    }
+
+    function renderRegions(regions) {
+        if (!regions) return;
+        
+        const regionNames = {
+            '华北地区': 'huabei',
+            '东北地区': 'dongbei',
+            '华东地区': 'huadong',
+            '华中地区': 'huazhong',
+            '华南地区': 'huanan',
+            '西南地区': 'xinan',
+            '西北地区': 'xibei'
+        };
+        
+        for (const [regionName, regionData] of Object.entries(regions)) {
+            if (regionData.industries) {
+                const regionId = regionNames[regionName] || regionName;
+                const container = document.querySelector(`#region-${regionId} .region-grid`);
+                if (container) {
+                    container.innerHTML = regionData.industries.map(ind => `
+                        <div class="province-card">
+                            <h4>${ind.name}</h4>
+                            <div class="industry">${regionData.name}</div>
+                            <div class="output">产值: ${ind.output}</div>
+                            <div style="color: #27ae60; font-size: 0.9rem;">📈 同比增长 ${ind.growth}</div>
+                            <div class="features">${ind.features?.join(' · ') || ''}</div>
+                        </div>
+                    `).join('');
+                }
+            } else if (regionData.name) {
+                // 单个省的情况
+                const regionId = regionNames[regionName] || regionName;
+                const container = document.querySelector(`#region-${regionId} .region-grid`);
+                if (container && regionData.industries) {
+                    container.innerHTML = `
+                        <div class="province-card">
+                            <h4>${regionData.name}</h4>
+                            <div class="output">产值: ${regionData.industries[0]?.output || 'N/A'}</div>
+                            <div style="color: #27ae60; font-size: 0.9rem;">
+                                📈 同比增长 ${regionData.industries[0]?.growth || 'N/A'}
+                            </div>
+                        </div>
+                    `;
+                }
+            }
+        }
+    }
+
+    function renderPrices(prices) {
+        const container = document.getElementById('price-container');
+        if (!prices || !prices.items) {
+            container.innerHTML = '<p style="color: #7f8c8d;">暂无数据</p>';
+            return;
+        }
+        
+        container.innerHTML = `
+            <table class="price-table">
+                <thead>
+                    <tr>
+                        <th>原材料</th>
+                        <th>价格区间</th>
+                        <th>涨跌</th>
+                        <th>趋势</th>
+                        <th>主要产区</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    ${prices.items.map(item => `
+                        <tr>
+                            <td><strong>${item.name}</strong></td>
+                            <td>${item.unit}</td>
+                            <td class="${item.change.startsWith('+') ? 'up' : 'down'}">${item.change}</td>
+                            <td>${item.trend}</td>
+                            <td>${item.region}</td>
+                        </tr>
+                    `).join('')}
+                </tbody>
+            </table>
+        `;
+    }
+
+    function renderPolicy(policy) {
+        const section = document.getElementById('policy-section');
+        if (!policy || !policy.items) {
+            section.innerHTML = '<h3>📋 政策动态</h3><p style="color: #7f8c8d;">暂无数据</p>';
+            return;
+        }
+        
+        section.innerHTML = `
+            <h3>📋 政策与行业动态</h3>
+            ${policy.items.map(item => `
+                <div class="action-item">
+                    <span style="font-size: 1.5rem;">📜</span>
+                    <div>
+                        <strong>${item.title}</strong>
+                        <div style="font-size: 0.85rem; color: #7f8c8d;">
+                            ${item.date} · ${item.region || '全国'}
+                        </div>
+                    </div>
+                    <span class="priority ${item.impact === '高' ? 'high' : 'medium'}" style="margin-left: auto;">
+                        ${item.impact}
+                    </span>
+                </div>
+            `).join('')}
+        `;
+    }
+
+    function renderInsights(insights) {
+        if (!insights) return;
+        
+        const container = document.getElementById('insights-container');
+        container.innerHTML = `
+            <h4 style="margin: 1rem 0 0.5rem;">📌 区域亮点</h4>
+            <ul style="margin-bottom: 1rem;">
+                ${insights.regionalHighlights?.map(h => `<li>• ${h}</li>`).join('') || ''}
+            </ul>
+            
+            <h4 style="margin: 1rem 0 0.5rem;">🔥 趋势亮点</h4>
+            <ul style="margin-bottom: 1rem;">
+                ${insights.trendHighlights?.map(h => `<li>• ${h}</li>`).join('') || ''}
+            </ul>
+        `;
+        
+        // 渲染行动建议
+        const actionContainer = document.getElementById('actions-container');
+        if (insights.recommendedActions) {
+            actionContainer.innerHTML = insights.recommendedActions.map(action => `
+                <div class="action-item">
+                    <span class="priority ${action.priority === '高' ? 'high' : 'medium'}">
+                        ${action.priority}
+                    </span>
+                    <div>
+                        <strong>${action.action}</strong>
+                        <div style="font-size: 0.85rem; color: #7f8c8d;">
+                            预期周期: ${action.timeline}
+                        </div>
+                    </div>
+                </div>
+            `).join('');
+        }
+    }
+
+    if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', initPage);
+    } else {
+        initPage();
+    }
+    </script>
 </body>
 </html>

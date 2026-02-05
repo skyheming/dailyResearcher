@@ -7,7 +7,6 @@
     <link rel="stylesheet" href="css/style.css">
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <style>
-        /* 加载动画 */
         .loading-spinner {
             display: inline-block;
             width: 20px;
@@ -18,6 +17,41 @@
             animation: spin 1s linear infinite;
         }
         @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
+        
+        .date-selector {
+            background: white;
+            padding: 1rem;
+            border-radius: var(--radius);
+            margin-bottom: 1.5rem;
+            box-shadow: var(--shadow);
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            flex-wrap: wrap;
+        }
+        .date-selector label {
+            font-weight: 500;
+            color: var(--primary-color);
+        }
+        .date-selector select {
+            padding: 0.5rem 1rem;
+            border: 2px solid var(--secondary-color);
+            border-radius: 8px;
+            font-size: 1rem;
+            cursor: pointer;
+            background: white;
+        }
+        .date-selector select:hover {
+            background: var(--bg-color);
+        }
+        .current-badge {
+            background: var(--success-color);
+            color: white;
+            padding: 0.3rem 0.8rem;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            margin-left: auto;
+        }
     </style>
 </head>
 <body>
@@ -31,10 +65,20 @@
         <a href="index.html" class="active">仪表板</a>
         <a href="competitor.html">竞品动态</a>
         <a href="social.html">社交趋势</a>
-        <a href="supply-chain.html">供应链周报</a>
+        <a href="supply-chain.html">供应链月报</a>
     </nav>
 
     <main>
+        <!-- 日期选择器 -->
+        <div class="date-selector">
+            <label>📅 选择日期：</label>
+            <select id="date-select" onchange="loadDataByDate()">
+                <option value="2026-02-05">2026年2月5日</option>
+                <option value="2026-02-04">2026年2月4日</option>
+            </select>
+            <span class="current-badge" id="current-badge">最新数据</span>
+        </div>
+
         <!-- 核心指标卡片 -->
         <section class="metrics">
             <div class="metric-card">
@@ -81,8 +125,8 @@
                 </a>
                 <a href="supply-chain.html" class="link-card">
                     <span class="icon">📦</span>
-                    <span class="title">供应链周报</span>
-                    <span class="desc">产区动态/原材料/政策信息</span>
+                    <span class="title">供应链月报</span>
+                    <span class="desc">全国产区/原材料/政策信息</span>
                 </a>
             </div>
         </section>
@@ -150,17 +194,51 @@
         }
     };
 
+    // 当前选中的日期
+    let currentDate = new Date().toISOString().split('T')[0];
+    
+    // 加载指定日期的数据
+    async function loadDataByDate() {
+        const select = document.getElementById('date-select');
+        currentDate = select.value;
+        
+        // 更新最新标识
+        const today = new Date().toISOString().split('T')[0];
+        const badge = document.getElementById('current-badge');
+        if (currentDate === today) {
+            badge.textContent = '最新数据';
+            badge.style.background = '#27ae60';
+        } else {
+            badge.textContent = '历史数据';
+            badge.style.background = '#f39c12';
+        }
+        
+        // 显示加载状态
+        document.getElementById('hot-topics').innerHTML = 
+            '<li style="padding: 1rem; text-align: center;"><span class="loading-spinner"></span> 加载中...</li>';
+        document.getElementById('tag-cloud').innerHTML = 
+            '<span style="color: #7f8c8d;"><span class="loading-spinner"></span> 加载中...</span>';
+        
+        await initDashboard();
+    }
+
     // 主逻辑
     async function initDashboard() {
-        console.log('🚀 Dashboard initializing...');
+        console.log('🚀 Dashboard initializing...', currentDate);
         document.getElementById('update-time').textContent = Utils.formatDate(new Date());
         
         try {
-            // 加载竞品数据
-            const response = await fetch('data/competitor-trends.json');
-            if (!response.ok) throw new Error('Failed to load competitor data');
-            const data = await response.json();
-            console.log('✅ Data loaded:', data);
+            const response = await fetch(`data/competitor/${currentDate}.json`);
+            if (!response.ok) {
+                // 如果指定日期没有数据，使用最新数据
+                const latestResponse = await fetch('data/competitor/2026-02-05.json');
+                if (!latestResponse.ok) throw new Error('No data available');
+                var data = await latestResponse.json();
+                console.log('✅ Using latest data:', data);
+            } else {
+                var data = await response.json();
+                console.log('✅ Data loaded:', data);
+            }
             
             // 渲染今日热点
             const hotContainer = document.getElementById('hot-topics');

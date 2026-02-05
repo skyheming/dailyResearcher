@@ -1,0 +1,61 @@
+{
+  "date": "2026-02-04",
+  "platformTrends": [
+    {
+      "platform": "TikTok",
+      "topTags": [
+        {"name": "#dragonballsuper", "count": 37000, "engagement": "🔥极高", "trend": "up", "weeklyChange": "+15.2%", "category": "动漫IP"},
+        {"name": "#ufc", "count": 32400, "engagement": "高", "trend": "stable", "weeklyChange": "+2.1%", "category": "体育格斗"},
+        {"name": "#skincaretok", "count": 125000000, "engagement": "高", "trend": "up", "weeklyChange": "+8.5%", "category": "美妆护肤"},
+        {"name": "#pettok", "count": 920000000, "engagement": "极高", "trend": "up", "weeklyChange": "+12.8%", "category": "宠物用品"},
+        {"name": "#heatlesscurls", "count": 520000000, "engagement": "高", "trend": "up", "weeklyChange": "+18.2%", "category": "美发工具"}
+      ]
+    },
+    {
+      "platform": "Pinterest",
+      "trendingPins": [
+        {"title": "家居装饰手工艺品", "category": "家居", "saveRate": "85%", "trend": "可持续"},
+        {"title": "Mocha Mousse配色方案", "category": "色彩", "saveRate": "82%", "trend": "Pantone 2025"},
+        {"title": "手工定制礼物", "category": "礼品", "saveRate": "78%", "trend": "个性化"},
+        {"title": "编织装饰趋势", "category": "编织", "saveRate": "75%", "trend": "自然材质"}
+      ]
+    },
+    {
+      "platform": "YouTube",
+      "trendingVideos": [
+        {"title": "ASMR手工制作过程", "views": 5200000, "duration": "15:32", "trend": "治愈系"},
+        {"title": "传统工艺技术展示", "views": 3800000, "duration": "22:15", "trend": "技艺传承"},
+        {"title": "陶瓷制作全过程", "views": 2900000, "duration": "35:42", "trend": "手作温度"}
+      ]
+    }
+  ],
+  "ipOpportunities": [
+    {"icon": "🐉", "name": "龙珠超", "category": "动漫IP", "suitability": "刺绣徽章、陶瓷摆件", "priority": 1},
+    {"icon": "⚔️", "name": "UFC", "category": "体育格斗", "suitability": "定制奖杯、纪念品", "priority": 3},
+    {"icon": "🎮", "name": "原神", "category": "游戏IP", "suitability": "刺绣周边、陶瓷角色", "priority": 2},
+    {"icon": "🏗️", "name": "建筑地标", "category": "旅游IP", "suitability": "地标文创、明信片", "priority": 3}
+  ],
+  "designTrends": {
+    "colors": [
+      {"name": "Mocha Mousse", "hex": "#6F4E37", "description": "Pantone 2025年度色", "priority": "⭐⭐⭐⭐⭐"},
+      {"name": "Patina Blue", "hex": "#5B8FA8", "description": "Etsy年度色", "priority": "⭐⭐⭐⭐"},
+      {"name": "Warm Earth Tones", "hex": "#C4A484", "description": "温暖大地色系", "priority": "⭐⭐⭐⭐⭐"}
+    ],
+    "materials": [
+      {"name": "天然纤维", "applications": "编织、纺织品", "growth": 35, "trend": "up"},
+      {"name": "再生材料", "applications": "环保产品", "growth": 52, "trend": "up"},
+      {"name": "陶瓷粘土", "applications": "陶艺、雕塑", "growth": 28, "trend": "up"}
+    ],
+    "styles": [
+      {"name": "可持续奢侈", "description": "环保+高端设计结合", "priority": "⭐⭐⭐⭐⭐"},
+      {"name": "手工艺复兴", "description": "传统技艺现代演绎", "priority": "⭐⭐⭐⭐⭐"},
+      {"name": "温暖极简主义", "description": "极简+温馨质感", "priority": "⭐⭐⭐⭐⭐"}
+    ]
+  },
+  "craftSuggestions": [
+    {"icon": "🧺", "craft": "柳编", "direction": "家居装饰+环保袋", "keywords": ["#sustainable", "#handmade"], "priority": "高"},
+    {"icon": "🪡", "craft": "刺绣", "direction": "动漫IP周边+定制服装", "keywords": ["#embroidery", "#anime"], "priority": "🔥最高"},
+    {"icon": "🏺", "craft": "陶瓷", "direction": "生活器皿+艺术品", "keywords": ["#pottery", "#ceramics"], "priority": "高"},
+    {"icon": "🧵", "craft": "编织", "direction": "时尚配饰+家居装饰", "keywords": ["#crochet", "#knitting"], "priority": "高"}
+  ]
+}
