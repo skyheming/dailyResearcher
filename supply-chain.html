@@ -335,36 +335,20 @@
             '西北地区': 'xibei'
         };
         
-        for (const [regionName, regionData] of Object.entries(regions)) {
-            if (regionData.industries) {
-                const regionId = regionNames[regionName] || regionName;
-                const container = document.querySelector(`#region-${regionId} .region-grid`);
-                if (container) {
-                    container.innerHTML = regionData.industries.map(ind => `
-                        <div class="province-card">
-                            <h4>${ind.name}</h4>
-                            <div class="industry">${regionData.name}</div>
-                            <div class="output">产值: ${ind.output}</div>
-                            <div style="color: #27ae60; font-size: 0.9rem;">📈 同比增长 ${ind.growth}</div>
-                            <div class="features">${ind.features?.join(' · ') || ''}</div>
-                        </div>
-                    `).join('');
-                }
-            } else if (regionData.name) {
-                // 单个省的情况
-                const regionId = regionNames[regionName] || regionName;
-                const container = document.querySelector(`#region-${regionId} .region-grid`);
-                if (container && regionData.industries) {
-                    container.innerHTML = `
-                        <div class="province-card">
-                            <h4>${regionData.name}</h4>
-                            <div class="output">产值: ${regionData.industries[0]?.output || 'N/A'}</div>
-                            <div style="color: #27ae60; font-size: 0.9rem;">
-                                📈 同比增长 ${regionData.industries[0]?.growth || 'N/A'}
-                            </div>
-                        </div>
-                    `;
-                }
+        for (const [regionName, provinces] of Object.entries(regions)) {
+            const regionId = regionNames[regionName] || regionName;
+            const container = document.querySelector(`#region-${regionId} .region-grid`);
+            
+            if (container && Array.isArray(provinces)) {
+                container.innerHTML = provinces.map(province => `
+                    <div class="province-card">
+                        <h4>${province.name}</h4>
+                        <div class="industry">${province.industry || ''}</div>
+                        <div class="output">产值: ${province.output}</div>
+                        <div style="color: #27ae60; font-size: 0.9rem;">📈 同比增长 ${province.growth}</div>
+                        <div class="features">${(province.features || []).join(' · ')}</div>
+                    </div>
+                `).join('');
             }
         }
     }
