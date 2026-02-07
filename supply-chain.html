@@ -7,41 +7,6 @@
     <link rel="stylesheet" href="css/style.css">
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <style>
-        .loading-spinner {
-            display: inline-block;
-            width: 20px;
-            height: 20px;
-            border: 2px solid #f3f3f3;
-            border-top: 2px solid #3498db;
-            border-radius: 50%;
-            animation: spin 1s linear infinite;
-        }
-        @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
-        
-        .month-selector {
-            background: white;
-            padding: 1rem;
-            border-radius: var(--radius);
-            margin-bottom: 1.5rem;
-            box-shadow: var(--shadow);
-            display: flex;
-            align-items: center;
-            gap: 1rem;
-            flex-wrap: wrap;
-        }
-        .month-selector label {
-            font-weight: 500;
-            color: var(--primary-color);
-        }
-        .month-selector select {
-            padding: 0.5rem 1rem;
-            border: 2px solid var(--secondary-color);
-            border-radius: 8px;
-            font-size: 1rem;
-            cursor: pointer;
-            background: white;
-        }
-        
         .region-section {
             background: var(--card-bg);
             border-radius: var(--radius);
@@ -154,7 +119,7 @@
     <header>
         <h1>📦 供应链月报</h1>
         <p>全国非遗手工艺产业集群 · 原材料价格 · 政策动态</p>
-        <p class="last-updated">最后更新：<span id="update-time">加载中...</span></p>
+        <p class="last-updated">最后更新：2026年2月5日</p>
     </header>
 
     <nav>
@@ -165,75 +130,270 @@
     </nav>
 
     <main>
-        <!-- 月份选择器 -->
-        <div class="month-selector">
-            <label>📅 选择月份：</label>
-            <select id="month-select" onchange="loadMonthData()">
-                <option value="2026-01">2026年1月</option>
-            </select>
-        </div>
-
         <!-- 全国概览 -->
-        <section class="insights-section" id="summary-section">
+        <section class="insights-section">
             <h3>📊 2026年1月全国概览</h3>
-            <p>加载中...</p>
+            <p>2026年1月全国传统工艺产业保持稳健增长，华东地区产业规模最大，华南地区出口最活跃，西南地区增速最快。跨境电商成为重要销售渠道，IP联名合作成为新趋势。</p>
         </section>
 
         <!-- 区域产业集群 -->
-        <section id="regions-container">
-            <!-- 华北地区 -->
-            <div class="region-section" id="region-huabei">
+        <section>
+            <!-- 华北 -->
+            <div class="region-section">
                 <h3>🏔️ 华北地区</h3>
                 <div class="region-grid">
-                    <p style="color: #7f8c8d;">加载中...</p>
+                    <div class="province-card">
+                        <h4>北京</h4>
+                        <div class="industry">文创设计</div>
+                        <div class="output">产值: 1,200亿元</div>
+                        <div style="color: #27ae60; font-size: 0.9rem;">📈 同比增长 15%</div>
+                        <div class="features">设计资源集中 · 国际交流频繁 · 政策支持强</div>
+                    </div>
+                    <div class="province-card">
+                        <h4>天津</h4>
+                        <div class="industry">工艺品制造</div>
+                        <div class="output">产值: 180亿元</div>
+                        <div style="color: #27ae60; font-size: 0.9rem;">📈 同比增长 8%</div>
+                        <div class="features">港口物流优势 · 制造业基础强</div>
+                    </div>
+                    <div class="province-card">
+                        <h4>河北</h4>
+                        <div class="industry">传统手工艺</div>
+                        <div class="output">产值: 350亿元</div>
+                        <div style="color: #27ae60; font-size: 0.9rem;">📈 同比增长 12%</div>
+                        <div class="features">曲阳石雕 · 衡水内画 · 蔚县剪纸</div>
+                    </div>
+                    <div class="province-card">
+                        <h4>山西</h4>
+                        <div class="industry">传统工艺</div>
+                        <div class="output">产值: 220亿元</div>
+                        <div style="color: #27ae60; font-size: 0.9rem;">📈 同比增长 10%</div>
+                        <div class="features">漆器 · 珐琅 · 剪纸</div>
+                    </div>
+                    <div class="province-card">
+                        <h4>内蒙古</h4>
+                        <div class="industry">民族工艺品</div>
+                        <div class="output">产值: 280亿元</div>
+                        <div style="color: #27ae60; font-size: 0.9rem;">📈 同比增长 18%</div>
+                        <div class="features">皮毛制品 · 蒙古族刺绣 · 银器制作</div>
+                    </div>
                 </div>
             </div>
-            
-            <!-- 东北地区 -->
-            <div class="region-section" id="region-dongbei">
+
+            <!-- 东北 -->
+            <div class="region-section">
                 <h3>❄️ 东北地区</h3>
                 <div class="region-grid">
-                    <p style="color: #7f8c8d;">加载中...</p>
+                    <div class="province-card">
+                        <h4>辽宁</h4>
+                        <div class="industry">玉石加工</div>
+                        <div class="output">产值: 450亿元</div>
+                        <div style="color: #27ae60; font-size: 0.9rem;">📈 同比增长 8%</div>
+                        <div class="features">岫岩玉 · 玛瑙 · 翡翠加工</div>
+                    </div>
+                    <div class="province-card">
+                        <h4>吉林</h4>
+                        <div class="industry">民族工艺品</div>
+                        <div class="output">产值: 150亿元</div>
+                        <div style="color: #27ae60; font-size: 0.9rem;">📈 同比增长 15%</div>
+                        <div class="features">朝鲜族工艺品 · 满族剪纸</div>
+                    </div>
+                    <div class="province-card">
+                        <h4>黑龙江</h4>
+                        <div class="industry">传统工艺</div>
+                        <div class="output">产值: 180亿元</div>
+                        <div style="color: #27ae60; font-size: 0.9rem;">📈 同比增长 20%</div>
+                        <div class="features">赫哲族鱼皮制品 · 鄂伦春族狍皮制品</div>
+                    </div>
                 </div>
             </div>
-            
-            <!-- 华东地区 -->
-            <div class="region-section" id="region-huadong">
+
+            <!-- 华东 -->
+            <div class="region-section">
                 <h3>🌸 华东地区</h3>
                 <div class="region-grid">
-                    <p style="color: #7f8c8d;">加载中...</p>
+                    <div class="province-card">
+                        <h4>上海</h4>
+                        <div class="industry">时尚设计</div>
+                        <div class="output">产值: 2,500亿元</div>
+                        <div style="color: #27ae60; font-size: 0.9rem;">📈 同比增长 18%</div>
+                        <div class="features">国际时尚中心 · 设计资源集中</div>
+                    </div>
+                    <div class="province-card">
+                        <h4>江苏</h4>
+                        <div class="industry">传统工艺</div>
+                        <div class="output">产值: 3,200亿元</div>
+                        <div style="color: #27ae60; font-size: 0.9rem;">📈 同比增长 15%</div>
+                        <div class="features">苏绣 · 紫砂 · 水晶 · 丝绸</div>
+                    </div>
+                    <div class="province-card">
+                        <h4>浙江</h4>
+                        <div class="industry">工艺品制造</div>
+                        <div class="output">产值: 2,800亿元</div>
+                        <div style="color: #27ae60; font-size: 0.9rem;">📈 同比增长 16%</div>
+                        <div class="features">杭州丝绸 · 龙泉青瓷 · 东阳木雕</div>
+                    </div>
+                    <div class="province-card">
+                        <h4>安徽</h4>
+                        <div class="industry">传统工艺</div>
+                        <div class="output">产值: 680亿元</div>
+                        <div style="color: #27ae60; font-size: 0.9rem;">📈 同比增长 12%</div>
+                        <div class="features">宣纸 · 歙砚 · 徽墨 · 徽州三雕</div>
+                    </div>
+                    <div class="province-card">
+                        <h4>福建</h4>
+                        <div class="industry">工艺品制造</div>
+                        <div class="output">产值: 1,200亿元</div>
+                        <div style="color: #27ae60; font-size: 0.9rem;">📈 同比增长 14%</div>
+                        <div class="features">德化白瓷 · 漆器 · 福州软木画</div>
+                    </div>
+                    <div class="province-card">
+                        <h4>江西</h4>
+                        <div class="industry">传统工艺</div>
+                        <div class="output">产值: 450亿元</div>
+                        <div style="color: #27ae60; font-size: 0.9rem;">📈 同比增长 10%</div>
+                        <div class="features">景德镇陶瓷 · 婺源歙砚</div>
+                    </div>
+                    <div class="province-card">
+                        <h4>山东</h4>
+                        <div class="industry">传统工艺</div>
+                        <div class="output">产值: 1,800亿元</div>
+                        <div style="color: #27ae60; font-size: 0.9rem;">📈 同比增长 18%</div>
+                        <div class="features">曹县汉服 · 潍坊风筝 · 临沭柳编 · 淄博陶瓷</div>
+                    </div>
                 </div>
             </div>
-            
-            <!-- 华中地区 -->
-            <div class="region-section" id="region-huazhong">
+
+            <!-- 华中 -->
+            <div class="region-section">
                 <h3>🏯 华中地区</h3>
                 <div class="region-grid">
-                    <p style="color: #7f8c8d;">加载中...</p>
+                    <div class="province-card">
+                        <h4>河南</h4>
+                        <div class="industry">传统工艺</div>
+                        <div class="output">产值: 680亿元</div>
+                        <div style="color: #27ae60; font-size: 0.9rem;">📈 同比增长 12%</div>
+                        <div class="features">洛阳唐三彩 · 开封汴绣 · 南阳玉雕</div>
+                    </div>
+                    <div class="province-card">
+                        <h4>湖北</h4>
+                        <div class="industry">工艺品制造</div>
+                        <div class="output">产值: 520亿元</div>
+                        <div style="color: #27ae60; font-size: 0.9rem;">📈 同比增长 10%</div>
+                        <div class="features">汉绣 · 绿松石雕 · 宜昌彩陶</div>
+                    </div>
+                    <div class="province-card">
+                        <h4>湖南</h4>
+                        <div class="industry">传统工艺</div>
+                        <div class="output">产值: 380亿元</div>
+                        <div style="color: #27ae60; font-size: 0.9rem;">📈 同比增长 14%</div>
+                        <div class="features">湘绣 · 醴陵瓷器 · 苗族银饰</div>
+                    </div>
                 </div>
             </div>
-            
-            <!-- 华南地区 -->
-            <div class="region-section" id="region-huanan">
+
+            <!-- 华南 -->
+            <div class="region-section">
                 <h3>🌴 华南地区</h3>
                 <div class="region-grid">
-                    <p style="color: #7f8c8d;">加载中...</p>
+                    <div class="province-card">
+                        <h4>广东</h4>
+                        <div class="industry">工艺品制造</div>
+                        <div class="output">产值: 4,500亿元</div>
+                        <div style="color: #27ae60; font-size: 0.9rem;">📈 同比增长 16%</div>
+                        <div class="features">广州彩瓷 · 潮州木雕 · 佛山石湾陶塑</div>
+                    </div>
+                    <div class="province-card">
+                        <h4>广西</h4>
+                        <div class="industry">民族工艺品</div>
+                        <div class="output">产值: 280亿元</div>
+                        <div style="color: #27ae60; font-size: 0.9rem;">📈 同比增长 15%</div>
+                        <div class="features">壮锦 · 瑶族服饰 · 靖西绣球</div>
+                    </div>
+                    <div class="province-card">
+                        <h4>海南</h4>
+                        <div class="industry">旅游工艺品</div>
+                        <div class="output">产值: 150亿元</div>
+                        <div style="color: #27ae60; font-size: 0.9rem;">📈 同比增长 22%</div>
+                        <div class="features">椰雕 · 贝壳工艺品 · 黎锦</div>
+                    </div>
                 </div>
             </div>
-            
-            <!-- 西南地区 -->
-            <div class="region-section" id="region-xinan">
+
+            <!-- 西南 -->
+            <div class="region-section">
                 <h3>🏔️ 西南地区</h3>
                 <div class="region-grid">
-                    <p style="color: #7f8c8d;">加载中...</p>
+                    <div class="province-card">
+                        <h4>四川</h4>
+                        <div class="industry">传统工艺</div>
+                        <div class="output">产值: 680亿元</div>
+                        <div style="color: #27ae60; font-size: 0.9rem;">📈 同比增长 14%</div>
+                        <div class="features">蜀绣 · 漆器 · 绵竹年画 · 羌族刺绣</div>
+                    </div>
+                    <div class="province-card">
+                        <h4>贵州</h4>
+                        <div class="industry">民族工艺品</div>
+                        <div class="output">产值: 320亿元</div>
+                        <div style="color: #27ae60; font-size: 0.9rem;">📈 同比增长 20%</div>
+                        <div class="features">苗族银饰 · 蜡染 · 侗族刺绣</div>
+                    </div>
+                    <div class="province-card">
+                        <h4>云南</h4>
+                        <div class="industry">民族工艺品</div>
+                        <div class="output">产值: 450亿元</div>
+                        <div style="color: #27ae60; font-size: 0.9rem;">📈 同比增长 18%</div>
+                        <div class="features">白族扎染 · 傣族织锦 · 彝族漆器</div>
+                    </div>
+                    <div class="province-card">
+                        <h4>重庆</h4>
+                        <div class="industry">工艺品制造</div>
+                        <div class="output">产值: 280亿元</div>
+                        <div style="color: #27ae60; font-size: 0.9rem;">📈 同比增长 12%</div>
+                        <div class="features">荣昌陶 · 蜀绣 · 石柱黄连</div>
+                    </div>
                 </div>
             </div>
-            
-            <!-- 西北地区 -->
-            <div class="region-section" id="region-xibei">
+
+            <!-- 西北 -->
+            <div class="region-section">
                 <h3>🏜️ 西北地区</h3>
                 <div class="region-grid">
-                    <p style="color: #7f8c8d;">加载中...</p>
+                    <div class="province-card">
+                        <h4>陕西</h4>
+                        <div class="industry">传统工艺</div>
+                        <div class="output">产值: 520亿元</div>
+                        <div style="color: #27ae60; font-size: 0.9rem;">📈 同比增长 12%</div>
+                        <div class="features">秦俑复制品 · 唐三彩 · 陕西皮影</div>
+                    </div>
+                    <div class="province-card">
+                        <h4>甘肃</h4>
+                        <div class="industry">传统工艺</div>
+                        <div class="output">产值: 180亿元</div>
+                        <div style="color: #27ae60; font-size: 0.9rem;">📈 同比增长 10%</div>
+                        <div class="features">敦煌壁画衍生品 · 庆阳香包 · 夜光杯</div>
+                    </div>
+                    <div class="province-card">
+                        <h4>青海</h4>
+                        <div class="industry">民族工艺品</div>
+                        <div class="output">产值: 120亿元</div>
+                        <div style="color: #27ae60; font-size: 0.9rem;">📈 同比增长 15%</div>
+                        <div class="features">藏族唐卡 · 银饰 · 藏香</div>
+                    </div>
+                    <div class="province-card">
+                        <h4>宁夏</h4>
+                        <div class="industry">传统工艺</div>
+                        <div class="output">产值: 80亿元</div>
+                        <div style="color: #27ae60; font-size: 0.9rem;">📈 同比增长 12%</div>
+                        <div class="features">贺兰石雕刻 · 回族刺绣</div>
+                    </div>
+                    <div class="province-card">
+                        <h4>新疆</h4>
+                        <div class="industry">民族工艺品</div>
+                        <div class="output">产值: 250亿元</div>
+                        <div style="color: #27ae60; font-size: 0.9rem;">📈 同比增长 16%</div>
+                        <div class="features">和田玉雕 · 维吾尔族地毯 · 英吉沙小刀</div>
+                    </div>
                 </div>
             </div>
         </section>
@@ -241,126 +401,6 @@
         <!-- 原材料价格 -->
         <section class="region-section">
             <h3>💵 原材料价格趋势</h3>
-            <div id="price-container">
-                <p style="color: #7f8c8d;">加载中...</p>
-            </div>
-        </section>
-
-        <!-- 政策动态 -->
-        <section class="policy-section" id="policy-section">
-            <h3>📋 政策与行业动态</h3>
-            <p>加载中...</p>
-        </section>
-
-        <!-- 核心洞察 -->
-        <section class="insights-section">
-            <h3>💡 核心洞察与建议</h3>
-            <div id="insights-container">
-                <p>加载中...</p>
-            </div>
-        </section>
-
-        <!-- 行动建议 -->
-        <section class="region-section">
-            <h3>🎯 行动建议</h3>
-            <div id="actions-container">
-                <p style="color: #7f8c8d;">加载中...</p>
-            </div>
-        </section>
-    </main>
-
-    <footer>
-        <p>📊 Daily Researcher | 非遗手工出海趋势洞察</p>
-        <p>数据来源：国家统计局、各省工信厅、行业报告</p>
-    </footer>
-
-    <script>
-    const Utils = {
-        formatDate(date) {
-            return new Date(date).toLocaleString('zh-CN', {
-                year: 'numeric', month: '2-digit', day: '2-digit',
-                hour: '2-digit', minute: '2-digit'
-            });
-        }
-    };
-
-    let currentMonth = '2026-01';
-
-    async function loadMonthData() {
-        const select = document.getElementById('month-select');
-        currentMonth = select.value;
-        await initPage();
-    }
-
-    async function initPage() {
-        console.log('🚀 Supply Chain page initializing...', currentMonth);
-        document.getElementById('update-time').textContent = Utils.formatDate(new Date());
-        
-        try {
-            const response = await fetch(`data/supply-chain/${currentMonth}.json`);
-            if (!response.ok) throw new Error('Failed to load data');
-            const data = await response.json();
-            console.log('✅ Data loaded:', data);
-            
-            // 渲染区域产业集群
-            renderRegions(data.regions);
-            
-            // 渲染原材料价格
-            renderPrices(data.materialPrices);
-            
-            // 渲染政策动态
-            renderPolicy(data.policyUpdates);
-            
-            // 渲染核心洞察
-            renderInsights(data.keyInsights);
-            
-            console.log('✅ Supply Chain page rendered');
-        } catch (error) {
-            console.error('❌ Error:', error);
-            document.getElementById('summary-section').innerHTML = 
-                '<h3>❌ 数据加载失败</h3><p>请检查网络连接或选择其他月份</p>';
-        }
-    }
-
-    function renderRegions(regions) {
-        if (!regions) return;
-        
-        const regionNames = {
-            '华北地区': 'huabei',
-            '东北地区': 'dongbei',
-            '华东地区': 'huadong',
-            '华中地区': 'huazhong',
-            '华南地区': 'huanan',
-            '西南地区': 'xinan',
-            '西北地区': 'xibei'
-        };
-        
-        for (const [regionName, provinces] of Object.entries(regions)) {
-            const regionId = regionNames[regionName] || regionName;
-            const container = document.querySelector(`#region-${regionId} .region-grid`);
-            
-            if (container && Array.isArray(provinces)) {
-                container.innerHTML = provinces.map(province => `
-                    <div class="province-card">
-                        <h4>${province.name}</h4>
-                        <div class="industry">${province.industry || ''}</div>
-                        <div class="output">产值: ${province.output}</div>
-                        <div style="color: #27ae60; font-size: 0.9rem;">📈 同比增长 ${province.growth}</div>
-                        <div class="features">${(province.features || []).join(' · ')}</div>
-                    </div>
-                `).join('');
-            }
-        }
-    }
-
-    function renderPrices(prices) {
-        const container = document.getElementById('price-container');
-        if (!prices || !prices.items) {
-            container.innerHTML = '<p style="color: #7f8c8d;">暂无数据</p>';
-            return;
-        }
-        
-        container.innerHTML = `
             <table class="price-table">
                 <thead>
                     <tr>
@@ -372,86 +412,96 @@
                     </tr>
                 </thead>
                 <tbody>
-                    ${prices.items.map(item => `
-                        <tr>
-                            <td><strong>${item.name}</strong></td>
-                            <td>${item.unit}</td>
-                            <td class="${item.change.startsWith('+') ? 'up' : 'down'}">${item.change}</td>
-                            <td>${item.trend}</td>
-                            <td>${item.region}</td>
-                        </tr>
-                    `).join('')}
+                    <tr><td><strong>蚕丝</strong></td><td>¥450-550/kg</td><td class="up">+3.5%</td><td>上涨</td><td>浙江、四川</td></tr>
+                    <tr><td><strong>棉花</strong></td><td>¥15-20/kg</td><td class="down">-1.2%</td><td>稳定</td><td>新疆、山东</td></tr>
+                    <tr><td><strong>羊毛</strong></td><td>¥80-120/kg</td><td class="up">+2.8%</td><td>上涨</td><td>内蒙古、新疆</td></tr>
+                    <tr><td><strong>羊绒</strong></td><td>¥800-1200/kg</td><td class="up">+5.2%</td><td>上涨明显</td><td>内蒙古</td></tr>
+                    <tr><td><strong>丝绸</strong></td><td>¥80-150/m</td><td class="up">+2.5%</td><td>稳定</td><td>江苏、浙江</td></tr>
+                    <tr><td><strong>亚麻</strong></td><td>¥25-40/m</td><td class="down">-0.8%</td><td>稳定</td><td>黑龙江、吉林</td></tr>
+                    <tr><td><strong>陶瓷粘土</strong></td><td>¥200-400/吨</td><td class="up">+1.5%</td><td>稳定</td><td>江西、福建</td></tr>
+                    <tr><td><strong>玉石</strong></td><td>¥1000-50000/kg</td><td class="up">+8.5%</td><td>上涨明显</td><td>新疆、辽宁</td></tr>
+                    <tr><td><strong>红木</strong></td><td>¥8000-50000/m³</td><td class="up">+2.3%</td><td>稳定</td><td>云南、海南</td></tr>
+                    <tr><td><strong>柳条</strong></td><td>¥8-15/kg</td><td class="up">+1.8%</td><td>稳定</td><td>山东、江苏</td></tr>
                 </tbody>
             </table>
-        `;
-    }
+        </section>
 
-    function renderPolicy(policy) {
-        const section = document.getElementById('policy-section');
-        if (!policy || !policy.items) {
-            section.innerHTML = '<h3>📋 政策动态</h3><p style="color: #7f8c8d;">暂无数据</p>';
-            return;
-        }
-        
-        section.innerHTML = `
+        <!-- 政策动态 -->
+        <section class="policy-section">
             <h3>📋 政策与行业动态</h3>
-            ${policy.items.map(item => `
-                <div class="action-item">
-                    <span style="font-size: 1.5rem;">📜</span>
-                    <div>
-                        <strong>${item.title}</strong>
-                        <div style="font-size: 0.85rem; color: #7f8c8d;">
-                            ${item.date} · ${item.region || '全国'}
-                        </div>
-                    </div>
-                    <span class="priority ${item.impact === '高' ? 'high' : 'medium'}" style="margin-left: auto;">
-                        ${item.impact}
-                    </span>
-                </div>
-            `).join('')}
-        `;
-    }
+            <div class="action-item">
+                <span style="font-size: 1.5rem;">📜</span>
+                <div><strong>国家级非遗传承人新增名单公布</strong><div style="font-size: 0.85rem; color: #7f8c8d;">2026-01-15 · 全国</div></div>
+                <span class="priority high" style="margin-left: auto;">高</span>
+            </div>
+            <div class="action-item">
+                <span style="font-size: 1.5rem;">📦</span>
+                <div><strong>跨境电商综试区扩容至50个城市</strong><div style="font-size: 0.85rem; color: #7f8c8d;">2026-01-20 · 全国</div></div>
+                <span class="priority high" style="margin-left: auto;">高</span>
+            </div>
+            <div class="action-item">
+                <span style="font-size: 1.5rem;">💰</span>
+                <div><strong>文化创意产业专项资金扶持政策</strong><div style="font-size: 0.85rem; color: #7f8c8d;">2026-01-10 · 全国</div></div>
+                <span class="priority medium" style="margin-left: auto;">中</span>
+            </div>
+            <div class="action-item">
+                <span style="font-size: 1.5rem;">🎨</span>
+                <div><strong>传统工艺振兴计划实施细则</strong><div style="font-size: 0.85rem; color: #7f8c8d;">2026-01-05 · 全国</div></div>
+                <span class="priority high" style="margin-left: auto;">高</span>
+            </div>
+            <div class="action-item">
+                <span style="font-size: 1.5rem;">🏫</span>
+                <div><strong>各省非遗进校园活动启动</strong><div style="font-size: 0.85rem; color: #7f8c8d;">2026-01-15 · 全国</div></div>
+                <span class="priority medium" style="margin-left: auto;">中</span>
+            </div>
+        </section>
 
-    function renderInsights(insights) {
-        if (!insights) return;
-        
-        const container = document.getElementById('insights-container');
-        container.innerHTML = `
+        <!-- 核心洞察 -->
+        <section class="insights-section">
+            <h3>💡 核心洞察与行动建议</h3>
+            
             <h4 style="margin: 1rem 0 0.5rem;">📌 区域亮点</h4>
-            <ul style="margin-bottom: 1rem;">
-                ${insights.regionalHighlights?.map(h => `<li>• ${h}</li>`).join('') || ''}
+            <ul>
+                <li>• 山东曹县汉服产业：AI设计平台上线，生产周期缩短至7天</li>
+                <li>• 江苏苏绣：IP联名合作模式成熟，动画、游戏合作项目增多</li>
+                <li>• 广东工艺品：出口贸易恢复增长，东南亚市场拓展顺利</li>
+                <li>• 云南民族工艺：旅游带动明显，数字化转型加速</li>
             </ul>
             
             <h4 style="margin: 1rem 0 0.5rem;">🔥 趋势亮点</h4>
-            <ul style="margin-bottom: 1rem;">
-                ${insights.trendHighlights?.map(h => `<li>• ${h}</li>`).join('') || ''}
+            <ul>
+                <li>• 跨境电商渠道增长35%，成为主要出口方式</li>
+                <li>• IP联名合作项目增长50%，动漫、游戏IP最受欢迎</li>
+                <li>• AI设计工具应用范围扩大，降低设计门槛</li>
+                <li>• 可持续材料需求增长25%，环保理念融入产品</li>
             </ul>
-        `;
-        
-        // 渲染行动建议
-        const actionContainer = document.getElementById('actions-container');
-        if (insights.recommendedActions) {
-            actionContainer.innerHTML = insights.recommendedActions.map(action => `
-                <div class="action-item">
-                    <span class="priority ${action.priority === '高' ? 'high' : 'medium'}">
-                        ${action.priority}
-                    </span>
-                    <div>
-                        <strong>${action.action}</strong>
-                        <div style="font-size: 0.85rem; color: #7f8c8d;">
-                            预期周期: ${action.timeline}
-                        </div>
-                    </div>
-                </div>
-            `).join('');
-        }
-    }
+        </section>
 
-    if (document.readyState === 'loading') {
-        document.addEventListener('DOMContentLoaded', initPage);
-    } else {
-        initPage();
-    }
-    </script>
+        <!-- 行动建议 -->
+        <section class="region-section">
+            <h3>🎯 行动建议</h3>
+            <div class="action-item">
+                <span class="priority high">高</span>
+                <div><strong>积极布局跨境电商平台</strong><div style="font-size: 0.85rem; color: #7f8c8d;">预期周期: 1-2个月</div></div>
+            </div>
+            <div class="action-item">
+                <span class="priority high">高</span>
+                <div><strong>探索动漫/游戏IP联名合作</strong><div style="font-size: 0.85rem; color: #7f8c8d;">预期周期: 1-3个月</div></div>
+            </div>
+            <div class="action-item">
+                <span class="priority medium">中</span>
+                <div><strong>引入AI设计工具提升效率</strong><div style="font-size: 0.85rem; color: #7f8c8d;">预期周期: 2-4个月</div></div>
+            </div>
+            <div class="action-item">
+                <span class="priority medium">中</span>
+                <div><strong>开发可持续材料产品线</strong><div style="font-size: 0.85rem; color: #7f8c8d;">预期周期: 3-6个月</div></div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <p>📊 Daily Researcher | 非遗手工出海趋势洞察</p>
+        <p>数据来源：国家统计局、各省工信厅、行业报告</p>
+    </footer>
 </body>
 </html>
