@@ -1,0 +1,39 @@
+{
+  "date": "2026-02-07",
+  "platformTrends": [
+    {
+      "platform": "TikTok",
+      "topTags": [
+        {"name": "#dragonballsuper", "count": 40000, "engagement": "🔥极高", "trend": "up", "weeklyChange": "+22%", "category": "动漫IP"},
+        {"name": "#ufc", "count": 34500, "engagement": "高", "trend": "up", "weeklyChange": "+7%", "category": "体育格斗"},
+        {"name": "#skincaretok", "count": 138000000, "engagement": "高", "trend": "up", "weeklyChange": "+14%", "category": "美妆护肤"},
+        {"name": "#pettok", "count": 1010000000, "engagement": "极高", "trend": "up", "weeklyChange": "+20%", "category": "宠物用品"},
+        {"name": "#heatlesscurls", "count": 610000000, "engagement": "高", "trend": "up", "weeklyChange": "+28%", "category": "美发工具"}
+      ]
+    }
+  ],
+  "ipOpportunities": [
+    {"icon": "🐉", "name": "龙珠超", "category": "动漫IP", "suitability": "刺绣徽章、角色周边", "priority": 1},
+    {"icon": "🎮", "name": "原神", "category": "游戏IP", "suitability": "陶瓷角色、刺绣周边", "priority": 2},
+    {"icon": "⚔️", "name": "UFC", "category": "体育格斗", "suitability": "纪念品、奖杯定制", "priority": 3}
+  ],
+  "designTrends": {
+    "colors": [
+      {"name": "Mocha Mousse", "hex": "#6F4E37", "description": "Pantone 2025年度色"},
+      {"name": "Patina Blue", "hex": "#5B8FA8", "description": "Etsy年度色"}
+    ],
+    "materials": [
+      {"name": "再生材料", "applications": "环保产品", "growth": 62, "trend": "up"},
+      {"name": "天然纤维", "applications": "编织、纺织品", "growth": 48, "trend": "up"}
+    ],
+    "styles": [
+      {"name": "可持续奢侈", "description": "环保+高端设计结合"},
+      {"name": "治愈系手工", "description": "ASMR、慢生活展示"}
+    ]
+  },
+  "craftSuggestions": [
+    {"icon": "🪡", "craft": "刺绣", "direction": "动漫IP周边+定制服装", "keywords": ["#embroidery", "#anime"], "priority": "🔥最高"},
+    {"icon": "🧺", "craft": "柳编", "direction": "家居装饰+环保袋", "keywords": ["#sustainable", "#handmade"], "priority": "高"},
+    {"icon": "🏺", "craft": "陶瓷", "direction": "生活器皿+艺术品", "keywords": ["#pottery", "#ceramics"], "priority": "高"}
+  ]
+}
