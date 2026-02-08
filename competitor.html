@@ -40,6 +40,7 @@
             font-size: 1rem;
             cursor: pointer;
             background: white;
+            min-width: 150px;
         }
         .current-badge {
             background: var(--success-color);
@@ -70,10 +71,9 @@
         <div class="date-selector">
             <label>📅 选择日期：</label>
             <select id="date-select" onchange="loadDataByDate()">
-                <option value="2026-02-05">2026年2月5日</option>
-                <option value="2026-02-04">2026年2月4日</option>
+                <option value="">加载中...</option>
             </select>
-            <span class="current-badge" id="current-badge">最新数据</span>
+            <span class="current-badge" id="current-badge">加载中...</span>
         </div>
 
         <!-- 平台概览 -->
@@ -156,13 +156,54 @@
     };
 
     let currentDate = new Date().toISOString().split('T')[0];
+    let availableDates = [];
+
+    // 扫描可用的日期
+    async function scanAvailableDates() {
+        try {
+            const response = await fetch('data/competitor/');
+            const text = await response.text();
+            const matches = text.match(/2026-\d{2}-\d{2}/g);
+            if (matches) {
+                availableDates = [...new Set(matches)].sort().reverse();
+            }
+            
+            if (availableDates.length === 0) {
+                availableDates = ['2026-02-07', '2026-02-06', '2026-02-05', '2026-02-04'];
+            }
+            
+            const select = document.getElementById('date-select');
+            select.innerHTML = availableDates.map(date => {
+                const cnDate = date.replace(/(\d{4})-(\d{2})-(\d{2})/, '$1年$2月$3日');
+                return `<option value="${date}">${cnDate}</option>`;
+            }).join('');
+            
+            const today = new Date().toISOString().split('T')[0];
+            currentDate = availableDates.includes(today) ? today : availableDates[0];
+            
+            document.getElementById('current-badge').textContent = '最新数据';
+            document.getElementById('current-badge').style.background = '#27ae60';
+            
+            initPage();
+        } catch (error) {
+            console.error('Error scanning dates:', error);
+            availableDates = ['2026-02-07', '2026-02-06', '2026-02-05', '2026-02-04'];
+            const select = document.getElementById('date-select');
+            select.innerHTML = availableDates.map(date => {
+                const cnDate = date.replace(/(\d{4})-(\d{2})-(\d{2})/, '$1年$2月$3日');
+                return `<option value="${date}">${cnDate}</option>`;
+            }).join('');
+            currentDate = availableDates[0];
+            initPage();
+        }
+    }
 
     async function loadDataByDate() {
         const select = document.getElementById('date-select');
         currentDate = select.value;
         
-        const badge = document.getElementById('current-badge');
         const today = new Date().toISOString().split('T')[0];
+        const badge = document.getElementById('current-badge');
         if (currentDate === today) {
             badge.textContent = '最新数据';
             badge.style.background = '#27ae60';
@@ -179,15 +220,16 @@
         document.getElementById('update-time').textContent = Utils.formatDate(new Date());
         
         try {
-            const response = await fetch(`data/competitor/${currentDate}.json`);
-            let data;
+            let response = await fetch(`data/competitor/${currentDate}.json`);
             if (!response.ok) {
-                const latestResponse = await fetch('data/competitor/2026-02-05.json');
-                if (!latestResponse.ok) throw new Error('No data available');
-                data = await latestResponse.json();
-            } else {
-                data = await response.json();
+                if (availableDates.length > 1) {
+                    currentDate = availableDates[0];
+                    document.getElementById('date-select').value = currentDate;
+                }
+                response = await fetch(`data/competitor/${currentDate}.json`);
             }
+            if (!response.ok) throw new Error('No data available');
+            const data = await response.json();
             console.log('✅ Data loaded:', data);
             
             // Amazon列表
@@ -291,9 +333,9 @@
     }
 
     if (document.readyState === 'loading') {
-        document.addEventListener('DOMContentLoaded', initPage);
+        document.addEventListener('DOMContentLoaded', scanAvailableDates);
     } else {
-        initPage();
+        scanAvailableDates();
     }
     </script>
 </body>
