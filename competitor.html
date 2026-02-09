@@ -7,49 +7,11 @@
     <link rel="stylesheet" href="css/style.css">
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <style>
-        .loading-spinner {
-            display: inline-block;
-            width: 20px;
-            height: 20px;
-            border: 2px solid #f3f3f3;
-            border-top: 2px solid #3498db;
-            border-radius: 50%;
-            animation: spin 1s linear infinite;
-        }
-        @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
-        
-        .date-selector {
-            background: white;
-            padding: 1rem;
-            border-radius: var(--radius);
-            margin-bottom: 1.5rem;
-            box-shadow: var(--shadow);
-            display: flex;
-            align-items: center;
-            gap: 1rem;
-            flex-wrap: wrap;
-        }
-        .date-selector label {
-            font-weight: 500;
-            color: var(--primary-color);
-        }
-        .date-selector select {
-            padding: 0.5rem 1rem;
-            border: 2px solid var(--secondary-color);
-            border-radius: 8px;
-            font-size: 1rem;
-            cursor: pointer;
-            background: white;
-            min-width: 150px;
-        }
-        .current-badge {
-            background: var(--success-color);
-            color: white;
-            padding: 0.3rem 0.8rem;
-            border-radius: 20px;
-            font-size: 0.8rem;
-            margin-left: auto;
-        }
+        .loading-spinner {display:inline-block;width:20px;height:20px;border:2px solid #f3f3f3;border-top:2px solid #3498db;border-radius:50%;animation:spin 1s linear infinite}
+        @keyframes spin {0%{transform:rotate(0deg)}100%{transform:rotate(360deg)}}
+        .date-selector {background:white;padding:1rem;border-radius:12px;margin-bottom:1.5rem;box-shadow:0 2px 10px rgba(0,0,0,0.1);display:flex;align-items:center;gap:1rem;flex-wrap:wrap}
+        .date-selector select {padding:0.5rem 1rem;border:2px solid #3498db;border-radius:8px;font-size:1rem;cursor:pointer;background:white;min-width:150px}
+        .current-badge {background:#27ae60;color:white;padding:0.3rem 0.8rem;border-radius:20px;font-size:0.8rem;margin-left:auto}
     </style>
 </head>
 <body>
@@ -58,285 +20,37 @@
         <p>Amazon · Etsy · TikTok Shop 全球电商热销分析</p>
         <p class="last-updated">最后更新：<span id="update-time">加载中...</span></p>
     </header>
-
     <nav>
         <a href="index.html">仪表板</a>
         <a href="competitor.html" class="active">竞品动态</a>
         <a href="social.html">社交趋势</a>
         <a href="supply-chain.html">供应链月报</a>
     </nav>
-
     <main>
-        <!-- 日期选择器 -->
         <div class="date-selector">
             <label>📅 选择日期：</label>
-            <select id="date-select" onchange="loadDataByDate()">
-                <option value="">加载中...</option>
-            </select>
+            <select id="date-select" onchange="loadDataByDate()"><option value="">加载中...</option></select>
             <span class="current-badge" id="current-badge">加载中...</span>
         </div>
-
-        <!-- 平台概览 -->
         <section class="platforms">
-            <div class="platform-card">
-                <h3>🛍️ Amazon Top 10</h3>
-                <div id="amazon-list" class="product-list">
-                    <div style="padding: 1rem; text-align: center; color: #7f8c8d;">
-                        <span class="loading-spinner"></span> 加载中...
-                    </div>
-                </div>
-            </div>
-            <div class="platform-card">
-                <h3>🎨 Etsy 热销榜</h3>
-                <div id="etsy-list" class="product-list">
-                    <div style="padding: 1rem; text-align: center; color: #7f8c8d;">
-                        <span class="loading-spinner"></span> 加载中...
-                    </div>
-                </div>
-            </div>
-            <div class="platform-card">
-                <h3>📱 TikTok Shop 爆款</h3>
-                <div id="tiktok-list" class="product-list">
-                    <div style="padding: 1rem; text-align: center; color: #7f8c8d;">
-                        <span class="loading-spinner"></span> 加载中...
-                    </div>
-                </div>
-            </div>
+            <div class="platform-card"><h3>🛍️ Amazon Top 10</h3><div id="amazon-list" class="product-list"><div style="padding:1rem;text-align:center;color:#7f8c8d;"><span class="loading-spinner"></span>加载中...</div></div></div>
+            <div class="platform-card"><h3>🎨 Etsy 热销榜</h3><div id="etsy-list" class="product-list"><div style="padding:1rem;text-align:center;color:#7f8c8d;"><span class="loading-spinner"></span>加载中...</div></div></div>
+            <div class="platform-card"><h3>📱 TikTok Shop 爆款</h3><div id="tiktok-list" class="product-list"><div style="padding:1rem;text-align:center;color:#7f8c8d;"><span class="loading-spinner"></span>加载中...</div></div></div>
         </section>
-
-        <!-- 趋势洞察 -->
         <section class="insights">
-            <div class="insight-card">
-                <h3>💰 价格带分布</h3>
-                <div id="price-distribution" style="height: 250px; position: relative;">
-                    <div style="padding: 1rem; text-align: center; color: #7f8c8d; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);">
-                        <span class="loading-spinner"></span> 加载中...
-                    </div>
-                </div>
-            </div>
-            <div class="insight-card">
-                <h3>🎯 品类热度排行</h3>
-                <div id="category-rankings">
-                    <div style="padding: 1rem; text-align: center; color: #7f8c8d;">
-                        <span class="loading-spinner"></span> 加载中...
-                    </div>
-                </div>
-            </div>
+            <div class="insight-card"><h3>💰 价格带分布</h3><div id="price-distribution" style="height:250px;position:relative"><div style="padding:1rem;text-align:center;color:#7f8c8d;position:absolute;top:50%;left:50%;transform:translate(-50%,-50%)"><span class="loading-spinner"></span>加载中...</div></div></div>
+            <div class="insight-card"><h3>🎯 品类热度排行</h3><div id="category-rankings"><div style="padding:1rem;text-align:center;color:#7f8c8d;"><span class="loading-spinner"></span>加载中...</div></div></div>
         </section>
-
-        <!-- 中国供应链优势 -->
-        <section class="opportunities">
-            <h3>🇨🇳 中国供应链优势品类</h3>
-            <div id="china-opportunities" class="opportunity-grid">
-                <div style="padding: 1rem; text-align: center; color: #7f8c8d; grid-column: 1/-1;">
-                    <span class="loading-spinner"></span> 加载中...
-                </div>
-            </div>
-        </section>
+        <section class="opportunities"><h3>🇨🇳 中国供应链优势品类</h3><div id="china-opportunities" class="opportunity-grid"><div style="padding:1rem;text-align:center;color:#7f8c8d;grid-column:1/-1"><span class="loading-spinner"></span>加载中...</div></div></section>
     </main>
-
-    <footer>
-        <p>📊 Daily Researcher | 非遗手工出海趋势洞察</p>
-    </footer>
-
+    <footer><p>📊 Daily Researcher | 非遗手工出海趋势洞察</p></footer>
     <script>
-    const Utils = {
-        formatDate(date) {
-            return new Date(date).toLocaleString('zh-CN', {
-                year: 'numeric', month: '2-digit', day: '2-digit',
-                hour: '2-digit', minute: '2-digit'
-            });
-        },
-        formatNumber(num) {
-            if (num >= 1000000000) return (num / 1000000000).toFixed(1) + 'B';
-            if (num >= 1000000) return (num / 1000000).toFixed(1) + 'M';
-            if (num >= 1000) return (num / 1000).toFixed(1) + 'K';
-            return num.toString();
-        }
-    };
-
-    let currentDate = new Date().toISOString().split('T')[0];
-    let availableDates = [];
-
-    // 扫描可用的日期
-    async function scanAvailableDates() {
-        try {
-            const response = await fetch('data/competitor/');
-            const text = await response.text();
-            const matches = text.match(/2026-\d{2}-\d{2}/g);
-            if (matches) {
-                availableDates = [...new Set(matches)].sort().reverse();
-            }
-            
-            if (availableDates.length === 0) {
-                availableDates = ['2026-02-07', '2026-02-06', '2026-02-05', '2026-02-04'];
-            }
-            
-            const select = document.getElementById('date-select');
-            select.innerHTML = availableDates.map(date => {
-                const cnDate = date.replace(/(\d{4})-(\d{2})-(\d{2})/, '$1年$2月$3日');
-                return `<option value="${date}">${cnDate}</option>`;
-            }).join('');
-            
-            const today = new Date().toISOString().split('T')[0];
-            currentDate = availableDates.includes(today) ? today : availableDates[0];
-            
-            document.getElementById('current-badge').textContent = '最新数据';
-            document.getElementById('current-badge').style.background = '#27ae60';
-            
-            initPage();
-        } catch (error) {
-            console.error('Error scanning dates:', error);
-            availableDates = ['2026-02-07', '2026-02-06', '2026-02-05', '2026-02-04'];
-            const select = document.getElementById('date-select');
-            select.innerHTML = availableDates.map(date => {
-                const cnDate = date.replace(/(\d{4})-(\d{2})-(\d{2})/, '$1年$2月$3日');
-                return `<option value="${date}">${cnDate}</option>`;
-            }).join('');
-            currentDate = availableDates[0];
-            initPage();
-        }
-    }
-
-    async function loadDataByDate() {
-        const select = document.getElementById('date-select');
-        currentDate = select.value;
-        
-        const today = new Date().toISOString().split('T')[0];
-        const badge = document.getElementById('current-badge');
-        if (currentDate === today) {
-            badge.textContent = '最新数据';
-            badge.style.background = '#27ae60';
-        } else {
-            badge.textContent = '历史数据';
-            badge.style.background = '#f39c12';
-        }
-        
-        await initPage();
-    }
-
-    async function initPage() {
-        console.log('🚀 Competitor page initializing...', currentDate);
-        document.getElementById('update-time').textContent = Utils.formatDate(new Date());
-        
-        try {
-            let response = await fetch(`data/competitor/${currentDate}.json`);
-            if (!response.ok) {
-                if (availableDates.length > 1) {
-                    currentDate = availableDates[0];
-                    document.getElementById('date-select').value = currentDate;
-                }
-                response = await fetch(`data/competitor/${currentDate}.json`);
-            }
-            if (!response.ok) throw new Error('No data available');
-            const data = await response.json();
-            console.log('✅ Data loaded:', data);
-            
-            // Amazon列表
-            if (data.amazonTop && data.amazonTop.length > 0) {
-                document.getElementById('amazon-list').innerHTML = data.amazonTop.slice(0, 10).map((p, i) => `
-                    <div class="product-item">
-                        <span class="product-rank">${i+1}</span>
-                        <div class="product-info">
-                            <div class="product-name">${p.name}</div>
-                            <div class="product-meta">${p.category} · ${p.source || 'Amazon'}</div>
-                        </div>
-                        <span class="product-price">${p.price}</span>
-                    </div>
-                `).join('');
-            }
-            
-            // Etsy列表
-            if (data.etsyTop && data.etsyTop.length > 0) {
-                document.getElementById('etsy-list').innerHTML = data.etsyTop.slice(0, 10).map((p, i) => `
-                    <div class="product-item">
-                        <span class="product-rank">${i+1}</span>
-                        <div class="product-info">
-                            <div class="product-name">${p.name}</div>
-                            <div class="product-meta">${p.category} · ${p.note || ''}</div>
-                        </div>
-                        <span class="product-price">${p.price}</span>
-                    </div>
-                `).join('');
-            }
-            
-            // TikTok列表
-            if (data.tiktokShop && data.tiktokShop.length > 0) {
-                document.getElementById('tiktok-list').innerHTML = data.tiktokShop.slice(0, 10).map((p, i) => `
-                    <div class="product-item">
-                        <span class="product-rank">${i+1}</span>
-                        <div class="product-info">
-                            <div class="product-name">${p.name}</div>
-                            <div class="product-meta">#${p.hashtag} · ${Utils.formatNumber(p.views)}播放</div>
-                        </div>
-                        <span class="product-price">${p.price}</span>
-                    </div>
-                `).join('');
-            }
-            
-            // 价格分布图表
-            if (data.priceDistribution) {
-                const ctx = document.getElementById('price-distribution');
-                ctx.innerHTML = '<canvas id="priceChart"></canvas>';
-                new Chart(ctx.querySelector('#priceChart'), {
-                    type: 'doughnut',
-                    data: {
-                        labels: data.priceDistribution.labels,
-                        datasets: [{
-                            data: data.priceDistribution.data,
-                            backgroundColor: ['#3498db','#e74c3c','#27ae60','#f39c12','#9b59b6'],
-                            borderWidth: 2, borderColor: '#fff'
-                        }]
-                    },
-                    options: {
-                        responsive: true, maintainAspectRatio: false,
-                        plugins: { legend: { position: 'right' } }
-                    }
-                });
-            }
-            
-            // 品类排行
-            if (data.categoryRankings && data.categoryRankings.length > 0) {
-                document.getElementById('category-rankings').innerHTML = `
-                    <table style="width:100%; border-collapse: collapse;">
-                        <thead>
-                            <tr style="background: var(--bg-color);">
-                                <th style="padding: 8px; text-align: left;">排名</th>
-                                <th style="padding: 8px; text-align: left;">品类</th>
-                                <th style="padding: 8px; text-align: right;">增长率</th>
-                                <th style="padding: 8px; text-align: right;">毛利率</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            ${data.categoryRankings.map((item, i) => `
-                                <tr style="border-bottom: 1px solid #eee;">
-                                    <td style="padding: 8px; width: 40px;">${i+1}</td>
-                                    <td style="padding: 8px;">${item.name}</td>
-                                    <td style="padding: 8px; text-align: right; color: #27ae60;">+${item.growth}%</td>
-                                    <td style="padding: 8px; text-align: right; color: #3498db;">${item.margin}</td>
-                                </tr>
-                            `).join('')}
-                        </tbody>
-                    </table>
-                `;
-            }
-            
-            console.log('✅ Competitor page rendered');
-        } catch (error) {
-            console.error('❌ Error:', error);
-            const ids = ['amazon-list', 'etsy-list', 'tiktok-list', 'china-opportunities'];
-            ids.forEach(id => {
-                const el = document.getElementById(id);
-                if (el) el.innerHTML = '<div style="padding: 1rem; color: #e74c3c;">数据加载失败</div>';
-            });
-        }
-    }
-
-    if (document.readyState === 'loading') {
-        document.addEventListener('DOMContentLoaded', scanAvailableDates);
-    } else {
-        scanAvailableDates();
-    }
+    var Utils={formatDate:function(d){return new Date(d).toLocaleString('zh-CN',{year:'numeric',month:'2-digit',day:'2-digit',hour:'2-digit',minute:'2-digit'})},formatNumber:function(n){if(n>=1000000000)return(n/1000000000).toFixed(1)+'B';if(n>=1000000)return(n/1000000).toFixed(1)+'M';if(n>=1000)return(n/1000).toFixed(1)+'K';return n.toString()}};
+    var currentDate=new Date().toISOString().split('T')[0];var availableDates=[];
+    function scanDates(){fetch('data/competitor/').then(function(r){return r.text()}).then(function(t){var m=t.match(/2026-\d{2}-\d{2}/g);availableDates=m? [...new Set(m)].sort().reverse():['2026-02-07','2026-02-06','2026-02-05','2026-02-04'];var s=document.getElementById('date-select');s.innerHTML=availableDates.map(function(d){var cn=d.replace(/(\d{4})-(\d{2})-(\d{2})/,'$1年$2月$3日');return'<option value="'+d+'">'+cn+'</option>'}).join('');var td=new Date().toISOString().split('T')[0];currentDate=availableDates.includes(td)?td:availableDates[0];s.value=currentDate;document.getElementById('current-badge').textContent='最新数据';initPage()})['catch'](function(){availableDates=['2026-02-07','2026-02-06','2026-02-05','2026-02-04'];var s=document.getElementById('date-select');s.innerHTML=availableDates.map(function(d){var cn=d.replace(/(\d{4})-(\d{2})-(\d{2})/,'$1年$2月$3日');return'<option value="'+d+'">'+cn+'</option>'}).join('');currentDate=availableDates[0];initPage()})}
+    function loadDataByDate(){var s=document.getElementById('date-select');currentDate=s.value;var td=new Date().toISOString().split('T')[0];var b=document.getElementById('current-badge');b.textContent=currentDate===td?'最新数据':'历史数据';b.style.background=currentDate===td?'#27ae60':'#f39c12';initPage()}
+    function initPage(){console.log('Competitor page init',currentDate);document.getElementById('update-time').textContent=Utils.formatDate(new Date());fetch('data/competitor/'+currentDate+'.json').then(function(r){if(!r.ok)throw new Error('No data');return r.json()})['catch'](function(){return fetch('data/competitor/'+availableDates[0]+'.json').then(function(r){if(!r.ok)throw new Error('No data');return r.json()})}).then(function(data){console.log('Data loaded',data);if(data.amazonTop&&data.amazonTop.length>0){document.getElementById('amazon-list').innerHTML=data.amazonTop.slice(0,10).map(function(p,i){return'<div class="product-item"><span class="product-rank">'+(i+1)+'</span><div class="product-info"><div class="product-name">'+p.name+'</div><div class="product-meta">'+p.category+' · '+(p.source||'Amazon')+'</div></div><span class="product-price">'+p.price+'</span></div>'}).join('')}if(data.etsyTop&&data.etsyTop.length>0){document.getElementById('etsy-list').innerHTML=data.etsyTop.slice(0,10).map(function(p,i){return'<div class="product-item"><span class="product-rank">'+(i+1)+'</span><div class="product-info"><div class="product-name">'+p.name+'</div><div class="product-meta">'+p.category+' · '+(p.note||'')+'</div></div><span class="product-price">'+p.price+'</span></div>'}).join('')}if(data.tiktokShop&&data.tiktokShop.length>0){document.getElementById('tiktok-list').innerHTML=data.tiktokShop.slice(0,10).map(function(p,i){return'<div class="product-item"><span class="product-rank">'+(i+1)+'</span><div class="product-info"><div class="product-name">'+p.name+'</div><div class="product-meta">#'+p.hashtag+' · '+Utils.formatNumber(p.views)+'播放</div></div><span class="product-price">'+p.price+'</span></div>'}).join('')}if(data.priceDistribution){var ctx=document.getElementById('price-distribution');ctx.innerHTML='<canvas id="priceChart"></canvas>';new Chart(ctx.querySelector('#priceChart'),{type:'doughnut',data:{labels:data.priceDistribution.labels,datasets:[{data:data.priceDistribution.data,backgroundColor:['#3498db','#e74c3c','#27ae60','#f39c12','#9b59b6'],borderWidth:2,borderColor:'#fff'}]},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{position:'right'}}}});if(data.categoryRankings&&data.categoryRankings.length>0){document.getElementById('category-rankings').innerHTML='<table style="width:100%;border-collapse:collapse"><thead><tr style="background:#f8f9fa"><th style="padding:8px;text-align:left">排名</th><th style="padding:8px;text-align:left">品类</th><th style="padding:8px;text-align:right">增长率</th><th style="padding:8px;text-align:right">毛利率</th></tr></thead><tbody>'+data.categoryRankings.map(function(item,i){return'<tr style="border-bottom:1px solid #eee"><td style="padding:8px;width:40px">'+(i+1)+'</td><td style="padding:8px">'+item.name+'</td><td style="padding:8px;text-align:right;color:#27ae60">+'+item.growth+'%</td><td style="padding:8px;text-align:right;color:#3498db">'+item.margin+'</td></tr>'}).join('')+'</tbody></table>'}console.log('Page rendered')})['catch'](function(e){console.error('Error',e);['amazon-list','etsy-list','tiktok-list','china-opportunities'].forEach(function(id){var el=document.getElementById(id);if(el)el.innerHTML='<div style="padding:1rem;color:#e74c3c">数据加载失败</div>'})}
+    if(document.readyState==='loading'){document.addEventListener('DOMContentLoaded',scanDates)}else{scanDates()}
     </script>
 </body>
 </html>

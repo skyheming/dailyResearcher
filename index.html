@@ -17,25 +17,20 @@
             animation: spin 1s linear infinite;
         }
         @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
-        
         .date-selector {
             background: white;
             padding: 1rem;
-            border-radius: var(--radius);
+            border-radius: 12px;
             margin-bottom: 1.5rem;
-            box-shadow: var(--shadow);
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
             display: flex;
             align-items: center;
             gap: 1rem;
             flex-wrap: wrap;
         }
-        .date-selector label {
-            font-weight: 500;
-            color: var(--primary-color);
-        }
         .date-selector select {
             padding: 0.5rem 1rem;
-            border: 2px solid var(--secondary-color);
+            border: 2px solid #3498db;
             border-radius: 8px;
             font-size: 1rem;
             cursor: pointer;
@@ -43,7 +38,7 @@
             min-width: 150px;
         }
         .current-badge {
-            background: var(--success-color);
+            background: #27ae60;
             color: white;
             padding: 0.3rem 0.8rem;
             border-radius: 20px;
@@ -58,16 +53,13 @@
         <p>非遗手工出海 · 全球趋势洞察仪表板</p>
         <p class="last-updated">最后更新：<span id="update-time">加载中...</span></p>
     </header>
-
     <nav>
         <a href="index.html" class="active">仪表板</a>
         <a href="competitor.html">竞品动态</a>
         <a href="social.html">社交趋势</a>
         <a href="supply-chain.html">供应链月报</a>
     </nav>
-
     <main>
-        <!-- 日期选择器 -->
         <div class="date-selector">
             <label>📅 选择日期：</label>
             <select id="date-select" onchange="loadDataByDate()">
@@ -75,26 +67,16 @@
             </select>
             <span class="current-badge" id="current-badge">加载中...</span>
         </div>
-
-        <!-- 核心指标卡片 -->
         <section class="metrics">
             <div class="metric-card">
                 <h3>🔥 今日热点</h3>
-                <ul id="hot-topics">
-                    <li style="padding: 1rem; text-align: center; color: #7f8c8d;">
-                        <span class="loading-spinner"></span> 加载中...
-                    </li>
-                </ul>
+                <ul id="hot-topics"><li style="padding:1rem;text-align:center;color:#7f8c8d;"><span class="loading-spinner"></span>加载中...</li></ul>
             </div>
             <div class="metric-card">
                 <h3>🏷️ 热门标签</h3>
-                <div id="tag-cloud" class="tag-cloud" style="padding: 1rem; text-align: center; color: #7f8c8d;">
-                    <span class="loading-spinner"></span> 加载中...
-                </div>
+                <div id="tag-cloud" class="tag-cloud" style="padding:1rem;text-align:center;color:#7f8c8d;"><span class="loading-spinner"></span>加载中...</div>
             </div>
         </section>
-
-        <!-- 趋势图表 -->
         <section class="charts">
             <div class="chart-container">
                 <h3>📈 趋势热度变化</h3>
@@ -105,248 +87,53 @@
                 <canvas id="categoryChart"></canvas>
             </div>
         </section>
-
-        <!-- 快速链接 -->
         <section class="quick-links">
             <h3>📱 快速查看</h3>
             <div class="link-cards">
-                <a href="competitor.html" class="link-card">
-                    <span class="icon">🛒</span>
-                    <span class="title">竞品动态</span>
-                    <span class="desc">Amazon/Etsy/TikTok Shop热销分析</span>
-                </a>
-                <a href="social.html" class="link-card">
-                    <span class="icon">🎨</span>
-                    <span class="title">社交趋势</span>
-                    <span class="desc">TikTok/Pinterest/文化IP热点</span>
-                </a>
-                <a href="supply-chain.html" class="link-card">
-                    <span class="icon">📦</span>
-                    <span class="title">供应链月报</span>
-                    <span class="desc">全国产区/原材料/政策信息</span>
-                </a>
+                <a href="competitor.html" class="link-card"><span class="icon">🛒</span><span class="title">竞品动态</span><span class="desc">Amazon/Etsy/TikTok Shop</span></a>
+                <a href="social.html" class="link-card"><span class="icon">🎨</span><span class="title">社交趋势</span><span class="desc">TikTok/Pinterest/IP热点</span></a>
+                <a href="supply-chain.html" class="link-card"><span class="icon">📦</span><span class="title">供应链月报</span><span class="desc">全国产区/原材料</span></a>
             </div>
         </section>
     </main>
-
     <footer>
         <p>📊 Daily Researcher | 非遗手工出海趋势洞察</p>
-        <p>数据来源：Amazon, Etsy, TikTok Shop, Pinterest, Google Trends</p>
+        <p>数据来源：Amazon, Etsy, TikTok Shop, Pinterest</p>
     </footer>
-
     <script>
-    // 工具函数
-    const Utils = {
-        formatDate(date) {
-            return new Date(date).toLocaleString('zh-CN', {
-                year: 'numeric', month: '2-digit', day: '2-digit',
-                hour: '2-digit', minute: '2-digit'
-            });
+    var Utils = {
+        formatDate: function(date) {
+            return new Date(date).toLocaleString('zh-CN', {year:'numeric',month:'2-digit',day:'2-digit',hour:'2-digit',minute:'2-digit'});
         },
-        formatNumber(num) {
-            if (num >= 1000000000) return (num / 1000000000).toFixed(1) + 'B';
-            if (num >= 1000000) return (num / 1000000).toFixed(1) + 'M';
-            if (num >= 1000) return (num / 1000).toFixed(1) + 'K';
+        formatNumber: function(num) {
+            if(num>=1000000000) return (num/1000000000).toFixed(1)+'B';
+            if(num>=1000000) return (num/1000000).toFixed(1)+'M';
+            if(num>=1000) return (num/1000).toFixed(1)+'K';
             return num.toString();
         },
-        getTagSize(count, maxCount) {
-            const ratio = count / maxCount;
-            if (ratio > 0.8) return 'size-5';
-            if (ratio > 0.6) return 'size-4';
-            if (ratio > 0.4) return 'size-3';
-            if (ratio > 0.2) return 'size-2';
+        getTagSize: function(count, maxCount) {
+            var ratio = count/maxCount;
+            if(ratio>0.8) return 'size-5';
+            if(ratio>0.6) return 'size-4';
+            if(ratio>0.4) return 'size-3';
+            if(ratio>0.2) return 'size-2';
             return 'size-1';
         }
     };
-
-    // 图表工具
-    const ChartUtils = {
-        createLineChart(ctx, labels, datasets) {
-            return new Chart(ctx, {
-                type: 'line',
-                data: { labels, datasets: datasets.map((d, i) => ({
-                    label: d.label, data: d.data,
-                    borderColor: ['#3498db','#e74c3c','#27ae60'][i%3],
-                    backgroundColor: 'transparent', tension: 0.4, fill: false
-                }))},
-                options: {
-                    responsive: true, maintainAspectRatio: false,
-                    plugins: { legend: { position: 'bottom' } },
-                    scales: { y: { beginAtZero: false } }
-                }
-            });
+    var ChartUtils = {
+        createLineChart: function(ctx, labels, datasets) {
+            new Chart(ctx, {type:'line',data:{labels:labels,datasets:datasets.map(function(d,i){return{label:d.label,data:d.data,borderColor:['#3498db','#e74c3c','#27ae60'][i%3],backgroundColor:'transparent',tension:0.4,fill:false}},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{position:'bottom'}},scales:{y:{beginAtZero:false}}});
         },
-        createPieChart(ctx, labels, data) {
-            return new Chart(ctx, {
-                type: 'doughnut',
-                data: { labels, datasets: [{
-                    data, borderWidth: 2, borderColor: '#fff',
-                    backgroundColor: ['#3498db','#e74c3c','#27ae60','#f39c12','#9b59b6','#1abc9c']
-                }]},
-                options: {
-                    responsive: true, maintainAspectRatio: false,
-                    plugins: { legend: { position: 'right' } }
-                }
-            });
+        createPieChart: function(ctx, labels, data) {
+            new Chart(ctx,{type:'doughnut',data:{labels:labels,datasets:[{data:data,borderWidth:2,borderColor:'#fff',backgroundColor:['#3498db','#e74c3c','#27ae60','#f39c12','#9b59b6','#1abc9c']}]},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{position:'right'}}});
         }
     };
-
-    let currentDate = new Date().toISOString().split('T')[0];
-    let availableDates = [];
-
-    // 扫描可用的日期
-    async function scanAvailableDates() {
-        try {
-            const response = await fetch('data/competitor/');
-            const text = await response.text();
-            // 从HTML中提取所有日期
-            const matches = text.match(/2026-\d{2}-\d{2}/g);
-            if (matches) {
-                availableDates = [...new Set(matches)].sort().reverse();
-            }
-            
-            // 如果没有找到，添加默认日期
-            if (availableDates.length === 0) {
-                availableDates = ['2026-02-07', '2026-02-06', '2026-02-05', '2026-02-04'];
-            }
-            
-            // 更新下拉菜单
-            const select = document.getElementById('date-select');
-            select.innerHTML = availableDates.map(date => {
-                const cnDate = date.replace(/(\d{4})-(\d{2})-(\d{2})/, '$1年$2月$3日');
-                return `<option value="${date}">${cnDate}</option>`;
-            }).join('');
-            
-            // 设置当前日期
-            const today = new Date().toISOString().split('T')[0];
-            if (availableDates.includes(today)) {
-                currentDate = today;
-            } else {
-                currentDate = availableDates[0];
-            }
-            
-            document.getElementById('current-badge').textContent = '最新数据';
-            document.getElementById('current-badge').style.background = '#27ae60';
-            
-            // 加载数据
-            initDashboard();
-        } catch (error) {
-            console.error('Error scanning dates:', error);
-            // 使用默认日期
-            availableDates = ['2026-02-07', '2026-02-06', '2026-02-05', '2026-02-04'];
-            const select = document.getElementById('date-select');
-            select.innerHTML = availableDates.map(date => {
-                const cnDate = date.replace(/(\d{4})-(\d{2})-(\d{2})/, '$1年$2月$3日');
-                return `<option value="${date}">${cnDate}</option>`;
-            }).join('');
-            currentDate = availableDates[0];
-            initDashboard();
-        }
-    }
-
-    // 加载指定日期的数据
-    async function loadDataByDate() {
-        const select = document.getElementById('date-select');
-        currentDate = select.value;
-        
-        const today = new Date().toISOString().split('T')[0];
-        const badge = document.getElementById('current-badge');
-        if (currentDate === today) {
-            badge.textContent = '最新数据';
-            badge.style.background = '#27ae60';
-        } else {
-            badge.textContent = '历史数据';
-            badge.style.background = '#f39c12';
-        }
-        
-        // 显示加载状态
-        document.getElementById('hot-topics').innerHTML = 
-            '<li style="padding: 1rem; text-align: center;"><span class="loading-spinner"></span> 加载中...</li>';
-        document.getElementById('tag-cloud').innerHTML = 
-            '<span style="color: #7f8c8d;"><span class="loading-spinner"></span> 加载中...</span>';
-        
-        await initDashboard();
-    }
-
-    // 主逻辑
-    async function initDashboard() {
-        console.log('🚀 Dashboard initializing...', currentDate);
-        document.getElementById('update-time').textContent = Utils.formatDate(new Date());
-        
-        try {
-            const response = await fetch(`data/competitor/${currentDate}.json`);
-            if (!response.ok) {
-                // 如果指定日期没有数据，使用最新日期
-                if (availableDates.length > 1) {
-                    currentDate = availableDates[0];
-                    document.getElementById('date-select').value = currentDate;
-                }
-                const latestResponse = await fetch(`data/competitor/${currentDate}.json`);
-                if (!latestResponse.ok) throw new Error('No data available');
-                var data = await latestResponse.json();
-            } else {
-                var data = await response.json();
-            }
-            console.log('✅ Data loaded:', data);
-            
-            // 渲染今日热点
-            const hotContainer = document.getElementById('hot-topics');
-            if (data.hotProducts && data.hotProducts.length > 0) {
-                hotContainer.innerHTML = data.hotProducts.slice(0, 5).map((p, i) => `
-                    <li class="product-item">
-                        <span class="product-rank">${i+1}</span>
-                        <div class="product-info">
-                            <div class="product-name">${p.name}</div>
-                            <div class="product-meta">${p.platform} · ${p.price}</div>
-                        </div>
-                        <span class="product-price">${p.sales}</span>
-                    </li>
-                `).join('');
-            } else {
-                hotContainer.innerHTML = '<li style="padding: 1rem; color: #7f8c8d;">暂无数据</li>';
-            }
-            
-            // 渲染标签云
-            const tagContainer = document.getElementById('tag-cloud');
-            if (data.trendingTags && data.trendingTags.length > 0) {
-                const maxCount = Math.max(...data.trendingTags.slice(0, 15).map(t => t.count || 1));
-                tagContainer.innerHTML = data.trendingTags.slice(0, 15).map(tag => `
-                    <span class="tag ${Utils.getTagSize(tag.count || 1, maxCount)}">
-                        ${tag.name}
-                    </span>
-                `).join('');
-            } else {
-                tagContainer.innerHTML = '<span style="color: #7f8c8d;">暂无标签数据</span>';
-            }
-            
-            // 渲染趋势图表
-            if (data.trendData) {
-                const trendCtx = document.getElementById('trendChart').getContext('2d');
-                ChartUtils.createLineChart(trendCtx, data.trendData.labels, data.trendData.datasets);
-            }
-            
-            // 渲染品类分布
-            if (data.categoryDistribution) {
-                const catCtx = document.getElementById('categoryChart').getContext('2d');
-                ChartUtils.createPieChart(catCtx, data.categoryDistribution.labels, data.categoryDistribution.data);
-            }
-            
-            console.log('✅ Dashboard rendered successfully');
-        } catch (error) {
-            console.error('❌ Error:', error);
-            document.getElementById('hot-topics').innerHTML = 
-                '<li style="padding: 1rem; color: #e74c3c;">数据加载失败</li>';
-            document.getElementById('tag-cloud').innerHTML = 
-                '<span style="color: #e74c3c;">数据加载失败</span>';
-        }
-    }
-
-    // 页面加载完成后执行
-    if (document.readyState === 'loading') {
-        document.addEventListener('DOMContentLoaded', scanAvailableDates);
-    } else {
-        scanAvailableDates();
-    }
+    var currentDate = new Date().toISOString().split('T')[0];
+    var availableDates = [];
+    function scanAvailableDates(){fetch('data/competitor/').then(function(r){return r.text()}).then(function(t){var m=t.match(/2026-\d{2}-\d{2}/g);availableDates=m? [...new Set(m)].sort().reverse(): ['2026-02-07','2026-02-06','2026-02-05','2026-02-04'];var s=document.getElementById('date-select');s.innerHTML=availableDates.map(function(d){var cn=d.replace(/(\d{4})-(\d{2})-(\d{2})/,'$1年$2月$3日');return'<option value="'+d+'">'+cn+'</option>'}).join('');var td=new Date().toISOString().split('T')[0];currentDate=availableDates.includes(td)?td:availableDates[0];s.value=currentDate;document.getElementById('current-badge').textContent='最新数据';initDashboard()})['catch'](function(e){availableDates=['2026-02-07','2026-02-06','2026-02-05','2026-02-04'];var s=document.getElementById('date-select');s.innerHTML=availableDates.map(function(d){var cn=d.replace(/(\d{4})-(\d{2})-(\d{2})/,'$1年$2月$3日');return'<option value="'+d+'">'+cn+'</option>'}).join('');currentDate=availableDates[0];initDashboard()})}
+    function loadDataByDate(){var s=document.getElementById('date-select');currentDate=s.value;var td=new Date().toISOString().split('T')[0];var b=document.getElementById('current-badge');b.textContent=currentDate===td?'最新数据':'历史数据';b.style.background=currentDate===td?'#27ae60':'#f39c12';document.getElementById('hot-topics').innerHTML='<li style="padding:1rem;text-align:center;"><span class="loading-spinner"></span>加载中...</li>';document.getElementById('tag-cloud').innerHTML='<span style="color:#7f8c8d;"><span class="loading-spinner"></span>加载中...</span>';initDashboard()}
+    function initDashboard(){console.log('Dashboard init',currentDate);document.getElementById('update-time').textContent=Utils.formatDate(new Date());fetch('data/competitor/'+currentDate+'.json').then(function(r){if(!r.ok)throw new Error('No data');return r.json()})['catch'](function(){return fetch('data/competitor/'+availableDates[0]+'.json').then(function(r){if(!r.ok)throw new Error('No data');return r.json()})}).then(function(data){console.log('Data loaded',data);var hc=document.getElementById('hot-topics');if(data.hotProducts&&data.hotProducts.length>0){hc.innerHTML=data.hotProducts.slice(0,5).map(function(p,i){return'<li class="product-item"><span class="product-rank">'+(i+1)+'</span><div class="product-info"><div class="product-name">'+p.name+'</div><div class="product-meta">'+p.platform+' · '+p.price+'</div></div><span class="product-price">'+p.sales+'</span></li>'}).join('')}else{hc.innerHTML='<li style="padding:1rem;color:#7f8c8d;">暂无数据</li>'}var tc=document.getElementById('tag-cloud');if(data.trendingTags&&data.trendingTags.length>0){var mc=Math.max.apply(Math,data.trendingTags.slice(0,15).map(function(t){return t.count||1}));tc.innerHTML=data.trendingTags.slice(0,15).map(function(t){return'<span class="tag '+Utils.getTagSize(t.count||1,mc)+'">'+t.name+'</span>'}).join('')}else{tc.innerHTML='<span style="color:#7f8c8d;">暂无标签数据</span>'}if(data.trendData){ChartUtils.createLineChart(document.getElementById('trendChart').getContext('2d'),data.trendData.labels,data.trendData.datasets)}if(data.categoryDistribution){ChartUtils.createPieChart(document.getElementById('categoryChart').getContext('2d'),data.categoryDistribution.labels,data.categoryDistribution.data)}console.log('Dashboard rendered')})['catch'](function(e){console.error('Error',e);document.getElementById('hot-topics').innerHTML='<li style="padding:1rem;color:#e74c3c;">数据加载失败</li>';document.getElementById('tag-cloud').innerHTML='<span style="color:#e74c3c;">数据加载失败</span>'})}
+    if(document.readyState==='loading'){document.addEventListener('DOMContentLoaded',scanAvailableDates)}else{scanAvailableDates()}
     </script>
 </body>
 </html>
