@@ -63,13 +63,197 @@
     </main>
     <footer><p>📊 Daily Researcher | 非遗手工出海趋势洞察</p><p>数据来源：Amazon, Etsy, TikTok Shop, Pinterest</p></footer>
     <script>
-    var Utils={formatDate:function(d){return new Date(d).toLocaleString('zh-CN',{year:'numeric',month:'2-digit',day:'2-digit',hour:'2-digit',minute:'2-digit'})},formatNumber:function(n){if(n>=1000000000)return(n/1000000000).toFixed(1)+'B';if(n>=1000000)return(n/1000000).toFixed(1)+'M';if(n>=1000)return(n/1000).toFixed(1)+'K';return n.toString()},getTagSize:function(c,m){var r=c/m;if(r>0.8)return'size-5';if(r>0.6)return'size-4';if(r>0.4)return'size-3';if(r>0.2)return'size-2';return'size-1'}};
-    var ChartUtils={createLineChart:function(c,l,d){new Chart(c,{type:'line',data:{labels:l,datasets:d.map(function(v,i){return{label:v.label,data:v.data,borderColor:['#3498db','#e74c3c','#27ae60'][i%3],backgroundColor:'transparent',tension:0.4,fill:false}}},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{position:'bottom'}},scales:{y:{beginAtZero:false}}})},createPieChart:function(c,l,d){new Chart(c,{type:'doughnut',data:{labels:l,datasets:[{data:d,borderWidth:2,borderColor:'#fff',backgroundColor:['#3498db','#e74c3c','#27ae60','#f39c12','#9b59b6','#1abc9c']}]},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{position:'right'}}})}};
-    var currentDate=new Date().toISOString().split('T')[0];var availableDates=[];
-    function scanAvailableDates(){fetch('data/competitor/').then(function(r){return r.text()}).then(function(t){var m=t.match(/2026-\d{2}-\d{2}/g);var dates=m? [...new Set(m)].sort().reverse():['2026-02-07','2026-02-06','2026-02-05','2026-02-04'];Promise.all(dates.map(function(d){return fetch('data/competitor/'+d+'.json').then(function(r){return r.ok?d:null})})).then(function(valid){availableDates=valid.filter(function(d){return d});if(availableDates.length===0)availableDates=['2026-02-07','2026-02-06','2026-02-05','2026-02-04'];var s=document.getElementById('date-select');s.innerHTML=availableDates.map(function(d){var cn=d.replace(/(\d{4})-(\d{2})-(\d{2})/,'$1年$2月$3日');return'<option value="'+d+'">'+cn+'</option>'}).join('');var td=new Date().toISOString().split('T')[0];currentDate=availableDates.includes(td)?td:availableDates[0];s.value=currentDate;document.getElementById('current-badge').textContent='最新数据';initDashboard()})})['catch'](function(){availableDates=['2026-02-07','2026-02-06','2026-02-05','2026-02-04'];var s=document.getElementById('date-select');s.innerHTML=availableDates.map(function(d){var cn=d.replace(/(\d{4})-(\d{2})-(\d{2})/,'$1年$2月$3日');return'<option value="'+d+'">'+cn+'</option>'}).join('');currentDate=availableDates[0];initDashboard()})}
-    function loadDataByDate(){var s=document.getElementById('date-select');currentDate=s.value;var td=new Date().toISOString().split('T')[0];var b=document.getElementById('current-badge');b.textContent=currentDate===td?'最新数据':'历史数据';b.style.background=currentDate===td?'#27ae60':'#f39c12';document.getElementById('hot-topics').innerHTML='<li style="padding:1rem;text-align:center"><span class="loading-spinner"></span>加载中...</li>';document.getElementById('tag-cloud').innerHTML='<span style="color:#7f8c8d"><span class="loading-spinner"></span>加载中...</span>';initDashboard()}
-    function initDashboard(){console.log('Dashboard init',currentDate);document.getElementById('update-time').textContent=Utils.formatDate(new Date());fetch('data/competitor/'+currentDate+'.json').then(function(r){if(!r.ok)throw new Error('No data');return r.json()})['catch'](function(){var nextDate=availableDates.find(function(d){return d!==currentDate});return nextDate?fetch('data/competitor/'+nextDate+'.json').then(function(r){if(!r.ok)throw new Error('No data');currentDate=nextDate;document.getElementById('date-select').value=nextDate;return r.json()}):Promise.reject('No valid date')}).then(function(data){console.log('Data loaded',data);var hc=document.getElementById('hot-topics');if(data.hotProducts&&data.hotProducts.length>0){hc.innerHTML=data.hotProducts.slice(0,5).map(function(p,i){return'<li class="product-item"><span class="product-rank">'+(i+1)+'</span><div class="product-info"><div class="product-name">'+p.name+'</div><div class="product-meta">'+p.platform+' · '+p.price+'</div></div><span class="product-price">'+p.sales+'</span></li>'}).join('')}else{hc.innerHTML='<li style="padding:1rem;color:#7f8c8d">暂无数据</li>'}var tc=document.getElementById('tag-cloud');if(data.trendingTags&&data.trendingTags.length>0){var mc=Math.max.apply(Math,data.trendingTags.slice(0,15).map(function(t){return t.count||1}));tc.innerHTML=data.trendingTags.slice(0,15).map(function(t){return'<span class="tag '+Utils.getTagSize(t.count||1,mc)+'">'+t.name+'</span>'}).join('')}else{tc.innerHTML='<span style="color:#7f8c8d">暂无标签数据</span>'}if(data.trendData){ChartUtils.createLineChart(document.getElementById('trendChart').getContext('2d'),data.trendData.labels,data.trendData.datasets)}if(data.categoryDistribution){ChartUtils.createPieChart(document.getElementById('categoryChart').getContext('2d'),data.categoryDistribution.labels,data.categoryDistribution.data)}console.log('Dashboard rendered')})['catch'](function(e){console.error('Error',e);document.getElementById('hot-topics').innerHTML='<li style="padding:1rem;color:#e74c3c">数据加载失败</li>';document.getElementById('tag-cloud').innerHTML='<span style="color:#e74c3c">数据加载失败</span>'})}
-    if(document.readyState==='loading'){document.addEventListener('DOMContentLoaded',scanAvailableDates)}else{scanAvailableDates()}
+    // 工具函数
+    function formatDate(date) {
+        return new Date(date).toLocaleString('zh-CN', {year:'numeric',month:'2-digit',day:'2-digit',hour:'2-digit',minute:'2-digit'});
+    }
+    function formatNumber(num) {
+        if(num>=1000000000) return (num/1000000000).toFixed(1)+'B';
+        if(num>=1000000) return (num/1000000).toFixed(1)+'M';
+        if(num>=1000) return (num/1000).toFixed(1)+'K';
+        return num.toString();
+    }
+    function getTagSize(count, maxCount) {
+        var ratio = count/maxCount;
+        if(ratio>0.8) return 'size-5';
+        if(ratio>0.6) return 'size-4';
+        if(ratio>0.4) return 'size-3';
+        if(ratio>0.2) return 'size-2';
+        return 'size-1';
+    }
+
+    // 全局变量
+    var currentDate = new Date().toISOString().split('T')[0];
+    var availableDates = [];
+
+    // 扫描可用日期
+    function scanAvailableDates() {
+        fetch('data/competitor/')
+            .then(function(r){ return r.text() })
+            .then(function(text){
+                var matches = text.match(/2026-\d{2}-\d{2}/g);
+                var dates = matches ? [...new Set(matches)].sort().reverse() : ['2026-02-07','2026-02-06','2026-02-05','2026-02-04'];
+                
+                // 验证每个日期是否有JSON文件
+                var promises = dates.map(function(d){
+                    return fetch('data/competitor/'+d+'.json')
+                        .then(function(r){ return r.ok ? d : null })
+                        .catch(function(){ return null });
+                });
+                
+                Promise.all(promises).then(function(validDates){
+                    availableDates = validDates.filter(function(d){ return d !== null });
+                    if(availableDates.length === 0) {
+                        availableDates = ['2026-02-07','2026-02-06','2026-02-05','2026-02-04'];
+                    }
+                    
+                    var select = document.getElementById('date-select');
+                    select.innerHTML = '';
+                    availableDates.forEach(function(d){
+                        var cn = d.replace(/(\d{4})-(\d{2})-(\d{2})/, '$1年$2月$3日');
+                        var opt = document.createElement('option');
+                        opt.value = d;
+                        opt.textContent = cn;
+                        select.appendChild(opt);
+                    });
+                    
+                    var today = new Date().toISOString().split('T')[0];
+                    currentDate = availableDates.includes(today) ? today : availableDates[0];
+                    select.value = currentDate;
+                    
+                    document.getElementById('current-badge').textContent = '最新数据';
+                    initDashboard();
+                });
+            })
+            .catch(function(){
+                availableDates = ['2026-02-07','2026-02-06','2026-02-05','2026-02-04'];
+                var select = document.getElementById('date-select');
+                availableDates.forEach(function(d){
+                    var opt = document.createElement('option');
+                    opt.value = d;
+                    opt.textContent = d.replace(/(\d{4})-(\d{2})-(\d{2})/, '$1年$2月$3日');
+                    select.appendChild(opt);
+                });
+                currentDate = availableDates[0];
+                initDashboard();
+            });
+    }
+
+    // 加载指定日期数据
+    function loadDataByDate() {
+        var select = document.getElementById('date-select');
+        currentDate = select.value;
+        var today = new Date().toISOString().split('T')[0];
+        var badge = document.getElementById('current-badge');
+        badge.textContent = currentDate === today ? '最新数据' : '历史数据';
+        badge.style.background = currentDate === today ? '#27ae60' : '#f39c12';
+        
+        document.getElementById('hot-topics').innerHTML = '<li style="padding:1rem;text-align:center"><span class="loading-spinner"></span>加载中...</li>';
+        document.getElementById('tag-cloud').innerHTML = '<span style="color:#7f8c8d"><span class="loading-spinner"></span>加载中...</span>';
+        
+        initDashboard();
+    }
+
+    // 初始化仪表板
+    function initDashboard() {
+        console.log('Dashboard init', currentDate);
+        document.getElementById('update-time').textContent = formatDate(new Date());
+        
+        fetch('data/competitor/'+currentDate+'.json')
+            .then(function(r){ 
+                if(!r.ok) throw new Error('No data');
+                return r.json();
+            })
+            .then(function(data){
+                console.log('Data loaded', data);
+                
+                // 渲染热点产品
+                var hotContainer = document.getElementById('hot-topics');
+                if(data.hotProducts && data.hotProducts.length > 0) {
+                    hotContainer.innerHTML = data.hotProducts.slice(0,5).map(function(p, i){
+                        return '<li class="product-item"><span class="product-rank">'+(i+1)+'</span>'+
+                            '<div class="product-info"><div class="product-name">'+p.name+'</div>'+
+                            '<div class="product-meta">'+p.platform+' · '+p.price+'</div></div>'+
+                            '<span class="product-price">'+p.sales+'</span></li>';
+                    }).join('');
+                } else {
+                    hotContainer.innerHTML = '<li style="padding:1rem;color:#7f8c8d">暂无数据</li>';
+                }
+                
+                // 渲染标签云
+                var tagContainer = document.getElementById('tag-cloud');
+                if(data.trendingTags && data.trendingTags.length > 0) {
+                    var maxCount = Math.max.apply(Math, data.trendingTags.slice(0,15).map(function(t){ return t.count || 1 }));
+                    tagContainer.innerHTML = data.trendingTags.slice(0,15).map(function(t){
+                        return '<span class="tag '+getTagSize(t.count||1, maxCount)+'">'+t.name+'</span>';
+                    }).join('');
+                } else {
+                    tagContainer.innerHTML = '<span style="color:#7f8c8d">暂无标签数据</span>';
+                }
+                
+                // 渲染图表
+                if(data.trendData && document.getElementById('trendChart')) {
+                    var ctx1 = document.getElementById('trendChart').getContext('2d');
+                    new Chart(ctx1, {
+                        type: 'line',
+                        data: {
+                            labels: data.trendData.labels,
+                            datasets: data.trendData.datasets.map(function(d, i){
+                                return {
+                                    label: d.label,
+                                    data: d.data,
+                                    borderColor: ['#3498db','#e74c3c','#27ae60'][i%3],
+                                    backgroundColor: 'transparent',
+                                    tension: 0.4,
+                                    fill: false
+                                };
+                            })
+                        },
+                        options: {
+                            responsive: true,
+                            maintainAspectRatio: false,
+                            plugins: { legend: { position: 'bottom' } },
+                            scales: { y: { beginAtZero: false } }
+                        }
+                    });
+                }
+                
+                if(data.categoryDistribution && document.getElementById('categoryChart')) {
+                    var ctx2 = document.getElementById('categoryChart').getContext('2d');
+                    new Chart(ctx2, {
+                        type: 'doughnut',
+                        data: {
+                            labels: data.categoryDistribution.labels,
+                            datasets: [{
+                                data: data.categoryDistribution.data,
+                                borderWidth: 2,
+                                borderColor: '#fff',
+                                backgroundColor: ['#3498db','#e74c3c','#27ae60','#f39c12','#9b59b6','#1abc9c']
+                            }]
+                        },
+                        options: {
+                            responsive: true,
+                            maintainAspectRatio: false,
+                            plugins: { legend: { position: 'right' } }
+                        }
+                    });
+                }
+                
+                console.log('Dashboard rendered');
+            })
+            .catch(function(e){
+                console.error('Error', e);
+                document.getElementById('hot-topics').innerHTML = '<li style="padding:1rem;color:#e74c3c">数据加载失败</li>';
+                document.getElementById('tag-cloud').innerHTML = '<span style="color:#e74c3c">数据加载失败</span>';
+            });
+    }
+
+    // 页面加载完成后执行
+    if(document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', scanAvailableDates);
+    } else {
+        scanAvailableDates();
+    }
     </script>
 </body>
 </html>

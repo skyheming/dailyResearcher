@@ -42,12 +42,165 @@
     </main>
     <footer><p>📊 Daily Researcher | 非遗手工出海趋势洞察</p></footer>
     <script>
-    var Utils={formatDate:function(d){return new Date(d).toLocaleString('zh-CN',{year:'numeric',month:'2-digit',day:'2-digit',hour:'2-digit',minute:'2-digit'})},formatNumber:function(n){if(n>=1000000000)return(n/1000000000).toFixed(1)+'B';if(n>=1000000)return(n/1000000).toFixed(1)+'M';if(n>=1000)return(n/1000).toFixed(1)+'K';return n.toString()}};
-    var currentDate=new Date().toISOString().split('T')[0];var availableDates=[];
-    function scanDates(){fetch('data/social/').then(function(r){return r.text()}).then(function(t){var m=t.match(/2026-\d{2}-\d{2}/g);var dates=m? [...new Set(m)].sort().reverse():['2026-02-07','2026-02-06','2026-02-05','2026-02-04'];Promise.all(dates.map(function(d){return fetch('data/social/'+d+'.json').then(function(r){return r.ok?d:null})})).then(function(valid){availableDates=valid.filter(function(d){return d});if(availableDates.length===0)availableDates=['2026-02-07','2026-02-06','2026-02-05','2026-02-04'];var s=document.getElementById('date-select');s.innerHTML=availableDates.map(function(d){var cn=d.replace(/(\d{4})-(\d{2})-(\d{2})/,'$1年$2月$3日');return'<option value="'+d+'">'+cn+'</option>'}).join('');var td=new Date().toISOString().split('T')[0];currentDate=availableDates.includes(td)?td:availableDates[0];s.value=currentDate;document.getElementById('current-badge').textContent='最新数据';initPage()})})['catch'](function(){availableDates=['2026-02-07','2026-02-06','2026-02-05','2026-02-04'];var s=document.getElementById('date-select');s.innerHTML=availableDates.map(function(d){var cn=d.replace(/(\d{4})-(\d{2})-(\d{2})/,'$1年$2月$3日');return'<option value="'+d+'">'+cn+'</option>'}).join('');currentDate=availableDates[0];initPage()})}
-    function loadDataByDate(){var s=document.getElementById('date-select');currentDate=s.value;var td=new Date().toISOString().split('T')[0];var b=document.getElementById('current-badge');b.textContent=currentDate===td?'最新数据':'历史数据';b.style.background=currentDate===td?'#27ae60':'#f39c12';initPage()}
-    function initPage(){console.log('Social page init',currentDate);document.getElementById('update-time').textContent=Utils.formatDate(new Date());fetch('data/social/'+currentDate+'.json').then(function(r){if(!r.ok)throw new Error('No data');return r.json()})['catch'](function(){var nextDate=availableDates.find(function(d){return d!==currentDate});return nextDate?fetch('data/social/'+nextDate+'.json').then(function(r){if(!r.ok)throw new Error('No data');currentDate=nextDate;document.getElementById('date-select').value=nextDate;return r.json()}):Promise.reject('No valid date')}).then(function(data){console.log('Data loaded',data);var tiktok=data.platformTrends?data.platformTrends.find(function(p){return p.platform==='TikTok'}):null;if(tiktok&&tiktok.topTags){document.getElementById('tiktok-tags').innerHTML=tiktok.topTags.slice(0,10).map(function(tag){return'<div class="product-item"><span class="product-rank">#</span><div class="product-info"><div class="product-name">'+tag.name+'</div><div class="product-meta">'+Utils.formatNumber(tag.count||0)+'帖子 · '+(tag.engagement||'中')+'</div></div><span style="color:'+(tag.trend==='up'?'#27ae60':'#e74c3c')+'">'+(tag.trend==='up'?'📈':'📉')+' '+(tag.weeklyChange||'0%')+'</span></div>'}).join('')}var pinterest=data.platformTrends?data.platformTrends.find(function(p){return p.platform==='Pinterest'}):null;if(pinterest&&pinterest.trendingPins){document.getElementById('pinterest-trends').innerHTML=pinterest.trendingPins.slice(0,8).map(function(pin,i){return'<div class="product-item"><span class="product-rank">'+(i+1)+'</span><div class="product-info"><div class="product-name">'+pin.title+'</div><div class="product-meta">'+pin.category+' · '+pin.saveRate+'保存率</div></div></div>'}).join('')}var youtube=data.platformTrends?data.platformTrends.find(function(p){return p.platform==='YouTube'}):null;if(youtube&&youtube.trendingVideos){document.getElementById('youtube-trends').innerHTML=youtube.trendingVideos.slice(0,8).map(function(v,i){return'<div class="product-item"><span class="product-rank">'+(i+1)+'</span><div class="product-info"><div class="product-name">'+v.title+'</div><div class="product-meta">'+Utils.formatNumber(v.views||0)+'观看 · '+(v.duration||'')+'</div></div></div>'}).join('')}if(data.ipOpportunities&&data.ipOpportunities.length>0){var sortedIps=data.ipOpportunities.sort(function(a,b){return(a.priority||99)-(b.priority||99)});document.getElementById('ip-grid').innerHTML=sortedIps.map(function(ip){return'<div class="ip-item"><h4>'+ip.icon+' '+ip.name+'</h4><p>'+ip.category+'</p><p style="font-size:0.8rem;margin-top:0.5rem;opacity:0.9">'+(ip.suitability||'')+'</p></div>'}).join('')}if(data.craftSuggestions&&data.craftSuggestions.length>0){document.getElementById('craft-suggestions').innerHTML=data.craftSuggestions.map(function(s){return'<div class="suggestion-item"><h4>'+(s.icon||'📦')+' '+s.craft+'</h4><p><strong>方向：</strong>'+(s.direction||'')+'</p><p><strong>目标：</strong>'+(s.targetAudience||'')+'</p><p style="font-size:0.8rem;color:#27ae60;margin-top:0.5rem">优先级: '+(s.priority||'中')+'</p></div>'}).join('')}console.log('Page rendered')})['catch'](function(e){console.error('Error',e);['tiktok-tags','pinterest-trends','youtube-trends','craft-suggestions'].forEach(function(id){var el=document.getElementById(id);if(el)el.innerHTML='<div style="padding:1rem;color:#e74c3c">数据加载失败</div>'})}
-    if(document.readyState==='loading'){document.addEventListener('DOMContentLoaded',scanDates)}else{scanDates()}
+    // 工具函数
+    function formatDate(date) {
+        return new Date(date).toLocaleString('zh-CN', {year:'numeric',month:'2-digit',day:'2-digit',hour:'2-digit',minute:'2-digit'});
+    }
+    function formatNumber(num) {
+        if(num>=1000000000) return (num/1000000000).toFixed(1)+'B';
+        if(num>=1000000) return (num/1000000).toFixed(1)+'M';
+        if(num>=1000) return (num/1000).toFixed(1)+'K';
+        return num.toString();
+    }
+
+    // 全局变量
+    var currentDate = new Date().toISOString().split('T')[0];
+    var availableDates = [];
+
+    // 扫描可用日期
+    function scanDates() {
+        fetch('data/social/')
+            .then(function(r){ return r.text() })
+            .then(function(text){
+                var matches = text.match(/2026-\d{2}-\d{2}/g);
+                var dates = matches ? [...new Set(matches)].sort().reverse() : ['2026-02-07','2026-02-06','2026-02-05','2026-02-04'];
+                
+                var promises = dates.map(function(d){
+                    return fetch('data/social/'+d+'.json')
+                        .then(function(r){ return r.ok ? d : null })
+                        .catch(function(){ return null });
+                });
+                
+                Promise.all(promises).then(function(validDates){
+                    availableDates = validDates.filter(function(d){ return d !== null });
+                    if(availableDates.length === 0) {
+                        availableDates = ['2026-02-07','2026-02-06','2026-02-05','2026-02-04'];
+                    }
+                    
+                    var select = document.getElementById('date-select');
+                    select.innerHTML = '';
+                    availableDates.forEach(function(d){
+                        var opt = document.createElement('option');
+                        opt.value = d;
+                        opt.textContent = d.replace(/(\d{4})-(\d{2})-(\d{2})/, '$1年$2月$3日');
+                        select.appendChild(opt);
+                    });
+                    
+                    var today = new Date().toISOString().split('T')[0];
+                    currentDate = availableDates.includes(today) ? today : availableDates[0];
+                    select.value = currentDate;
+                    
+                    document.getElementById('current-badge').textContent = '最新数据';
+                    initPage();
+                });
+            })
+            .catch(function(){
+                availableDates = ['2026-02-07','2026-02-06','2026-02-05','2026-02-04'];
+                var select = document.getElementById('date-select');
+                availableDates.forEach(function(d){
+                    var opt = document.createElement('option');
+                    opt.value = d;
+                    opt.textContent = d.replace(/(\d{4})-(\d{2})-(\d{2})/, '$1年$2月$3日');
+                    select.appendChild(opt);
+                });
+                currentDate = availableDates[0];
+                initPage();
+            });
+    }
+
+    // 加载指定日期数据
+    function loadDataByDate() {
+        var select = document.getElementById('date-select');
+        currentDate = select.value;
+        var today = new Date().toISOString().split('T')[0];
+        var badge = document.getElementById('current-badge');
+        badge.textContent = currentDate === today ? '最新数据' : '历史数据';
+        badge.style.background = currentDate === today ? '#27ae60' : '#f39c12';
+        initPage();
+    }
+
+    // 初始化页面
+    function initPage() {
+        console.log('Social page init', currentDate);
+        document.getElementById('update-time').textContent = formatDate(new Date());
+        
+        fetch('data/social/'+currentDate+'.json')
+            .then(function(r){ 
+                if(!r.ok) throw new Error('No data');
+                return r.json();
+            })
+            .then(function(data){
+                console.log('Data loaded', data);
+                
+                // TikTok标签
+                var tiktok = data.platformTrends ? data.platformTrends.find(function(p){ return p.platform === 'TikTok' }) : null;
+                if(tiktok && tiktok.topTags) {
+                    document.getElementById('tiktok-tags').innerHTML = tiktok.topTags.slice(0,10).map(function(tag){
+                        return '<div class="product-item"><span class="product-rank">#</span>'+
+                            '<div class="product-info"><div class="product-name">'+tag.name+'</div>'+
+                            '<div class="product-meta">'+formatNumber(tag.count||0)+'帖子 · '+(tag.engagement||'中')+'</div></div>'+
+                            '<span style="color:'+(tag.trend==='up'?'#27ae60':'#e74c3c')+'">'+
+                            (tag.trend==='up'?'📈':'📉')+' '+(tag.weeklyChange||'0%')+'</span></div>';
+                    }).join('');
+                }
+                
+                // Pinterest趋势
+                var pinterest = data.platformTrends ? data.platformTrends.find(function(p){ return p.platform === 'Pinterest' }) : null;
+                if(pinterest && pinterest.trendingPins) {
+                    document.getElementById('pinterest-trends').innerHTML = pinterest.trendingPins.slice(0,8).map(function(pin, i){
+                        return '<div class="product-item"><span class="product-rank">'+(i+1)+'</span>'+
+                            '<div class="product-info"><div class="product-name">'+pin.title+'</div>'+
+                            '<div class="product-meta">'+pin.category+' · '+pin.saveRate+'保存率</div></div></div>';
+                    }).join('');
+                }
+                
+                // YouTube趋势
+                var youtube = data.platformTrends ? data.platformTrends.find(function(p){ return p.platform === 'YouTube' }) : null;
+                if(youtube && youtube.trendingVideos) {
+                    document.getElementById('youtube-trends').innerHTML = youtube.trendingVideos.slice(0,8).map(function(v, i){
+                        return '<div class="product-item"><span class="product-rank">'+(i+1)+'</span>'+
+                            '<div class="product-info"><div class="product-name">'+v.title+'</div>'+
+                            '<div class="product-meta">'+formatNumber(v.views||0)+'观看 · '+(v.duration||'')+'</div></div></div>';
+                    }).join('');
+                }
+                
+                // IP合作机会
+                if(data.ipOpportunities && data.ipOpportunities.length > 0) {
+                    var sortedIps = data.ipOpportunities.sort(function(a, b){ return (a.priority||99) - (b.priority||99) });
+                    document.getElementById('ip-grid').innerHTML = sortedIps.map(function(ip){
+                        return '<div class="ip-item"><h4>'+ip.icon+' '+ip.name+'</h4>'+
+                            '<p>'+ip.category+'</p>'+
+                            '<p style="font-size:0.8rem;margin-top:0.5rem;opacity:0.9">'+(ip.suitability||'')+'</p></div>';
+                    }).join('');
+                }
+                
+                // 工艺建议
+                if(data.craftSuggestions && data.craftSuggestions.length > 0) {
+                    document.getElementById('craft-suggestions').innerHTML = data.craftSuggestions.map(function(s){
+                        return '<div class="suggestion-item"><h4>'+(s.icon||'📦')+' '+s.craft+'</h4>'+
+                            '<p><strong>方向：</strong>'+(s.direction||'')+'</p>'+
+                            '<p><strong>目标：</strong>'+(s.targetAudience||'')+'</p>'+
+                            '<p style="font-size:0.8rem;color:#27ae60;margin-top:0.5rem">优先级: '+(s.priority||'中')+'</p></div>';
+                    }).join('');
+                }
+                
+                console.log('Page rendered');
+            })
+            .catch(function(e){
+                console.error('Error', e);
+                ['tiktok-tags','pinterest-trends','youtube-trends','craft-suggestions'].forEach(function(id){
+                    var el = document.getElementById(id);
+                    if(el) el.innerHTML = '<div style="padding:1rem;color:#e74c3c">数据加载失败</div>';
+                });
+            });
+    }
+
+    // 页面加载完成后执行
+    if(document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', scanDates);
+    } else {
+        scanDates();
+    }
     </script>
 </body>
 </html>
