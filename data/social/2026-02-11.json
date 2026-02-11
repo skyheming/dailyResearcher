@@ -1,0 +1,32 @@
+{
+  "date": "2026-02-11",
+  "platformTrends": [
+    {
+      "platform": "TikTok",
+      "topTags": [
+        {"name": "handmadetok", "count": 890000, "trend": "up", "weeklyChange": "+15%", "engagement": "高"},
+        {"name": "artisansoftiktok", "count": 560000, "trend": "up", "weeklyChange": "+22%", "engagement": "高"},
+        {"name": "crafttok", "count": 2300000, "trend": "stable", "weeklyChange": "+3%", "engagement": "中"},
+        {"name": "diyproject", "count": 1200000, "trend": "up", "weeklyChange": "+18%", "engagement": "中"}
+      ]
+    },
+    {
+      "platform": "Pinterest",
+      "trendingPins": [
+        {"title": "新中式客厅装饰", "category": "家居", "saveRate": "8.5%"},
+        {"title": "汉服配饰灵感", "category": "时尚", "saveRate": "12.3%"},
+        {"title": "传统纹样印花", "category": "艺术", "saveRate": "15.7%"}
+      ]
+    }
+  ],
+  "ipOpportunities": [
+    {"name": "敦煌壁画", "category": "文化IP", "suitability": "适合纺织品、陶瓷", "priority": 1},
+    {"name": "故宫文创", "category": "博物馆", "suitability": "适合文具、饰品", "priority": 2},
+    {"name": "十二生肖", "category": "传统文化", "suitability": "适合礼品、装饰", "priority": 3}
+  ],
+  "craftSuggestions": [
+    {"craft": "苏绣", "direction": "现代家居装饰", "targetAudience": "欧美中高端消费者", "priority": "高"},
+    {"craft": "苗族银饰", "direction": "时尚配饰", "targetAudience": "年轻女性", "priority": "中"},
+    {"craft": "景德镇陶瓷", "direction": "餐具茶具", "targetAudience": "礼品市场", "priority": "高"}
+  ]
+}
