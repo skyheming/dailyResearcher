@@ -86,57 +86,56 @@
     var currentDate = new Date().toISOString().split('T')[0];
     var availableDates = [];
 
-    // 扫描可用日期
+    // 预定义最近30天的日期列表
+    function getRecentDates() {
+        var dates = [];
+        for(var i=0; i<30; i++) {
+            var d = new Date();
+            d.setDate(d.getDate() - i);
+            dates.push(d.toISOString().split('T')[0]);
+        }
+        return dates;
+    }
+
+    // 扫描可用日期 - 尝试多个日期直到找到存在的
     function scanAvailableDates() {
-        fetch('data/competitor/')
-            .then(function(r){ return r.text() })
-            .then(function(text){
-                var matches = text.match(/2026-\d{2}-\d{2}/g);
-                var dates = matches ? [...new Set(matches)].sort().reverse() : ['2026-02-07','2026-02-06','2026-02-05','2026-02-04'];
-                
-                // 验证每个日期是否有JSON文件
-                var promises = dates.map(function(d){
-                    return fetch('data/competitor/'+d+'.json')
-                        .then(function(r){ return r.ok ? d : null })
-                        .catch(function(){ return null });
-                });
-                
-                Promise.all(promises).then(function(validDates){
-                    availableDates = validDates.filter(function(d){ return d !== null });
-                    if(availableDates.length === 0) {
-                        availableDates = ['2026-02-07','2026-02-06','2026-02-05','2026-02-04'];
-                    }
-                    
-                    var select = document.getElementById('date-select');
-                    select.innerHTML = '';
-                    availableDates.forEach(function(d){
-                        var cn = d.replace(/(\d{4})-(\d{2})-(\d{2})/, '$1年$2月$3日');
-                        var opt = document.createElement('option');
-                        opt.value = d;
-                        opt.textContent = cn;
-                        select.appendChild(opt);
-                    });
-                    
-                    var today = new Date().toISOString().split('T')[0];
-                    currentDate = availableDates.includes(today) ? today : availableDates[0];
-                    select.value = currentDate;
-                    
-                    document.getElementById('current-badge').textContent = '最新数据';
-                    initDashboard();
-                });
-            })
-            .catch(function(){
+        var recentDates = getRecentDates();
+        var promises = recentDates.map(function(d) {
+            return fetch('data/competitor/'+d+'.json')
+                .then(function(r) { return r.ok ? d : null; })
+                .catch(function() { return null; });
+        });
+
+        Promise.all(promises).then(function(results) {
+            availableDates = results.filter(function(d) { return d !== null; });
+            
+            // 如果没有找到，使用默认日期
+            if(availableDates.length === 0) {
                 availableDates = ['2026-02-07','2026-02-06','2026-02-05','2026-02-04'];
-                var select = document.getElementById('date-select');
-                availableDates.forEach(function(d){
-                    var opt = document.createElement('option');
-                    opt.value = d;
-                    opt.textContent = d.replace(/(\d{4})-(\d{2})-(\d{2})/, '$1年$2月$3日');
-                    select.appendChild(opt);
-                });
-                currentDate = availableDates[0];
-                initDashboard();
+            }
+
+            // 按日期降序排列
+            availableDates.sort().reverse();
+
+            // 更新下拉菜单
+            var select = document.getElementById('date-select');
+            select.innerHTML = '';
+            availableDates.forEach(function(d) {
+                var cn = d.replace(/(\d{4})-(\d{2})-(\d{2})/, '$1年$2月$3日');
+                var opt = document.createElement('option');
+                opt.value = d;
+                opt.textContent = cn;
+                select.appendChild(opt);
             });
+
+            // 设置当前日期
+            var today = new Date().toISOString().split('T')[0];
+            currentDate = availableDates.includes(today) ? today : availableDates[0];
+            select.value = currentDate;
+
+            document.getElementById('current-badge').textContent = '最新数据';
+            initDashboard();
+        });
     }
 
     // 加载指定日期数据
@@ -147,10 +146,10 @@
         var badge = document.getElementById('current-badge');
         badge.textContent = currentDate === today ? '最新数据' : '历史数据';
         badge.style.background = currentDate === today ? '#27ae60' : '#f39c12';
-        
+
         document.getElementById('hot-topics').innerHTML = '<li style="padding:1rem;text-align:center"><span class="loading-spinner"></span>加载中...</li>';
         document.getElementById('tag-cloud').innerHTML = '<span style="color:#7f8c8d"><span class="loading-spinner"></span>加载中...</span>';
-        
+
         initDashboard();
     }
 
@@ -158,19 +157,19 @@
     function initDashboard() {
         console.log('Dashboard init', currentDate);
         document.getElementById('update-time').textContent = formatDate(new Date());
-        
+
         fetch('data/competitor/'+currentDate+'.json')
-            .then(function(r){ 
+            .then(function(r) {
                 if(!r.ok) throw new Error('No data');
                 return r.json();
             })
-            .then(function(data){
+            .then(function(data) {
                 console.log('Data loaded', data);
-                
+
                 // 渲染热点产品
                 var hotContainer = document.getElementById('hot-topics');
                 if(data.hotProducts && data.hotProducts.length > 0) {
-                    hotContainer.innerHTML = data.hotProducts.slice(0,5).map(function(p, i){
+                    hotContainer.innerHTML = data.hotProducts.slice(0,5).map(function(p, i) {
                         return '<li class="product-item"><span class="product-rank">'+(i+1)+'</span>'+
                             '<div class="product-info"><div class="product-name">'+p.name+'</div>'+
                             '<div class="product-meta">'+p.platform+' · '+p.price+'</div></div>'+
@@ -179,18 +178,18 @@
                 } else {
                     hotContainer.innerHTML = '<li style="padding:1rem;color:#7f8c8d">暂无数据</li>';
                 }
-                
+
                 // 渲染标签云
                 var tagContainer = document.getElementById('tag-cloud');
                 if(data.trendingTags && data.trendingTags.length > 0) {
-                    var maxCount = Math.max.apply(Math, data.trendingTags.slice(0,15).map(function(t){ return t.count || 1 }));
-                    tagContainer.innerHTML = data.trendingTags.slice(0,15).map(function(t){
+                    var maxCount = Math.max.apply(Math, data.trendingTags.slice(0,15).map(function(t) { return t.count || 1; }));
+                    tagContainer.innerHTML = data.trendingTags.slice(0,15).map(function(t) {
                         return '<span class="tag '+getTagSize(t.count||1, maxCount)+'">'+t.name+'</span>';
                     }).join('');
                 } else {
                     tagContainer.innerHTML = '<span style="color:#7f8c8d">暂无标签数据</span>';
                 }
-                
+
                 // 渲染图表
                 if(data.trendData && document.getElementById('trendChart')) {
                     var ctx1 = document.getElementById('trendChart').getContext('2d');
@@ -198,7 +197,7 @@
                         type: 'line',
                         data: {
                             labels: data.trendData.labels,
-                            datasets: data.trendData.datasets.map(function(d, i){
+                            datasets: data.trendData.datasets.map(function(d, i) {
                                 return {
                                     label: d.label,
                                     data: d.data,
@@ -217,7 +216,7 @@
                         }
                     });
                 }
-                
+
                 if(data.categoryDistribution && document.getElementById('categoryChart')) {
                     var ctx2 = document.getElementById('categoryChart').getContext('2d');
                     new Chart(ctx2, {
@@ -238,10 +237,10 @@
                         }
                     });
                 }
-                
+
                 console.log('Dashboard rendered');
             })
-            .catch(function(e){
+            .catch(function(e) {
                 console.error('Error', e);
                 document.getElementById('hot-topics').innerHTML = '<li style="padding:1rem;color:#e74c3c">数据加载失败</li>';
                 document.getElementById('tag-cloud').innerHTML = '<span style="color:#e74c3c">数据加载失败</span>';
