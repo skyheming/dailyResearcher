@@ -1,10 +1,25 @@
 {
   "date": "2026-02-06",
-  "amazonTop": [],
-  "etsyTop": [],
-  "tiktokShop": [],
-  "hotProducts": [],
-  "trendingTags": [],
-  "priceDistribution": {},
-  "categoryRankings": []
+  "hotProducts": [
+    {"name": "手工刺绣抱枕", "platform": "Etsy", "price": "$45.99", "sales": "+120%"},
+    {"name": "非遗手作发簪", "platform": "Amazon", "price": "$29.99", "sales": "+85%"},
+    {"name": "国风手机壳", "platform": "TikTok Shop", "price": "$18.99", "sales": "+200%"},
+    {"name": "陶瓷茶杯套装", "platform": "Etsy", "price": "$89.00", "sales": "+65%"},
+    {"name": "丝绸刺绣围巾", "platform": "Amazon", "price": "$59.99", "sales": "+95%"}
+  ],
+  "trendingTags": [
+    {"name": "handmade", "count": 1250000, "trend": "up"},
+    {"name": "traditionalcraft", "count": 89000, "trend": "up"},
+    {"name": "chineseculture", "count": 45000, "trend": "up"},
+    {"name": "artisan", "count": 780000, "trend": "stable"},
+    {"name": "giftideas", "count": 2300000, "trend": "up"}
+  ],
+  "trendData": {
+    "labels": ["周一", "周二", "周三", "周四", "周五", "周六", "周日"],
+    "datasets": [{"label": "搜索热度", "data": [65, 72, 68, 75, 82, 78, 80]}]
+  },
+  "categoryDistribution": {
+    "labels": ["家居装饰", "服饰配件", "艺术品", "礼品", "其他"],
+    "data": [35, 28, 18, 12, 7]
+  }
 }
