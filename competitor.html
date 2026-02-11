@@ -29,7 +29,7 @@
     <main>
         <div class="date-selector">
             <label>📅 选择日期：</label>
-            <select id="date-select" onchange="loadDataByDate()"><option value="">加载中...</option></select>
+            <select id="date-select" onchange="loadDataByDate()"></select>
             <span class="current-badge" id="current-badge">加载中...</span>
         </div>
         <section class="platforms">
@@ -45,66 +45,47 @@
     </main>
     <footer><p>📊 Daily Researcher | 非遗手工出海趋势洞察</p></footer>
     <script>
-    // 工具函数
-    function formatDate(date) {
-        return new Date(date).toLocaleString('zh-CN', {year:'numeric',month:'2-digit',day:'2-digit',hour:'2-digit',minute:'2-digit'});
-    }
-    function formatNumber(num) {
-        if(num>=1000000000) return (num/1000000000).toFixed(1)+'B';
-        if(num>=1000000) return (num/1000000).toFixed(1)+'M';
-        if(num>=1000) return (num/1000).toFixed(1)+'K';
-        return num.toString();
-    }
-
-    // 全局变量
+    var Utils = {formatDate: function(d){return new Date(d).toLocaleString('zh-CN',{year:'numeric',month:'2-digit',day:'2-digit',hour:'2-digit',minute:'2-digit'})}, formatNumber: function(n){if(n>=1000000000)return(n/1000000000).toFixed(1)+'B';if(n>=1000000)return(n/1000000).toFixed(1)+'M';if(n>=1000)return(n/1000).toFixed(1)+'K';return n.toString()}};
     var currentDate = new Date().toISOString().split('T')[0];
     var availableDates = [];
-
-    // 预定义最近30天的日期列表
-    function getRecentDates() {
+    
+    function scanDates() {
         var dates = [];
         for(var i=0; i<30; i++) {
             var d = new Date();
             d.setDate(d.getDate() - i);
             dates.push(d.toISOString().split('T')[0]);
         }
-        return dates;
-    }
-
-    // 扫描可用日期
-    function scanDates() {
-        var recentDates = getRecentDates();
-        var promises = recentDates.map(function(d) {
-            return fetch('data/competitor/'+d+'.json')
-                .then(function(r) { return r.ok ? d : null; })
-                .catch(function() { return null; });
-        });
-
-        Promise.all(promises).then(function(results) {
-            availableDates = results.filter(function(d) { return d !== null; });
-            if(availableDates.length === 0) {
-                availableDates = ['2026-02-07','2026-02-06','2026-02-05','2026-02-04'];
+        var index = 0;
+        function checkNext() {
+            if(index >= dates.length) {
+                if(availableDates.length === 0) availableDates = ['2026-02-07','2026-02-06','2026-02-05','2026-02-04'];
+                showDates();
+                return;
             }
-            availableDates.sort().reverse();
-
-            var select = document.getElementById('date-select');
-            select.innerHTML = '';
-            availableDates.forEach(function(d) {
-                var opt = document.createElement('option');
-                opt.value = d;
-                opt.textContent = d.replace(/(\d{4})-(\d{2})-(\d{2})/, '$1年$2月$3日');
-                select.appendChild(opt);
-            });
-
-            var today = new Date().toISOString().split('T')[0];
-            currentDate = availableDates.includes(today) ? today : availableDates[0];
-            select.value = currentDate;
-
-            document.getElementById('current-badge').textContent = '最新数据';
-            initPage();
-        });
+            var date = dates[index];
+            fetch('data/competitor/'+date+'.json').then(function(r){ if(r.ok) availableDates.push(date); }).finally(function(){ index++; checkNext(); });
+        }
+        checkNext();
     }
-
+    
+    function showDates() {
+        availableDates.sort().reverse();
+        var select = document.getElementById('date-select');
+        select.innerHTML = '';
+        availableDates.forEach(function(d){
+            var opt = document.createElement('option');
+            opt.value = d;
+            opt.textContent = d.replace(/(\d{4})-(\d{2})-(\d{2})/, '$1年$2月$3日');
+            select.appendChild(opt);
+        });
+        var today = new Date().toISOString().split('T')[0];
+        currentDate = availableDates.includes(today) ? today : availableDates[0];
+        select.value = currentDate;
+        document.getElementById('current-badge').textContent = '最新数据';
+        initPage();
+    }
+    
     function loadDataByDate() {
         var select = document.getElementById('date-select');
         currentDate = select.value;
@@ -114,99 +95,39 @@
         badge.style.background = currentDate === today ? '#27ae60' : '#f39c12';
         initPage();
     }
-
+    
     function initPage() {
         console.log('Competitor page init', currentDate);
-        document.getElementById('update-time').textContent = formatDate(new Date());
-
-        fetch('data/competitor/'+currentDate+'.json')
-            .then(function(r) {
-                if(!r.ok) throw new Error('No data');
-                return r.json();
-            })
-            .then(function(data) {
-                console.log('Data loaded', data);
-
-                if(data.amazonTop && data.amazonTop.length > 0) {
-                    document.getElementById('amazon-list').innerHTML = data.amazonTop.slice(0,10).map(function(p, i) {
-                        return '<div class="product-item"><span class="product-rank">'+(i+1)+'</span>'+
-                            '<div class="product-info"><div class="product-name">'+p.name+'</div>'+
-                            '<div class="product-meta">'+p.category+' · '+(p.source||'Amazon')+'</div></div>'+
-                            '<span class="product-price">'+p.price+'</span></div>';
-                    }).join('');
-                }
-
-                if(data.etsyTop && data.etsyTop.length > 0) {
-                    document.getElementById('etsy-list').innerHTML = data.etsyTop.slice(0,10).map(function(p, i) {
-                        return '<div class="product-item"><span class="product-rank">'+(i+1)+'</span>'+
-                            '<div class="product-info"><div class="product-name">'+p.name+'</div>'+
-                            '<div class="product-meta">'+p.category+' · '+(p.note||'')+'</div></div>'+
-                            '<span class="product-price">'+p.price+'</span></div>';
-                    }).join('');
-                }
-
-                if(data.tiktokShop && data.tiktokShop.length > 0) {
-                    document.getElementById('tiktok-list').innerHTML = data.tiktokShop.slice(0,10).map(function(p, i) {
-                        return '<div class="product-item"><span class="product-rank">'+(i+1)+'</span>'+
-                            '<div class="product-info"><div class="product-name">'+p.name+'</div>'+
-                            '<div class="product-meta">#'+p.hashtag+' · '+formatNumber(p.views)+'播放</div></div>'+
-                            '<span class="product-price">'+p.price+'</span></div>';
-                    }).join('');
-                }
-
-                if(data.priceDistribution) {
-                    var ctx = document.getElementById('price-distribution');
-                    ctx.innerHTML = '<canvas id="priceChart"></canvas>';
-                    new Chart(ctx.querySelector('#priceChart'), {
-                        type: 'doughnut',
-                        data: {
-                            labels: data.priceDistribution.labels,
-                            datasets: [{
-                                data: data.priceDistribution.data,
-                                backgroundColor: ['#3498db','#e74c3c','#27ae60','#f39c12','#9b59b6'],
-                                borderWidth: 2,
-                                borderColor: '#fff'
-                            }]
-                        },
-                        options: {
-                            responsive: true,
-                            maintainAspectRatio: false,
-                            plugins: { legend: { position: 'right' } }
-                        }
-                    });
-                }
-
-                if(data.categoryRankings && data.categoryRankings.length > 0) {
-                    document.getElementById('category-rankings').innerHTML =
-                        '<table style="width:100%;border-collapse:collapse"><thead><tr style="background:#f8f9fa">'+
-                        '<th style="padding:8px;text-align:left">排名</th>'+
-                        '<th style="padding:8px;text-align:left">品类</th>'+
-                        '<th style="padding:8px;text-align:right">增长率</th>'+
-                        '<th style="padding:8px;text-align:right">毛利率</th></tr></thead><tbody>'+
-                        data.categoryRankings.map(function(item, i) {
-                            return '<tr style="border-bottom:1px solid #eee"><td style="padding:8px;width:40px">'+(i+1)+'</td>'+
-                                '<td style="padding:8px">'+item.name+'</td>'+
-                                '<td style="padding:8px;text-align:right;color:#27ae60">+'+item.growth+'%</td>'+
-                                '<td style="padding:8px;text-align:right;color:#3498db">'+item.margin+'</td></tr>';
-                        }).join('')+'</tbody></table>';
-                }
-
-                console.log('Page rendered');
-            })
-            .catch(function(e) {
-                console.error('Error', e);
-                ['amazon-list','etsy-list','tiktok-list','china-opportunities'].forEach(function(id) {
-                    var el = document.getElementById(id);
-                    if(el) el.innerHTML = '<div style="padding:1rem;color:#e74c3c">数据加载失败</div>';
-                });
-            });
+        document.getElementById('update-time').textContent = Utils.formatDate(new Date());
+        fetch('data/competitor/'+currentDate+'.json').then(function(r){ if(!r.ok) throw new Error('No data'); return r.json(); }).then(function(data){
+            console.log('Data loaded', data);
+            if(data.amazonTop && data.amazonTop.length > 0) {
+                document.getElementById('amazon-list').innerHTML = data.amazonTop.slice(0,10).map(function(p, i){
+                    return '<div class="product-item"><span class="product-rank">'+(i+1)+'</span><div class="product-info"><div class="product-name">'+p.name+'</div><div class="product-meta">'+p.category+' · '+(p.source||'Amazon')+'</div></div><span class="product-price">'+p.price+'</span></div>';
+                }).join('');
+            }
+            if(data.etsyTop && data.etsyTop.length > 0) {
+                document.getElementById('etsy-list').innerHTML = data.etsyTop.slice(0,10).map(function(p, i){
+                    return '<div class="product-item"><span class="product-rank">'+(i+1)+'</span><div class="product-info"><div class="product-name">'+p.name+'</div><div class="product-meta">'+p.category+' · '+(p.note||'')+'</div></div><span class="product-price">'+p.price+'</span></div>';
+                }).join('');
+            }
+            if(data.tiktokShop && data.tiktokShop.length > 0) {
+                document.getElementById('tiktok-list').innerHTML = data.tiktokShop.slice(0,10).map(function(p, i){
+                    return '<div class="product-item"><span class="product-rank">'+(i+1)+'</span><div class="product-info"><div class="product-name">'+p.name+'</div><div class="product-meta">#'+p.hashtag+' · '+Utils.formatNumber(p.views)+'播放</div></div><span class="product-price">'+p.price+'</span></div>';
+                }).join('');
+            }
+            if(data.priceDistribution) {
+                var ctx = document.getElementById('price-distribution');
+                ctx.innerHTML = '<canvas id="priceChart"></canvas>';
+                new Chart(ctx.querySelector('#priceChart'), {type:'doughnut', data:{labels:data.priceDistribution.labels, datasets:[{data:data.priceDistribution.data, backgroundColor:['#3498db','#e74c3c','#27ae60','#f39c12','#9b59b6'], borderWidth:2, borderColor:'#fff'}]}, options:{responsive:true, maintainAspectRatio:false, plugins:{legend:{position:'right'}}}});
+            }
+            if(data.categoryRankings && data.categoryRankings.length > 0) {
+                document.getElementById('category-rankings').innerHTML = '<table style="width:100%;border-collapse:collapse"><thead><tr style="background:#f8f9fa"><th style="padding:8px;text-align:left">排名</th><th style="padding:8px;text-align:left">品类</th><th style="padding:8px;text-align:right">增长率</th><th style="padding:8px;text-align:right">毛利率</th></tr></thead><tbody>'+data.categoryRankings.map(function(item, i){return'<tr style="border-bottom:1px solid #eee"><td style="padding:8px;width:40px">'+(i+1)+'</td><td style="padding:8px">'+item.name+'</td><td style="padding:8px;text-align:right;color:#27ae60">+'+item.growth+'%</td><td style="padding:8px;text-align:right;color:#3498db">'+item.margin+'</td></tr>'}).join('')+'</tbody></table>';
+            }
+        }).catch(function(e){ console.error('Error', e); ['amazon-list','etsy-list','tiktok-list','china-opportunities'].forEach(function(id){ var el=document.getElementById(id); if(el) el.innerHTML='<div style="padding:1rem;color:#e74c3c">数据加载失败</div>'; }); });
     }
-
-    if(document.readyState === 'loading') {
-        document.addEventListener('DOMContentLoaded', scanDates);
-    } else {
-        scanDates();
-    }
+    
+    if(document.readyState === 'loading') { document.addEventListener('DOMContentLoaded', scanDates); } else { scanDates(); }
     </script>
 </body>
 </html>
