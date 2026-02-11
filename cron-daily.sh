@@ -5,12 +5,6 @@
 DATE=$(date +%Y-%m-%d)
 TODAY_CN=$(date +%Y年%m月%d日)
 LOG_FILE="/root/.openclaw/workspace/cron.log"
-TELEGRAM_BOT_TOKEN="${TELEGRAM_BOT_TOKEN:-}"
-TELEGRAM_CHAT_ID="${TELEGRAM_CHAT_ID:-859301840}"
-
-# GitHub配置
-GH_TOKEN="${GH_TOKEN:-$(cat ~/.config/github_token 2>/dev/null || echo '')}"
-GIT_REPO="/root/.openclaw/workspace"
 
 log() {
     echo "[$(date '+%Y-%m-%d %H:%M:%S')] $1" | tee -a "$LOG_FILE"
@@ -34,15 +28,15 @@ mkdir -p /root/.openclaw/workspace/data/social/$DATE
 # ========== 收集竞品动态数据 ==========
 log "📊 收集竞品动态数据..."
 
-cat > /root/.openclaw/workspace/data/competitor/$DATE.json << DATAEOF
+cat > /root/.openclaw/workspace/data/competitor/$DATE.json << 'DATAEOF'
 {
-  "date": "$DATE",
+  "date": "DATE_PLACEHOLDER",
   "hotProducts": [
-    {"name": "手工刺绣抱枕", "platform": "Etsy", "price": "\$45.99", "sales": "+120%"},
-    {"name": "非遗手作发簪", "platform": "Amazon", "price": "\$29.99", "sales": "+85%"},
-    {"name": "国风手机壳", "platform": "TikTok Shop", "price": "\$18.99", "sales": "+200%"},
-    {"name": "陶瓷茶杯套装", "platform": "Etsy", "price": "\$89.00", "sales": "+65%"},
-    {"name": "丝绸刺绣围巾", "platform": "Amazon", "price": "\$59.99", "sales": "+95%"}
+    {"name": "手工刺绣抱枕", "platform": "Etsy", "price": "$45.99", "sales": "+120%"},
+    {"name": "非遗手作发簪", "platform": "Amazon", "price": "$29.99", "sales": "+85%"},
+    {"name": "国风手机壳", "platform": "TikTok Shop", "price": "$18.99", "sales": "+200%"},
+    {"name": "陶瓷茶杯套装", "platform": "Etsy", "price": "$89.00", "sales": "+65%"},
+    {"name": "丝绸刺绣围巾", "platform": "Amazon", "price": "$59.99", "sales": "+95%"}
   ],
   "trendingTags": [
     {"name": "handmade", "count": 1250000, "trend": "up"},
@@ -62,14 +56,15 @@ cat > /root/.openclaw/workspace/data/competitor/$DATE.json << DATAEOF
 }
 DATAEOF
 
+sed -i "s/DATE_PLACEHOLDER/$DATE/g" /root/.openclaw/workspace/data/competitor/$DATE.json
 log "✅ 竞品数据已保存"
 
 # ========== 收集社交趋势数据 ==========
 log "🎨 收集社交趋势数据..."
 
-cat > /root/.openclaw/workspace/data/social/$DATE.json << DATAEOF
+cat > /root/.openclaw/workspace/data/social/$DATE.json << 'DATAEOF'
 {
-  "date": "$DATE",
+  "date": "DATE_PLACEHOLDER",
   "platformTrends": [
     {
       "platform": "TikTok",
@@ -102,11 +97,13 @@ cat > /root/.openclaw/workspace/data/social/$DATE.json << DATAEOF
 }
 DATAEOF
 
+sed -i "s/DATE_PLACEHOLDER/$DATE/g" /root/.openclaw/workspace/data/social/$DATE.json
 log "✅ 社交趋势数据已保存"
 
-# ========== 生成Telegram新闻摘要 ==========
-log "📱 生成每日新闻摘要..."
+# ========== 发送Telegram每日新闻 (使用OpenClaw) ==========
+log "📱 生成并发送每日新闻摘要..."
 
+# 构建消息
 MESSAGE="📊 *每日非遗手工出海趋势*
 ━━━━━━━━━━━━━━━━
 📅 $TODAY_CN
@@ -122,7 +119,6 @@ MESSAGE="📊 *每日非遗手工出海趋势*
 💡 *趋势洞察*
 • 手工艺品搜索热度持续上升 (+15%)
 • TikTok手工内容 engagement 创新高
-• 新中式风格在欧美市场走俏
 
 🎭 *IP合作推荐*
 • 敦煌壁画 - 适合纺织品、陶瓷
@@ -131,49 +127,57 @@ MESSAGE="📊 *每日非遗手工出海趋势*
 ━━━━━━━━━━━━━━━━
 📈 详情: https://skyheming.github.io/dailyResearcher/"
 
-# 发送Telegram消息
-if [ -n "$TELEGRAM_BOT_TOKEN" ]; then
-    log "📨 发送Telegram消息..."
-    curl -s -X POST "https://api.telegram.org/bot$TELEGRAM_BOT_TOKEN/sendMessage" \
-        -d "chat_id=$TELEGRAM_CHAT_ID" \
-        -d "text=$MESSAGE" \
-        -d "parse_mode=Markdown" \
-        -d "disable_web_page_preview=true" > /dev/null
-    
+# 使用OpenClaw发送消息
+cd /root/.nvm/versions/node/v22.22.0/lib/node_modules/openclaw
+
+# 尝试使用OpenClaw CLI发送
+if [ -f "./openclaw" ]; then
+    # 方法1: 通过OpenClaw CLI
+    ./openclaw message send --to 859301840 --message "$MESSAGE" 2>/dev/null
     if [ $? -eq 0 ]; then
-        log "✅ Telegram消息发送成功"
+        log "✅ OpenClaw消息发送成功"
     else
-        log "❌ Telegram消息发送失败"
+        log "⚠️ OpenClaw发送失败，尝试备用方法"
+        
+        # 备用方法: 直接发送curl请求到OpenClaw gateway
+        curl -s -X POST "http://localhost:2145/message/send" \
+            -H "Content-Type: application/json" \
+            -d "{\"action\":\"send\",\"target\":\"859301840\",\"message\":\"$MESSAGE\",\"channel\":\"telegram\"}" 2>/dev/null
+        
+        if [ $? -eq 0 ]; then
+            log "✅ Gateway消息发送成功"
+        else
+            log "⚠️ 消息发送失败（可能是Gateway未运行）"
+        fi
     fi
 else
-    log "⚠️ 未配置Telegram Bot Token，跳过发送"
+    # 直接通过Gateway发送
+    curl -s -X POST "http://localhost:2145/message/send" \
+        -H "Content-Type: application/json" \
+        -d "{\"action\":\"send\",\"target\":\"859301840\",\"message\":\"$MESSAGE\",\"channel\":\"telegram\"}" 2>/dev/null
+    
+    if [ $? -eq 0 ]; then
+        log "✅ Gateway消息发送成功"
+    else
+        log "⚠️ Gateway未运行，消息未发送"
+        # 保存消息到文件供手动发送
+        echo "$MESSAGE" > /root/.openclaw/workspace/pending-message.txt
+        log "📝 消息已保存到pending-message.txt"
+    fi
 fi
 
 # ========== 同步到GitHub ==========
-log "🔄 检查是否需要同步到GitHub..."
+log "🔄 同步到GitHub..."
 
-if [ -n "$GH_TOKEN" ] && [ -d "$GIT_REPO/.git" ]; then
-    cd "$GIT_REPO"
-    git add -A 2>/dev/null
-    CHANGES=$(git status -s 2>/dev/null | wc -l)
-    
-    if [ "$CHANGES" -gt 0 ]; then
-        log "📦 检测到 $CHANGES 个变更，推送到GitHub..."
-        git config user.email "bot@dailyresearcher.com" 2>/dev/null
-        git config user.name "Daily Researcher Bot" 2>/dev/null
-        git commit -m "Auto-update: $TODAY_CN 数据更新" 2>/dev/null
-        git push "https://x-access-token:$GH_TOKEN@github.com/skyheming/dailyResearcher.git" main 2>/dev/null
-        
-        if [ $? -eq 0 ]; then
-            log "✅ GitHub同步成功"
-        else
-            log "❌ GitHub同步失败"
-        fi
-    else
-        log "ℹ️ 没有新数据变更，跳过推送"
-    fi
+cd /root/.openclaw/workspace
+git add -A
+git commit -m "Auto-update: $TODAY_CN 数据更新" 2>/dev/null
+git push origin main 2>/dev/null
+
+if [ $? -eq 0 ]; then
+    log "✅ GitHub同步成功"
 else
-    log "⚠️ GitHub token未配置，跳过同步"
+    log "⚠️ GitHub同步失败或无变更"
 fi
 
 log "✅ ========== 每日任务执行完成 =========="
