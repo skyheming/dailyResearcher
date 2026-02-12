@@ -4,13 +4,44 @@
     {
       "platform": "TikTok",
       "topTags": [
-        {"name": "handmadetok", "count": 890000, "trend": "up", "weeklyChange": "+15%"},
-        {"name": "crafttok", "count": 2300000, "trend": "stable", "weeklyChange": "+3%"}
+        {"name": "CraftTok", "count": 4500000, "trend": "up", "weeklyChange": "+25%", "engagement": "高"},
+        {"name": "handmadetok", "count": 2300000, "trend": "up", "weeklyChange": "+18%", "engagement": "高"},
+        {"name": "sustainableliving", "count": 1200000, "trend": "up", "weeklyChange": "+30%", "engagement": "高"},
+        {"name": "asmrcrafts", "count": 890000, "trend": "up", "weeklyChange": "+45%", "engagement": "高"},
+        {"name": "diyproject", "count": 670000, "trend": "stable", "weeklyChange": "+5%", "engagement": "中"}
+      ]
+    },
+    {
+      "platform": "Pinterest",
+      "trendingPins": [
+        {"title": "Castlecore极简奢华风", "category": "家居", "saveRate": "12.5%"},
+        {"title": "Cherry Red樱桃红配色", "category": "色彩", "saveRate": "15.8%"},
+        {"title": "Japandi日式北欧融合", "category": "室内", "saveRate": "9.2%"},
+        {"title": "Terra Futura可持续未来", "category": "环保", "saveRate": "8.5%"}
       ]
     }
   ],
+  "designTrends": {
+    "colors": [
+      {"name": "Mocha Mousse", "hex": "#A47056", "trend": "hot", "category": "Pantone年度色"},
+      {"name": "Cherry Red", "hex": "#D2122E", "trend": "+100%", "category": "色彩趋势"},
+      {"name": "Terra Cotta", "hex": "#E2725B", "trend": "up", "category": "大地色系"}
+    ],
+    "styles": [
+      {"name": "Castlecore", "popularity": "hot", "desc": "城堡极简奢华风"},
+      {"name": "Japandi", "popularity": "mainstream", "desc": "日式北欧融合"},
+      {"name": "Sustainable", "popularity": "rising", "desc": "可持续设计"}
+    ]
+  },
   "ipOpportunities": [
-    {"name": "敦煌壁画", "category": "文化IP", "suitability": "适合纺织品、陶瓷"},
-    {"name": "故宫文创", "category": "博物馆", "suitability": "适合文具、饰品"}
+    {"name": "龙珠超", "category": "动漫IP", "suitability": "刺绣徽章、陶瓷摆件、手办", "priority": 1},
+    {"name": "原神", "category": "游戏IP", "suitability": "角色周边、刺绣挂件", "priority": 1},
+    {"name": "UFC", "category": "体育IP", "suitability": "定制奖杯、纪念品", "priority": 2},
+    {"name": "星穹铁道", "category": "游戏IP", "suitability": "限量周边、收藏品", "priority": 2}
+  ],
+  "craftSuggestions": [
+    {"craft": "柳编/藤编", "direction": "可持续家居装饰", "targetAudience": "欧美中高端环保消费者", "priority": "高"},
+    {"craft": "刺绣", "direction": "动漫IP联名周边", "targetAudience": "年轻二次元群体", "priority": "高"},
+    {"craft": "陶瓷", "direction": "Mocha Mousse配色餐具", "targetAudience": "中高端礼品市场", "priority": "高"}
   ]
 }

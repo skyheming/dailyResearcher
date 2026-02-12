@@ -1,15 +1,28 @@
 {
   "date": "2026-02-12",
   "hotProducts": [
-    {"name": "手工刺绣抱枕", "platform": "Etsy", "price": "$45.99", "sales": "+120%"},
-    {"name": "非遗手作发簪", "platform": "Amazon", "price": "$29.99", "sales": "+85%"},
-    {"name": "国风手机壳", "platform": "TikTok Shop", "price": "$18.99", "sales": "+200%"},
-    {"name": "陶瓷茶杯套装", "platform": "Etsy", "price": "$89.00", "sales": "+65%"},
-    {"name": "丝绸刺绣围巾", "platform": "Amazon", "price": "$59.99", "sales": "+95%"}
+    {"name": "个性化珠宝首饰", "platform": "Etsy", "price": "$15-200", "sales": "+85%", "source": "Etsy"},
+    {"name": "Fire TV Stick 4K Max", "platform": "Amazon", "price": "$54.99", "sales": "+120%", "source": "Amazon"},
+    {"name": "家居舒适风装饰", "platform": "Etsy", "price": "$20-150", "sales": "+95%", "source": "Etsy"},
+    {"name": "休闲连衣裙", "platform": "TikTok Shop", "price": "$15-80", "sales": "+200%", "source": "TikTok"},
+    {"name": "苹果AirPods 4", "platform": "Amazon", "price": "$179", "sales": "+150%", "source": "Amazon"}
   ],
   "trendingTags": [
     {"name": "handmade", "count": 1250000, "trend": "up"},
-    {"name": "traditionalcraft", "count": 89000, "trend": "up"},
-    {"name": "chineseculture", "count": 45000, "trend": "up"}
-  ]
+    {"name": "crafts", "count": 890000, "trend": "up"},
+    {"name": "jewelry", "count": 650000, "trend": "stable"},
+    {"name": "homedecor", "count": 520000, "trend": "up"},
+    {"name": "fashion", "count": 980000, "trend": "up"}
+  ],
+  "trendData": {
+    "labels": ["周一", "周二", "周三", "周四", "周五", "周六", "周日"],
+    "datasets": [
+      {"label": "Etsy搜索热度", "data": [72, 75, 78, 80, 82, 88, 90]},
+      {"label": "Amazon热度", "data": [85, 82, 88, 90, 92, 95, 98]}
+    ]
+  },
+  "categoryDistribution": {
+    "labels": ["珠宝首饰", "家居装饰", "服装配饰", "3C电子", "其他"],
+    "data": [28, 25, 22, 15, 10]
+  }
 }
