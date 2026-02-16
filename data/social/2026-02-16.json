@@ -1,0 +1,16 @@
+{
+  "date": "2026-02-16",
+  "platformTrends": [
+    {
+      "platform": "TikTok",
+      "topTags": [
+        {"name": "handmadetok", "count": 890000, "trend": "up", "weeklyChange": "+15%"},
+        {"name": "crafttok", "count": 2300000, "trend": "stable", "weeklyChange": "+3%"}
+      ]
+    }
+  ],
+  "ipOpportunities": [
+    {"name": "敦煌壁画", "category": "文化IP", "suitability": "适合纺织品、陶瓷"},
+    {"name": "故宫文创", "category": "博物馆", "suitability": "适合文具、饰品"}
+  ]
+}
