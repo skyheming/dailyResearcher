@@ -97,3 +97,29 @@ To https://github.com/skyheming/dailyResearcher.git
 [2026-02-16 09:00:01] ⚠️ Telegram发送可能失败，检查日志
 [2026-02-16 09:00:01] 🔄 推送到GitHub...
 [2026-02-16 09:00:01] 🔄 推送到GitHub...
+[main 6f55477] Auto-update: 2026年02月16日
+ 9 files changed, 1160 insertions(+), 518 deletions(-)
+ create mode 100644 data/competitor/2026-02-16.json
+ create mode 100644 data/social/2026-02-16.json
+ create mode 100644 memory/2026-02-13.md
+ create mode 100644 memory/social-trends-report-2026-02-13.md
+ create mode 100644 memory/social-trends-table-2026-02-13.csv
+To https://github.com/skyheming/dailyResearcher.git
+   72bfe40..6f55477  main -> main
+[2026-02-16 09:00:02] ✅ GitHub推送成功
+[2026-02-16 09:00:02] ✅ GitHub推送成功
+[2026-02-16 09:00:02] ✅ ========== 每日任务完成 ==========
+[2026-02-16 09:00:02] ✅ ========== 每日任务完成 ==========
+[2026-02-17 09:00:02] 🚀 ========== 开始每日任务: 2026-02-17 ==========
+[2026-02-17 09:00:02] 🚀 ========== 开始每日任务: 2026-02-17 ==========
+[2026-02-17 09:00:02] 📊 生成数据...
+[2026-02-17 09:00:02] 📊 生成数据...
+[2026-02-17 09:00:02] ✅ 数据已生成
+[2026-02-17 09:00:02] ✅ 数据已生成
+[2026-02-17 09:00:02] 📱 发送Telegram消息...
+[2026-02-17 09:00:02] 📱 发送Telegram消息...
+/usr/bin/env: ‘node’: No such file or directory
+[2026-02-17 09:00:02] ⚠️ Telegram发送可能失败，检查日志
+[2026-02-17 09:00:02] ⚠️ Telegram发送可能失败，检查日志
+[2026-02-17 09:00:02] 🔄 推送到GitHub...
+[2026-02-17 09:00:02] 🔄 推送到GitHub...
