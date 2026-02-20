@@ -1,0 +1,15 @@
+{
+  "date": "2026-02-20",
+  "hotProducts": [
+    {"name": "手工刺绣抱枕", "platform": "Etsy", "price": "$45.99", "sales": "+120%"},
+    {"name": "非遗手作发簪", "platform": "Amazon", "price": "$29.99", "sales": "+85%"},
+    {"name": "国风手机壳", "platform": "TikTok Shop", "price": "$18.99", "sales": "+200%"},
+    {"name": "陶瓷茶杯套装", "platform": "Etsy", "price": "$89.00", "sales": "+65%"},
+    {"name": "丝绸刺绣围巾", "platform": "Amazon", "price": "$59.99", "sales": "+95%"}
+  ],
+  "trendingTags": [
+    {"name": "handmade", "count": 1250000, "trend": "up"},
+    {"name": "traditionalcraft", "count": 89000, "trend": "up"},
+    {"name": "chineseculture", "count": 45000, "trend": "up"}
+  ]
+}
