@@ -1,0 +1,23 @@
+{
+  "date": "2026-02-22",
+  "platformTrends": [
+    {
+      "platform": "TikTok",
+      "topTags": [
+        {"name": "handmadetok", "count": 4500000, "trend": "up", "weeklyChange": "+25%", "engagement": "高"},
+        {"name": "crafttok", "count": 2300000, "trend": "up", "weeklyChange": "+18%", "engagement": "高"},
+        {"name": "sustainableliving", "count": 1200000, "trend": "up", "weeklyChange": "+30%", "engagement": "高"}
+      ]
+    }
+  ],
+  "ipOpportunities": [
+    {"name": "宝可梦", "category": "游戏IP", "suitability": "刺绣周边、玩具", "priority": 1},
+    {"name": "原神", "category": "游戏IP", "suitability": "角色周边、手办", "priority": 1},
+    {"name": "三丽鸥", "category": "卡通IP", "suitability": "可爱风格配饰", "priority": 2}
+  ],
+  "craftSuggestions": [
+    {"craft": "刺绣", "direction": "个性化定制", "targetAudience": "年轻女性", "priority": "高"},
+    {"craft": "陶瓷", "direction": "治愈系摆件", "targetAudience": "家居爱好者", "priority": "高"},
+    {"craft": "编织", "direction": "可持续产品", "targetAudience": "环保消费者", "priority": "中"}
+  ]
+}

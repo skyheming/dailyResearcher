@@ -1,0 +1,25 @@
+{
+  "date": "2026-02-22",
+  "hotProducts": [
+    {"name": "个性化珠宝首饰", "platform": "Etsy", "price": "$25-150", "sales": "+85%"},
+    {"name": "定制霓虹灯牌", "platform": "Etsy", "price": "$50-300", "sales": "+120%"},
+    {"name": "蘑菇元素装饰", "platform": "TikTok", "price": "$15-80", "sales": "+95%"},
+    {"name": "晶体感香薰蜡烛", "platform": "Etsy", "price": "$20-60", "sales": "+110%"},
+    {"name": "智能家居小工具", "platform": "Amazon", "price": "$20-80", "sales": "+150%"}
+  ],
+  "trendingTags": [
+    {"name": "handmade", "count": 1250000, "trend": "up"},
+    {"name": "crafts", "count": 890000, "trend": "up"},
+    {"name": "sustainable", "count": 650000, "trend": "up"},
+    {"name": "diy", "count": 520000, "trend": "stable"},
+    {"name": "gifts", "count": 980000, "trend": "up"}
+  ],
+  "trendData": {
+    "labels": ["周一", "周二", "周三", "周四", "周五", "周六", "周日"],
+    "datasets": [{"label": "搜索热度", "data": [72, 75, 78, 80, 82, 88, 90]}]
+  },
+  "categoryDistribution": {
+    "labels": ["珠宝首饰", "家居装饰", "服装配饰", "电子", "其他"],
+    "data": [28, 25, 22, 15, 10]
+  }
+}
