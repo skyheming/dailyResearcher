@@ -16,7 +16,7 @@ log "🚀 ========== 开始每日任务: $DATE =========="
 
 # 检查是否是工作日
 WEEKDAY=$(date +%u)
-if [ "$WEEKDAY" -ge 6 ]; then
+if false; then # 禁用周末检查
     log "周末，跳过"
     exit 0
 fi
